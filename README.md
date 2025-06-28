@@ -14,3 +14,30 @@ If you are developing a production application, we recommend using TypeScript wi
 
 ## Creating frontend of AITR project
 
+Follow instruction to run code on your local machine
+
+### Installation
+
+```bash
+
+# Clone the repository
+
+git clone http://github.com/As-ajay06/AITR-frontend.git
+
+
+# NAvigate into the directory
+
+cd AITR-frontend
+
+# Install depedencies
+
+npm install
+
+```
+
+## Depedencies
+
+- React
+- react-hook-form
+- axios
+- Tailwindcss
