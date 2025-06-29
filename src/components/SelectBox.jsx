@@ -1,12 +1,23 @@
-import React from "react"
+import React from "react";
 
-export const SelectBox = (({ onChange, onBlur, name, label ,options , register }) => (
-  <>
-    <label>{label}</label>
-    <select name={name} onChange={onChange} onBlur={onBlur} {...register(label)}>
-      {/* can use mapping here */}
-      <option options={options[0]} >{options[0]}</option>
-      <option options={options[1]}>{options[1]}</option>
+const SelectBox = ({ label, name, options, register, onChange, onBlur }) => (
+  <div className="flex flex-col mb-4 w-full max-w-sm">
+    <label className="text-sm font-medium text-gray-700 mb-1">{label.split("_").join(" ").toUpperCase()}</label>
+    <select
+      name={name}
+      onChange={onChange}
+      onBlur={onBlur}
+      {...register(label)}
+      className="px-3 py-2 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+    >
+      <option value="">Select {label.split("_").join(" ")}</option>
+      {options.map((option, index) => (
+        <option key={index} value={option}>
+          {option}
+        </option>
+      ))}
     </select>
-  </>
-))
+  </div>
+);
+
+export default SelectBox;

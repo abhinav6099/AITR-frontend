@@ -1,24 +1,24 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import InputBox from "./InputBox";
+import InputBox from "../../components/InputBox";
 
-const ResearchForm  = () => {
+const ResearchPaper = () => {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
-    console.log("Student Publication Data:", data);
+    console.log("Research Paper Submitted:", data);
     reset();
   };
 
   return (
     <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md p-10">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-        Student Publication Form
+        Research Paper Submission
       </h2>
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <InputBox label="student_name" register={register} required />
+          <InputBox label="faculty_name" register={register} required />
           <InputBox label="title" register={register} required />
           <InputBox label="publication_date" register={register} required />
           <InputBox label="journal_name" register={register} required />
@@ -38,4 +38,4 @@ const ResearchForm  = () => {
   );
 };
 
-export default ResearchForm ;
+export default ResearchPaper;

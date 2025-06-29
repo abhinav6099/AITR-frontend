@@ -1,14 +1,19 @@
 import { useState } from 'react'
 import './App.css'
-import Button from './components/Button'
-import FacultyForm from './Forms/FacultyForm'
+import SportForm from './Forms/StudentForms/SportsForm'
+import StudentPlacementForm from './Forms/StudentForms/Placement'
+import StudentHackathonForm from './Forms/StudentForms/Hackathons'
+import StudentInternshipForm from './Forms/StudentForms/Internship'
+import StudentCertificateForm from './Forms/StudentForms/Certificate'
+
 
 function App() {
 
   return (
     <>
-      <FacultyForm /> 
+    
     </>
+
   )
 }
 
