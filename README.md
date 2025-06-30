@@ -41,3 +41,5 @@ npm install
 - react-hook-form
 - axios
 - Tailwindcss
+- react-data-table-component
+
