@@ -2,7 +2,7 @@ import { Input } from 'postcss'
 import React, { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import InputBox from '../../components/InputBox'
-import { SelectBox } from '../../components/SelectBox'
+import  SelectBox  from '../../components/SelectBox'
 
 import FileBox from '../../components/FileBox'
 import axios from 'axios'
