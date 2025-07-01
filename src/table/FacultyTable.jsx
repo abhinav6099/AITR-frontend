@@ -1,3 +1,4 @@
+import axios from 'axios';
 import DataTable from 'react-data-table-component';
 
 const facultyData = [
@@ -44,6 +45,8 @@ const facultyData = [
   }
 ];
 
+const responce = await axios.get("http://localhost:3000/facultydata")
+console.log(responce.data.response)
 
 // Define faculty columns
 const index =   1
@@ -78,7 +81,7 @@ const columns = [
   },
   {
     name: 'Experience (Years)',
-    selector: row => row.years_Of_Experience,
+    selector: row => row.years_of_experience,
     sortable: true,
 
   },
@@ -94,7 +97,7 @@ function FacultyTable() {
 	return (
 		<DataTable
 			columns={columns}
-			data={facultyData}
+			data={responce.data.response}
 		/>
 	);
 };
