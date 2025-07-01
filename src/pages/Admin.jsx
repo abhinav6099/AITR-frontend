@@ -1,28 +1,34 @@
-import React, { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar'
-import Button from '../components/Button'
-import FacultyForm from '../Forms/FacultyForms/FacultyForm';
+import React from 'react';
+import { BrowserRouter, Link, Outlet, Route, RouterProvider, Routes } from 'react-router-dom'; // ✅ Import added
 
 function Admin() {
 
-    const [visible , setVisible ] = useState(false);
 
-    const onClickHandler = (e) => {
-        console.log(e.target.value)
-    }
-    
+
   return (
+    <>
     <div>
-        <div className='navigation bar'>
-            <Button onClick={(e) => onClickHandler(e)} label={"Faculty"} />
-            <Button label={"student"} />
-            <Button label={"Awards"} />
-        </div>
-        <div>
-            { visible && <FacultyForm />}
-        </div>
+      <AdminNavbar />
+      <div className="p-4">
+        <Outlet /> {/* Renders AddFaculty, AddAwards, etc. */}
+      </div>
     </div>
-  )
+
+    </>
+  );
 }
 
-export default Admin
+
+
+export default Admin;
+
+
+
+const AdminNavbar = () => (
+  <nav className="p-2 bg-blue-100 flex gap-4">
+    <Link to="/admin/addfaculty">Add Faculty</Link>
+    <Link to="/admin/addawards">Add Awards</Link>
+    <Link></Link>
+  </nav>
+);
+
