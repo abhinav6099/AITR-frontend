@@ -30,7 +30,7 @@ const DevlopmentProgram = () => {
           <InputBox label="organized_By" register={register} required />
           <CalenderBox label="start_Date" register={register} />
           <CalenderBox label="end_Date" register={register} />
-          <SelectBox label="programT_ype" options={programTypes} register={register} />
+          <SelectBox label="program_type" options={programTypes} register={register} />
           <SelectBox label="mode" options={modes} register={register} />
           <InputBox label="location" register={register} />
           <InputBox label="duration_Days" register={register} />

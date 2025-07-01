@@ -11,8 +11,6 @@ import CalenderBox from '../../components/CalenderBox'
 function FacultyForm() {
 
     const { register, handleSubmit, reset  } = useForm()
-
-    // const [file , setFile] = useState(null)
     const departments = ["Computer Science", "Mechanical", "Electrical", "Civil"];
     const experienceYears = ["0-1", "2-4", "5-7", "8+"];
     const designations = ["Assistant Professor", "Associate Professor", "Professor"];
@@ -21,28 +19,31 @@ function FacultyForm() {
     const onSubmit = async(data) => {
     console.log(data)
     reset()
-    // setFile(data.file[0])
-    // try{
-    //   const formData = new FormData();
-    //   formData.append("file" , file);
 
-    //   const res = await axios.post("http://localhost:3000/file", formData)
-    //   console.log(res.data)
+    try{
+      // const formData = new FormData();
+      // formData.append("file" , file);
 
-    //   const response = await axios.post("http://localhost:3000/userData" , {
-    //     firstName : data.firstName,
-    //     age: data.Age,
-    //     startingDate: Date.startingDate,
-    //     // using fileId without middleware 
-    //     // TODO : create middleware and send the fileId with using middleware
-    //     fileId : res.data.fileId
-    //   })
+      // const res = await axios.post("http://localhost:3000/file", formData)
+      // console.log(res.data)
+
+      const response = await axios.post("http://localhost:3000/facultydata" , {
+        name: data.name,
+        email: data.email,
+        department: data.department,
+        mobile_no: data.mobile_no,
+        years_of_experience: data.years_of_experience,
+        designation: data.designation,
+        // using fileId without middleware 
+        // TODO : create middleware and send the fileId with using middleware
+        // fileId : res.data.fileId
+      })
       
-    //   console.log(response)
+      console.log(response)
       
-    //   }catch(err){
-    //     console.log("Error:", err )
-    //   }
+      }catch(err){
+        console.log("Error:", err )
+      }
   }
 
  return (
@@ -54,6 +55,7 @@ function FacultyForm() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <InputBox label="name" register={register} required />
+          <InputBox label="mobile_no" register={register} required/>
           <InputBox label="email" register={register} required />
           <SelectBox label="department" options={departments} register={register} />
           <SelectBox label="years_of_experience" options={experienceYears} register={register} />

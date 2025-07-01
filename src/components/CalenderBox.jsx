@@ -1,10 +1,10 @@
 import React from 'react'
 
-function CalenderBox({ register }) {
+function CalenderBox({ register , label}) {
   return (
     <div className="flex flex-col mb-4 w-full max-w-xs">
       <label className="block text-sm font-medium text-gray-700 mb-2">
-        Starting Date
+        {label.split("_").join(" ").toUpperCase()}
       </label>
       <input
         type="date"
