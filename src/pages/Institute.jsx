@@ -1,9 +1,12 @@
 import React from 'react'
+import SearchBar from '../components/SearchBar'
+import InstituteTabs from '../components/InstituteTabs'
 
 function Institute() {
   return (
-    <div>
-        
+    <div >
+      <SearchBar/>
+      <InstituteTabs/>
     </div>
   )
 }

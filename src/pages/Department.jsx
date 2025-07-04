@@ -1,14 +1,14 @@
 import React from 'react';
 import SearchBar from '../components/SearchBar';
-import FacultyTabs from '../components/FacultyTabs';
+import DepartmentTabs from '../components/DepartmentTabs';
 
-const Faculty = () => {
+const Department = () => {
     return (
         <div>
             <SearchBar/>
-            <FacultyTabs/>
+            <DepartmentTabs/>
         </div>
     );
 }
 
-export default Faculty;
+export default Department;

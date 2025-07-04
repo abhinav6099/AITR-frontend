@@ -1,18 +1,34 @@
 import React from "react";
-import { Search } from "lucide-react"; // Optional icon, needs lucide-react or use any SVG
+import { Search } from "lucide-react";
 
 const SearchBar = ({ value, onChange, placeholder = "Search..." }) => {
   return (
-    <div className="w-full max-w-md mx-auto">
+    <div className="w-full px-4 pt-10">
       <div className="relative">
         <input
           type="text"
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          className="w-full pl-10 pr-4 py-2 rounded-2xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm focus:shadow-md transition-all duration-200"
+          className="
+            w-full
+            pl-12 pr-4 py-3
+            rounded-full
+            bg-blue-50
+            border border-blue-200
+            text-gray-800
+            placeholder-gray-500
+            shadow
+            transition-all duration-300
+            focus:outline-none
+            focus:ring-2 focus:ring-blue-500
+            focus:bg-white focus:shadow-lg
+          "
         />
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+        <Search
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-400"
+          size={20}
+        />
       </div>
     </div>
   );

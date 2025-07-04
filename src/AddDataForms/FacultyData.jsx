@@ -9,5 +9,4 @@ function AddFaculty() {
     </div>
   )
 }
-
 export default AddFaculty

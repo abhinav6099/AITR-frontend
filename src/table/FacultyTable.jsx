@@ -45,8 +45,8 @@ const facultyData = [
   }
 ];
 
-const responce = await axios.get("http://localhost:3000/facultydata")
-console.log(responce.data.response)
+// const responce = await axios.get("http://localhost:3000/facultydata")
+// console.log(responce.data.response)
 
 // Define faculty columns
 const index =   1
@@ -97,7 +97,8 @@ function FacultyTable() {
 	return (
 		<DataTable
 			columns={columns}
-			data={responce.data.response}
+			facultyData={responce.data.response}
+
 		/>
 	);
 };

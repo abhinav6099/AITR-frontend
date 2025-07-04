@@ -1,9 +1,8 @@
 
-
 const InputBox = ({ label, register, required }) => (
   <div className="flex flex-col mb-4 w-full max-w-xs">
     <label className="text-sm font-medium text-gray-700 mb-1">
-      {label.split("_").join(" ").toUpperCase()} 
+      {(label || "").split("_").join(" ").toUpperCase()}
     </label>
     <input
       {...register(label, { required })}
@@ -11,5 +10,6 @@ const InputBox = ({ label, register, required }) => (
     />
   </div>
 );
+
 
 export default InputBox;
