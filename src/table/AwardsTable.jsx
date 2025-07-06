@@ -51,7 +51,7 @@ const columns = [
 ];
 
 // Sample Data
-const data = [
+const awardsdata = [
   {
     Id: 1,
     Faculty_Name: 'Dr. Ajay Sahani',
@@ -90,6 +90,9 @@ const data = [
   },
 ];
 
+
+
+
 // Component
 const AwardTable = () => {
   return (
@@ -97,7 +100,7 @@ const AwardTable = () => {
       <DataTable
         title="Faculty Awards"
         columns={columns}
-        data={data}
+        data={awardsdata}
         pagination
         highlightOnHover
         striped

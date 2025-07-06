@@ -45,6 +45,10 @@ const facultyData = [
   }
 ];
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6b60373 (last change before commit)
 // const responce = await axios.get("http://localhost:3000/facultydata")
 // console.log(responce.data.response)
 
@@ -81,7 +85,7 @@ const columns = [
   },
   {
     name: 'Experience (Years)',
-    selector: row => row.years_of_experience,
+    selector: row => row.years_Of_Experience,
     sortable: true,
 
   },
@@ -93,12 +97,17 @@ const columns = [
 ];
 
 
-function FacultyTable() {
+function FacultyTable({data}) {
+  console.log(data)
 	return (
 		<DataTable
 			columns={columns}
+<<<<<<< HEAD
 			facultyData={responce.data.response}
 
+=======
+			data={facultyData}
+>>>>>>> 6b60373 (last change before commit)
 		/>
 	);
 };

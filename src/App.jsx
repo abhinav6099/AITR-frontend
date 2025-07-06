@@ -10,25 +10,25 @@ import AddAwards from "./AddDataForms/AwardsData";
 import HomePage from "./pages/HomePage";
 import Admin from "./pages/Admin";
 
-import Navbar from "./components/Navbar";
-import Accordian from "./components/Accordian";
-import AddConferenceData from "./AddDataForms/AddConferenceData";
-import AddDevelopmentProgramData from "./AddDataForms/AddDevelopmentProgramData";
-import AddPatentData from "./AddDataForms/AddPatentData";
-import AddFacultyResearchData from "./AddDataForms/AddFacultyResearchData";
-import NotFound404 from "./pages/NotFound404";
-import AddStudentData from "./AddDataForms/AddStudentData";
-import AddStudentCertificateData from "./AddDataForms/AddStudentCertificateData";
-import AddHackathonsData from "./AddDataForms/AddHackathonsData";
-import AddInternshipData from "./AddDataForms/AddInternshipData";
-import AddPlacementData from "./AddDataForms/AddPlacementData";
-import AddStudentResearchData from "./AddDataForms/AddStudentResearchData";
-import AddSportsData from "./AddDataForms/AddSportsData";
-import NavbarHeader from "./components/NavbarHeader";
-import Institute from "./pages/Institute";
-import Faculty from "./pages/Faculty";
-import Department from "./pages/Department";
-import Student from "./pages/Student";
+import Navbar from './components/Navbar'
+import Accordian from './components/Accordian'
+import AddConferenceData from './AddDataForms/AddConferenceData'
+import AddDevelopmentProgramData from './AddDataForms/AddDevelopmentProgramData'
+import AddPatentData from './AddDataForms/AddPatentData'
+import AddFacultyResearchData from './AddDataForms/AddFacultyResearchData'
+import NotFound404 from './pages/NotFound404'
+import AddStudentData from './AddDataForms/AddStudentData'
+import AddStudentCertificateData from './AddDataForms/AddStudentCertificateData'
+import AddHackathonsData from './AddDataForms/AddHackathonsData'
+import AddInternshipData from './AddDataForms/AddInternshipData'
+import AddPlacementData from './AddDataForms/AddPlacementData'
+import AddStudentResearchData from './AddDataForms/AddStudentResearchData'
+import AddSportsData from './AddDataForms/AddSportsData'
+
+
+
+
+
 
 function App() {
   return (
@@ -69,10 +69,13 @@ function App() {
             element={<AddStudentResearchData />}
           />
           <Route path="addsports" element={<AddSportsData />} />
-        {/* <Route path='*' element={<NotFound404 />} /> */}
+          </Route>
+        <Route path='*' element={<NotFound404 />} />
       </Routes>
     </BrowserRouter>
-  );
+    </>
+
+  )
 }
 
 export default App;

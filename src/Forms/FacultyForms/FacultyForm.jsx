@@ -1,56 +1,22 @@
-import { Input } from 'postcss'
 import React, { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import InputBox from '../../components/InputBox'
 import  SelectBox  from '../../components/SelectBox'
 
-import FileBox from '../../components/FileBox'
-import axios from 'axios'
-import CalenderBox from '../../components/CalenderBox'
 
-function FacultyForm() {
 
-    const { register, handleSubmit, reset  } = useForm()
+function FacultyForm({register, handleSubmit, reset , onSubmit}) {
+
     const departments = ["Computer Science", "Mechanical", "Electrical", "Civil"];
     const experienceYears = ["0-1", "2-4", "5-7", "8+"];
     const designations = ["Assistant Professor", "Associate Professor", "Professor"];
 
 
-    const onSubmit = async(data) => {
-    console.log(data)
-    reset()
-
-    try{
-      // const formData = new FormData();
-      // formData.append("file" , file);
-
-      // const res = await axios.post("http://localhost:3000/file", formData)
-      // console.log(res.data)
-
-      const response = await axios.post("http://localhost:3000/facultydata" , {
-        name: data.name,
-        email: data.email,
-        department: data.department,
-        mobile_no: data.mobile_no,
-        years_of_experience: data.years_of_experience,
-        designation: data.designation,
-        // using fileId without middleware 
-        // TODO : create middleware and send the fileId with using middleware
-        // fileId : res.data.fileId
-      })
-      
-      console.log(response)
-      
-      }catch(err){
-        console.log("Error:", err )
-      }
-  }
-
  return (
     <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md p-10">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6">
         Faculty Registration Form
-      </h2>
+      </h2> 
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
