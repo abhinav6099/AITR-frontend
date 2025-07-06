@@ -11,6 +11,9 @@ import HomePage from "./pages/HomePage";
 import Admin from "./pages/Admin";
 
 import Navbar from './components/Navbar'
+import NavbarHeader from './components/NavbarHeader'
+
+
 import Accordian from './components/Accordian'
 import AddConferenceData from './AddDataForms/AddConferenceData'
 import AddDevelopmentProgramData from './AddDataForms/AddDevelopmentProgramData'
@@ -26,12 +29,16 @@ import AddStudentResearchData from './AddDataForms/AddStudentResearchData'
 import AddSportsData from './AddDataForms/AddSportsData'
 
 
-
+import Faculty from './pages/Faculty'
+import Student from './pages/Student'
+import Institute from './pages/Institute'
+import Department from './pages/Department'
 
 
 
 function App() {
   return (
+    <>
     <BrowserRouter>
       <NavbarHeader />
       <Navbar />
@@ -47,29 +54,16 @@ function App() {
           <Route path="addfaculty" element={<AddFaculty />} />
           <Route path="addawards" element={<AddAwards />} />
           <Route path="addconferences" element={<AddConferenceData />} />
-          <Route
-            path="adddevlopmentprograms"
-            element={<AddDevelopmentProgramData />}
-          />
+          <Route path="adddevlopmentprograms" element={<AddDevelopmentProgramData />} />
           <Route path="addpatents" element={<AddPatentData />} />
-          <Route
-            path="addfacultyresearch"
-            element={<AddFacultyResearchData />}
-          />
+          <Route path="addfacultyresearch" element={<AddFacultyResearchData />} />
           <Route path="addstudents" element={<AddStudentData />} />
-          <Route
-            path="addstudentcertificates"
-            element={<AddStudentCertificateData />}
-          />
+          <Route path="addstudentcertificates" element={<AddStudentCertificateData />} />
           <Route path="addhackathons" element={<AddHackathonsData />} />
           <Route path="addinternships" element={<AddInternshipData />} />
           <Route path="addplacements" element={<AddPlacementData />} />
-          <Route
-            path="addstudentresearchs"
-            element={<AddStudentResearchData />}
-          />
+          <Route path="addstudentresearchs" element={<AddStudentResearchData />} />
           <Route path="addsports" element={<AddSportsData />} />
-          </Route>
         <Route path='*' element={<NotFound404 />} />
       </Routes>
     </BrowserRouter>

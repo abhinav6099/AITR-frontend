@@ -12,7 +12,7 @@ const Navbar = () => {
   };
 
   return (
-<<<<<<< HEAD
+
     <nav className="h-20 bg-slate-100 flex items-center justify-between shadow-lg text-black text-lg font-medium">
       <div className="ml-48 gap-4 flex items-center">
         <Link to="/" onClick={() => handleNavClick("Home")}>
@@ -60,28 +60,7 @@ const Navbar = () => {
       <div className="flex items-center mr-40 gap-4 text-base text-white">
         <Link to="/admin" onClick={() => handleNavClick("Admin")}>
           <Button label="Admin" className="rounded-md" />
-=======
-    <nav className="w-full bg-white shadow flex justify-around items-center px-8 py-4">
-      <div className="flex gap-4">
-        <Link to ="/home" >
-          <Button className= {"rounded-md"} label="Home" onClick={() => handleNavClick("Home")} />   
-        </Link>
 
-        <Link to="/institute" >
-          <Button className= {"rounded-md"} label="Institute" onClick={() => handleNavClick("Institute")} />
-        </Link>
-
-        <Link to="/department">
-          <Button className= {"rounded-md"} label="Department" onClick={() => handleNavClick("Department")} />
-        </Link>
-
-        <Link to="/faculty" >
-          <Button className= {"rounded-md"} label="Faculty" onClick={() => handleNavClick("Faculty")} />
-        </Link>
-        
-        <Link to="/student">
-          <Button className= {"rounded-md"} label="Student" onClick={() => handleNavClick("Student")} />
->>>>>>> 6b60373 (last change before commit)
         </Link>
       </div>
     </nav>

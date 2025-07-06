@@ -45,10 +45,7 @@ const facultyData = [
   }
 ];
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 6b60373 (last change before commit)
 // const responce = await axios.get("http://localhost:3000/facultydata")
 // console.log(responce.data.response)
 
@@ -100,15 +97,7 @@ const columns = [
 function FacultyTable({data}) {
   console.log(data)
 	return (
-		<DataTable
-			columns={columns}
-<<<<<<< HEAD
-			facultyData={responce.data.response}
-
-=======
-			data={facultyData}
->>>>>>> 6b60373 (last change before commit)
-		/>
+		<DataTable columns={columns} data={facultyData} />
 	);
 };
 

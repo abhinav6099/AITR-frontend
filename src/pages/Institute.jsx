@@ -1,14 +1,6 @@
 import React from 'react'
 import SearchBar from '../components/SearchBar'
-<<<<<<< HEAD
-import InstituteTabs from '../components/InstituteTabs'
 
-function Institute() {
-  return (
-    <div >
-      <SearchBar/>
-      <InstituteTabs/>
-=======
 import InputBox from '../components/InputBox'
 import Button from '../components/Button'
 import { Link } from 'react-router-dom'
@@ -26,7 +18,7 @@ function Institute() {
       <div className="p-4">
         <Outlet /> {/* Renders AddFaculty, AddAwards, etc. */}
       </div>
->>>>>>> 6b60373 (last change before commit)
+
     </div>
 
     </>

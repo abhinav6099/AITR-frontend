@@ -9,10 +9,7 @@ const StudentTabs = () => {
   const links = [
     { path: "/student/profile", label: "Profile" },
     { path: "/student/certification", label: "Certification" },
-    {
-      path: "/student/competitions",
-      label: "Technical/Non-Technical Competitions",
-    },
+    { path: "/student/competitions", label: "Technical/Non-Technical Competitions"},
     { path: "/student/placement", label: "Placement" },
     { path: "/student/internship", label: "Internship" },
     { path: "/student/researchpaper", label: "Research Paper" },
@@ -20,10 +17,7 @@ const StudentTabs = () => {
     { path: "/student/extracurricular", label: "Extra Curricular" },
     { path: "/student/project", label: "Project Work/Capstone Project" },
     { path: "/student/startups", label: "Startups/Entrepreneurial Ventures" },
-    {
-      path: "/student/hackathons",
-      label: "Hackathons / Innovation Challenges",
-    },
+    { path: "/student/hackathons", label: "Hackathons / Innovation Challenges"},
     { path: "/student/higherstudies", label: "Higher Studies" },
     { path: "/student/memberships", label: "Professional Memberships" },
   ];
