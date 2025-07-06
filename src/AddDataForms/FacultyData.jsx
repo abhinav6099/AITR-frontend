@@ -9,56 +9,56 @@ import DataTable from 'react-data-table-component';
 
 function AddFaculty() {
 
-  // const {register, handleSubmit, reset} = useForm()
-  // const [data, setData] = useState([])
-  // const [loading , setLoading ] = useState(true)
+  const {register, handleSubmit, reset} = useForm()
+  const [data, setData] = useState([])
+  const [loading , setLoading ] = useState(true)
 
-  // const fetchData = async () => {
-  //   if(loading == true ){
-  //     const data = await axios.get("http://localhost:3000/facultydata")
-  //     setData(data.data.response)
-  //   }
+  const fetchData = async () => {
+    if(loading == true ){
+      const data = await axios.get("http://localhost:3000/facultydata")
+      setData(data.data.response)
+    }
  
-  // }
+  }
 
-  // useEffect(() => {
-  //   console.log("fetching data")
-  //   fetchData()
-  //   console.log(data)
-  // },[loading])
+  useEffect(() => {
+    console.log("fetching data")
+    fetchData()
+    console.log(data)
+  },[loading])
 
-  // const onSubmit = async (facultyData) => {
+  const onSubmit = async (facultyData) => {
  
-  //   try{
-  //     // const formData = new FormData();
-  //     // formData.append("file" , file);
+    try{
+      // const formData = new FormData();
+      // formData.append("file" , file);
 
-  //     // const res = await axios.post("http://localhost:3000/file", formData)
-  //     // console.log(res.data)
+      // const res = await axios.post("http://localhost:3000/file", formData)
+      // console.log(res.data)
 
-  //     console.log(facultyData)
+      console.log(facultyData)
 
-  //     const response = await axios.post("http://localhost:3000/facultydata" , {
-  //       name: facultyData.name,
-  //       email: facultyData.email,
-  //       department: facultyData.department,
-  //       mobile_no: facultyData.mobile_no,
-  //       years_Of_Experience: facultyData.years_of_experience,
-  //       designation: facultyData.designation,
-  //       // using fileId without middleware 
-  //       // TODO : create middleware and send the fileId with using middleware
-  //       // fileId : res.data.fileId
-  //     })
+      const response = await axios.post("http://localhost:3000/facultydata" , {
+        name: facultyData.name,
+        email: facultyData.email,
+        department: facultyData.department,
+        mobile_no: facultyData.mobile_no,
+        years_Of_Experience: facultyData.years_of_experience,
+        designation: facultyData.designation,
+        // using fileId without middleware 
+        // TODO : create middleware and send the fileId with using middleware
+        // fileId : res.data.fileId
+      })
 
-  //     console.log(response)
+      console.log(response)
       
-  //     }catch(err){
-  //       console.log("Error:", err )
-  //     }
-  //     console.log(facultyData)
+      }catch(err){
+        console.log("Error:", err )
+      }
+      console.log(facultyData)
 
-  //   setLoading((p) => !p)
-  // }
+    setLoading((p) => !p)
+  }
 
   const index =   1
 

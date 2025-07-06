@@ -44,13 +44,13 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/admin" element={<Admin />}/>
-        
         <Route path="/faculty" element={<Faculty />}/>
         <Route path="/student" element={<Student/>}/>
         
         <Route path="/institute" element={<Institute />}/>
         <Route path="/department" element={<Department />}/>
+
+        <Route path="/admin" element={<Admin />} >
           <Route path="addfaculty" element={<AddFaculty />} />
           <Route path="addawards" element={<AddAwards />} />
           <Route path="addconferences" element={<AddConferenceData />} />
@@ -64,6 +64,7 @@ function App() {
           <Route path="addplacements" element={<AddPlacementData />} />
           <Route path="addstudentresearchs" element={<AddStudentResearchData />} />
           <Route path="addsports" element={<AddSportsData />} />
+        </Route>
         <Route path='*' element={<NotFound404 />} />
       </Routes>
     </BrowserRouter>
