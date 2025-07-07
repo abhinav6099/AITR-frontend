@@ -13,10 +13,57 @@ function AddFaculty() {
   const [data, setData] = useState([])
   const [loading , setLoading ] = useState(true)
 
+
+  const facultyData = [
+  {
+    name: "Dr. Aditi Sharma",
+    email: "aditi.sharma@university.edu",
+    department: "Computer Science",
+    mobile_no: "9876543210",
+    years_Of_Experience: 12,
+    designation: "Associate Professor"
+  },
+  {
+    name: "Prof. Rajesh Kumar",
+    email: "rajesh.kumar@university.edu",
+    department: "Mechanical Engineering",
+    mobile_no: "9123456780",
+    years_Of_Experience: 18,
+    designation: "Professor"
+  },
+  {
+    name: "Ms. Neha Verma",
+    email: "neha.verma@university.edu",
+    department: "Electrical Engineering",
+    mobile_no: "9988776655",
+    years_Of_Experience: 7,
+    designation: "Assistant Professor"
+  },
+  {
+    name: "Dr. Vikram Singh",
+    email: "vikram.singh@university.edu",
+    department: "Civil Engineering",
+    mobile_no: "9765432109",
+    years_Of_Experience: 15,
+    designation: "Professor"
+  },
+  {
+    name: "Mr. Alok Das",
+    email: "alok.das@university.edu",
+    department: "Mathematics",
+    mobile_no: "9090909090",
+    years_Of_Experience: 5,
+    designation: "Lecturer",
+    fileId: "345346534653465392"
+  }
+];
+
+
   const fetchData = async () => {
     if(loading == true ){
-      const data = await axios.get("http://localhost:3000/facultydata")
-      setData(data.data.response)
+      const data = await axios.get("http://localhost:3000/api/v1/faculty/profiles")
+      console.log(data.data.profiles)
+      setData(data.data.profiles)
     }
  
   }
@@ -37,18 +84,23 @@ function AddFaculty() {
       // console.log(res.data)
 
       console.log(facultyData)
-
-      const response = await axios.post("http://localhost:3000/facultydata" , {
+      const url = "http://localhost:3000/api/v1/faculty/profile"
+      const response = await axios.post( url 
+        , {
+        facultyId: facultyData.facultyId,
         name: facultyData.name,
         email: facultyData.email,
         department: facultyData.department,
-        mobile_no: facultyData.mobile_no,
-        years_Of_Experience: facultyData.years_of_experience,
+        mobileNumber: facultyData.mobileNumber,
+        category: facultyData.category,
+        teachingExperience: facultyData.teachingExperience,
         designation: facultyData.designation,
+
         // using fileId without middleware 
         // TODO : create middleware and send the fileId with using middleware
         // fileId : res.data.fileId
-      })
+      }
+    )
 
       console.log(response)
       
@@ -92,7 +144,7 @@ function AddFaculty() {
   },
   {
     name: 'Experience (Years)',
-    selector: row => row.years_Of_Experience,
+    selector: row => row.teachingExperience,
     sortable: true,
 
   },
@@ -109,7 +161,7 @@ function AddFaculty() {
   return (
     <div>
         <FacultyForm onSubmit={onSubmit}  register={register} handleSubmit={handleSubmit} reset={reset} />
-        <DataTable columns={columns} />
+        <DataTable columns={columns} data={facultyData} />
     </div>
   )
 }

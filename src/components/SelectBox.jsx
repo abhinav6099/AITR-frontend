@@ -1,13 +1,20 @@
 import React from "react";
 
-const SelectBox = ({ label, name, options, register, onChange, onBlur }) => (
+const SelectBox = ({ label, name, options, register, onChange, onBlur }) => {
+
+  const field = label.split("_").join("")
+
+  
+  
+  return (
+    <>
   <div className="flex flex-col mb-4 w-full max-w-sm">
     <label className="text-sm font-medium text-gray-700 mb-1">{label.split("_").join(" ").toUpperCase()}</label>
     <select
       name={name}
       onChange={onChange}
       onBlur={onBlur}
-      {...register(label)}
+      {...register(name)}
       className="px-3 py-2 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
     >
       <option value="">Select {label.split("_").join(" ")}</option>
@@ -18,6 +25,8 @@ const SelectBox = ({ label, name, options, register, onChange, onBlur }) => (
       ))}
     </select>
   </div>
+  </>
 );
+} 
 
 export default SelectBox;

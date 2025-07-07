@@ -24,17 +24,20 @@ const DevlopmentProgram = () => {
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-          <InputBox label="faculty_Name" register={register} required />
-          <InputBox label="program_Name" register={register} required />
-          <InputBox label="organized_By" register={register} required />
-          <CalenderBox label="start_Date" register={register} />
-          <CalenderBox label="end_Date" register={register} />
-          <SelectBox label="program_type" options={programTypes} register={register} />
-          <SelectBox label="mode" options={modes} register={register} />
-          <InputBox label="location" register={register} />
-          <InputBox label="duration_Days" register={register} />
-          <FileBox label="certificatePdf" register={register} />
+          <InputBox label="ID" name={"facultyId"} register={register} />
+          <InputBox label="faculty_Name" name={"facultyName"} register={register} required />
+          <InputBox label="department" name={"department"} register={register} required />
+          <InputBox label="fdp_Title" name={"fdpTitle"} register={register} required />
+          <InputBox label="program_Name" name={""} register={register} required />
+          <InputBox label="organizing_Institute" name={"organizingInstitute"} register={register} required />
+          <CalenderBox label="start_Date" name={"startDate"} register={register} />
+          <CalenderBox label="end_Date" name={"endDate"} register={register} />
+          <SelectBox label="program_Type" name={"programType"} options={programTypes} register={register} />
+          <SelectBox label="mode" name={"mode"} options={modes} register={register} />
+          <InputBox label="location" name={"location"} register={register} />
+          <InputBox label="duration_Days" name={"numberOfDays"} register={register} />
+          <FileBox label="certificatePdf" name={"certificatePdfUrl"} register={register} />
+          <InputBox label="outcome" name={"outcomeHighlights"} register={register} />
 
         </div>
 

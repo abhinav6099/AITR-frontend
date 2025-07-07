@@ -3,7 +3,7 @@ import InputBox from '../../components/InputBox'
 import FileBox from '../../components/FileBox'
 import { useForm } from 'react-hook-form'  
 
-function acedmicQualificationDiscipline() {
+function AcedmicQualificationDiscipline() {
     const { register, handleSubmit, reset } = useForm()
     
     const onSubmit = async (data) => {  
@@ -14,21 +14,22 @@ function acedmicQualificationDiscipline() {
   return (
     <div>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 p-4">
-        <InputBox label="Highest Degree Earned" name="highestDegree" register={register} required />
+
+        <InputBox label={"faculty_name"} name="facultyName" register={register} required />
+        <InputBox label="highest_Degree" name="highestDegree" register={register} required />
         
-        <InputBox label="University/Institute" name="universityOrInstitute" register={register} required />
+        <InputBox label="universityOrInstitute" name="universityOrInstitute" register={register} required />
         
-        <InputBox label="Specialization" name="specialization" register={register} required />
+        <InputBox label="specialization" name="specialization" register={register} required />
         
         <InputBox
-            label="Year of Completion"
+            label="year_Of_Completion"
             name="yearOfCompletion"
             register={register}
             type="number"
             required
         />
-        
-        <FileBox label="Supporting Document (Certificate)" name="certificateUrl" register={register} />
+        <FileBox label="certificateUrl" name="certificateUrl" register={register} />
 
         <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded">Submit</button>
         </form>
@@ -37,4 +38,5 @@ function acedmicQualificationDiscipline() {
   )
 }
 
-export default acedmicQualificationDiscipline
+export default AcedmicQualificationDiscipline
+

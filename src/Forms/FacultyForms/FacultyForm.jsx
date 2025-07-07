@@ -20,12 +20,16 @@ function FacultyForm({register, handleSubmit, reset , onSubmit}) {
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <InputBox label="name" register={register} required />
-          <InputBox label="mobile_no" register={register} required/>
-          <InputBox label="email" register={register} required />
-          <SelectBox label="department" options={departments} register={register} />
-          <SelectBox label="years_of_experience" options={experienceYears} register={register} />
-          <SelectBox label="designation" options={designations} register={register} />
+          <InputBox label="facultyId" name="facultyId" register={register} required />
+          <InputBox label="name" name="name" register={register} required />
+          <InputBox label="email" name="email" register={register} required />
+          <InputBox label="qualification" name="qualification" register={register} required />
+          <SelectBox label="department" name={"department"} options={departments} register={register} />
+          <InputBox label="mobile_Number" name={"mobileNumber"} register={register} required/>
+          <InputBox label="category" name={"category"} register={register} required />
+          <SelectBox label="teaching_Experience" name={"teachingExperience"} options={experienceYears} register={register} />
+          <SelectBox label="designation" name={"designation"} options={designations} register={register} />
+
         </div>
 
         <div className="mt-8">

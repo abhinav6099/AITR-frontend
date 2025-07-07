@@ -3,7 +3,7 @@ import InputBox from '../../components/InputBox'
 import SelectBox from '../../components/SelectBox'
 import { useForm } from 'react-hook-form'
 
-function researchProjectsGuided() {
+function ResearchProjectsGuided() {
 
     const { register, handleSubmit, reset } = useForm()
     const onSubmit = async (data) => {  
@@ -16,14 +16,14 @@ function researchProjectsGuided() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 p-4">
 
         <InputBox
-            label="Project Title"
+            label="project_Title"
             name="projectTitle"
             register={register}
             required
         />
 
         <SelectBox
-            label="Level"
+            label="level"
             name="level"
             register={register}
             options={[
@@ -35,7 +35,7 @@ function researchProjectsGuided() {
         />
 
         <InputBox
-            label="Student Names (comma-separated)"
+            label="student_Names"
             name="studentNames"
             register={register}
             placeholder="e.g., John Doe, Jane Smith"
@@ -43,14 +43,14 @@ function researchProjectsGuided() {
         />
 
         <SelectBox
-            label="Outcome"
+            label="outcome"
             name="outcome"
             register={register}
             options={[
-            { value: "Publication", label: "Publication" },
-            { value: "Patent", label: "Patent" },
-            { value: "Prototype", label: "Prototype" },
-            { value: "Other", label: "Other" }
+             "Publication",
+             "Patent",
+             "Prototype",
+             "Other"
             ]}
             required
         />
@@ -64,4 +64,4 @@ function researchProjectsGuided() {
   )
 }
 
-export default researchProjectsGuided
+export default ResearchProjectsGuided

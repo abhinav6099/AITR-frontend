@@ -5,7 +5,7 @@ import CalenderBox from '../../components/CalenderBox'
 import FileBox from '../../components/FileBox'
 import { useForm } from 'react-hook-form'
 
-function invitedTalks() {
+function InvitedTalks() {
     const { register, handleSubmit, reset } = useForm()
 
     const onSubmit = async (data) => {  
@@ -18,55 +18,55 @@ function invitedTalks() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 p-4">
 
         <InputBox
-            label="Faculty Name"
+            label="faculty_Name"
             name="facultyName"
             register={register}
             required
         />
 
         <InputBox
-            label="Title of Talk/Session"
-            name="talkTitle"
+            label="title_Of_Talk"
+            name="titleOfTalk"
             register={register}
             required
         />
 
         <InputBox
-            label="Event Name"
+            label="event_Name"
             name="eventName"
             register={register}
             required
         />
 
         <InputBox
-            label="Organizing Body"
+            label="organizing_Body"
             name="organizingBody"
             register={register}
             required
         />
 
         <CalenderBox
-            label="Date"
+            label="date"
             name="date"
             register={register}
             required
         />
 
         <SelectBox
-            label="Nature of Engagement"
-            name="engagementNature"
+            label="nature_Of_Engagement"
+            name="natureOfEngagement"
             register={register}
             options={[
-            { value: "Keynote", label: "Keynote" },
-            { value: "Panelist", label: "Panelist" },
-            { value: "Speaker", label: "Speaker" }
+            "Keynote", 
+            "Panelist",
+            "Speaker", 
             ]}
             required
         />
 
         <FileBox
-            label="Supporting Letter or Certificate"
-            name="supportingCertificate"
+            label="certificate_Url"
+            name="certificateUrl"
             register={register}
         />
 
@@ -79,4 +79,4 @@ function invitedTalks() {
   )
 }
 
-export default invitedTalks
+export default InvitedTalks

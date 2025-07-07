@@ -3,47 +3,44 @@ import { useForm } from "react-hook-form";
 import InputBox from "../../components/InputBox";
 import CalenderBox from "../../components/CalenderBox";
 import FileBox from "../../components/FileBox";
+import SelectBox from "../../components/SelectBox";
 
 
-const AwardForm = () => {
-  const { register, handleSubmit, reset } = useForm();
-
-  const onSubmit = (data) => {
-    console.log("Award Submission:", data);
-    reset();
-  };
+const AwardForm = ({register, handleSubmit, reset , onSubmit}) => {
 
   return (
     <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md p-10">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-        Faculty Award Submission
+        Faculty Award Submission Form
       </h2>
-
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <InputBox label="faculty_Name" register={register} />
-          <InputBox label="award_Name" register={register} />
-          <InputBox label="awarded_By" register={register} />
-          <CalenderBox label="award_Date" register={register} />
-
-          <InputBox label="category" register={register} required />
-          <InputBox label="recognition_Type" register={register} required />
-          <InputBox label="event_Name" register={register} required />
-          <InputBox label="description" register={register} required />
-
-          <FileBox label="certificatePdf" register={register} />
-        </div>
-
-        <div className="mt-8">
-          <button
-            type="submit"
-            className="px-6 py-3 bg-blue-600 text-white font-semibold text-base rounded-md shadow hover:bg-blue-700 transition"
-          >
-            Submit
-          </button>
-        </div>
-      </form>
+      <form onSubmit={handleSubmit(onSubmit)} >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6" >
+        <InputBox label="id" name={"recipientId"} register={register} required />
+        <InputBox label="recipient_Name" name={"recipientName"} register={register} required />
+        <InputBox label="department" name={"department"} register={register} required />
+        <InputBox label="award_Name" name={"awardName"} register={register} required />
+        <InputBox label="issuing_Organization" name={"issuingOrganization"} register={register} required />
+        <InputBox label="date" name={"date"} register={register} required type="date" />
+        <InputBox label="category" name={"category"} register={register} required />
+        <InputBox label="event_Name" name={"eventName"} register={register} required />
+        <InputBox label="description" name={"description"} register={register} required />
+        <FileBox label="certificate_Pdf" name={"certificatePdfUrl"} register={register} />
+        <InputBox label="title_Of_Award" name={"titleOfAward"} register={register} required />
+        <SelectBox
+          label="level"
+          name={"level"}
+          register={register}
+          required
+          options={["INSTITUTE", "STATE", "NATIONAL", "INTERNATIONAL"]}
+        />
+        <FileBox label="supporting_Document" name={"supportingDocumentUrl"} register={register} />
+      <button type="submit" className="px-6 py-3 bg-blue-600 text-white font-semibold text-base rounded-md shadow hover:bg-blue-700 transition">
+        Submit
+      </button>
     </div>
+    </form>
+    </div>
+    
   );
 };
 

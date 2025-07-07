@@ -4,7 +4,7 @@ import SelectBox from '../../components/SelectBox'
 import CalenderBox from '../../components/CalenderBox'
 import { useForm } from 'react-hook-form'
 
-function membershipProfessionalBodies() {
+function MembershipProfessionalBodies() {
 
     const { register, handleSubmit, reset } = useForm()
     const onSubmit = async (data) => {  
@@ -15,23 +15,23 @@ function membershipProfessionalBodies() {
   return (
     <div>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 p-4">
-        <InputBox label="Faculty Name" name="facultyName" register={register} required />
-        <InputBox label="Name of Organization (IEEE, ISTE, ACM, etc.)" name="organization" register={register} required />
+        <InputBox label="faculty_Name" name="facultyName" register={register} required />
+        <InputBox label="name_Of_Organization" name="organizationName" register={register} required />
         
         <SelectBox
-            label="Membership Type"
+            label="membership_Type"
             name="membershipType"
             options={["Life", "Annual", "Student", "Professional"]}
             register={register}
             required
         />
         
-        <InputBox label="Membership ID" name="membershipId" register={register} required />
+        <InputBox label="membership_ID" name="membershipId" register={register} required />
         
-        <CalenderBox label="Date of Joining" name="dateOfJoining" register={register} required />
+        <CalenderBox label="date_Of_Joining" name="dateOfJoining" register={register} required />
         
         <SelectBox
-            label="Current Status"
+            label="current_Status"
             name="currentStatus"
             options={["Active", "Expired"]}
             register={register}
@@ -45,4 +45,4 @@ function membershipProfessionalBodies() {
   )
 }
 
-export default membershipProfessionalBodies
+export default MembershipProfessionalBodies

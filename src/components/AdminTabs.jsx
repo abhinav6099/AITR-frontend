@@ -34,23 +34,26 @@ const AdminTabs = () => {
         ))}
       </div>
       <div className="flex flex-wrap justify-center gap-3 mt-4">
+
       {tab === "Faculty" && (
         <Accordion isOpen={true}>
-        <Link to="/admin/addfaculty">Add Profile</Link>
-        <Link to="/admin/addfacultyresearch">Reaserch Paper publication</Link>
-        <Link to="/admin/addawards">Awards and Recognitions</Link>
-        <Link to="/admin/adddevlopmentprograms"> Development Programs</Link>
-        <Link to="/admin/addpatents">Patent Published</Link>
-        <Link to="/admin/addawards">Patent granted</Link>
-        <Link to="/admin/addawards">Professional Certificate Earned</Link>
-        <Link to="/admin/addawards">Acadmic Qualifications Discipline</Link>
-        <Link to="/admin/addawards">phD Supervision / Guidence</Link>
-        <Link to="/admin/addawards">Membership in Professinal Bodies</Link>
-        <Link to="/admin/addawards">Research Projects Guided</Link>
-        <Link to="/admin/addawards">Invited talks/ Resource person</Link>
-        <Link to="/admin/addawards">Books / Chapters Authored</Link>
+        <Link to="faculty-addfaculty">Add Profile</Link>
+        <Link to="faculty-addawards">Awards and Recognitions</Link>
+        <Link to="faculty-adddevlopmentprograms"> Development Programs</Link>
+        <Link to="faculty-addpatents">Patent Published</Link>
+        <Link to="faculty-patentsgranted">Patent granted</Link>
+        <Link to="faculty-professioanlCertificate">Professional Certificate Earned</Link>
+        <Link to="faculty-academic-qualification-discipline">Acadmic Qualifications Discipline</Link>
+        <Link to="faculty-phD-supervision">phD Supervision / Guidence</Link>
+        <Link to="faculty-membership-professional-bodies">Membership in Professinal Bodies</Link>
+        <Link to="faculty-research-projects-guided">Research Projects Guided</Link>
+        <Link to="faculty-research-paper-publication">Research Paper Publication</Link>
+        <Link to="faculty-invited-talks">Invited talks/ Resource person</Link>
+        <Link to="faculty-books-chapterd-authored">Books / Chapters Authored</Link>
       </Accordion> // Render FacultyNavBar when "Faculty" tab is selected}
       )}
+
+
       {tab === "Student" && (
         <Accordion label="Student" isOpen={true}>
           <Link to="/admin/addstudents">Profile</Link>

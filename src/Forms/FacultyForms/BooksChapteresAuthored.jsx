@@ -2,7 +2,7 @@ import React from 'react'
 import InputBox from '../../components/InputBox'
 import { useForm } from 'react-hook-form'   
 
-function booksChapteresAuthored() {
+function BooksChapteresAuthored() {
 
     const { register, handleSubmit, reset } = useForm()
     const onSubmit = async (data) => {  
@@ -22,21 +22,21 @@ function booksChapteresAuthored() {
         />
 
         <InputBox
-            label="Publisher"
+            label="publisher"
             name="publisher"
             register={register}
             required
         />
 
         <InputBox
-            label="ISBN"
+            label="isbn"
             name="isbn"
             register={register}
             required
         />
 
         <InputBox
-            label="Year of Publication"
+            label="year_Of_Publication"
             name="yearOfPublication"
             register={register}
             type="number"
@@ -62,4 +62,4 @@ function booksChapteresAuthored() {
   )
 }
 
-export default booksChapteresAuthored
+export default BooksChapteresAuthored

@@ -1,6 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import InputBox from "../../components/InputBox";
+import SelectBox from "../../components/SelectBox";
+import FileBox from "../../components/FileBox";
 
 const ResearchPaper = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -18,11 +20,23 @@ const ResearchPaper = () => {
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <InputBox label="faculty_name" register={register} required />
-          <InputBox label="title" register={register} required />
-          <InputBox label="publication_date" register={register} required />
-          <InputBox label="journal_name" register={register} required />
-          <InputBox label="co_authors" register={register} required />
+          <InputBox label="ID" name={"facultyId"} register={register} required />
+          <InputBox label="faculty_Name" name={"facultyName"}  register={register} required />
+          <InputBox label="title_Of_Paper" name={"titleOfPaper"} register={register} required />
+          <InputBox label="publication_Date" name={"publicationDate"} register={register} required />
+          <InputBox label="journal_Name" name={"journalOrConferenceName"} register={register} required />
+          <InputBox label="co_Authors" name={"coAuthors"} register={register} required />
+          <SelectBox
+            label="indexing"
+            name={"indexing"}
+            register={register}
+            required
+            options={["SCOPUS", "SCI", "ETC"]} />
+          <FileBox label="paper_Pdf" name={"paperPdfUrl"} register={register} required />
+          <InputBox label="issn_Number" name={"issnNumber"} register={register} required />
+          <InputBox label="doi" name={"doiLink"} register={register} required />
+          <InputBox label="authors" name={"authors"} register={register} required />
+          <InputBox label="department" name={"department"} register={register} required />
         </div>
 
         <div className="mt-8">

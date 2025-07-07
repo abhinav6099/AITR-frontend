@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import FacultyTable from '../table/FacultyTable'
 import InternshipTable from '../table/InternshipTable'
 import { Outlet } from 'react-router-dom'
-
+import InstituteTabs from '../components/InstituteTabs'
 function Institute() {
 
 
@@ -16,6 +16,8 @@ function Institute() {
     <div>
       <FacultyNavbar />
       <div className="p-4">
+      <SearchBar placeholder="Search Faculty" />
+      <InstituteTabs/>
         <Outlet /> {/* Renders AddFaculty, AddAwards, etc. */}
       </div>
 

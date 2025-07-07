@@ -1,7 +1,7 @@
 import React from "react";
 import InputBox from "../../components/InputBox";
 import CalenderBox from "../../components/CalenderBox";
-import Options from "../../components/Options";
+import Options from "../../components/SelectBox";
 import FileBox from "../../components/FileBox";
 import { useForm } from "react-hook-form";
 
