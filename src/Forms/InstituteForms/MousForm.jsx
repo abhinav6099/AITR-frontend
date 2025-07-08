@@ -4,33 +4,79 @@ import InputBox from "../../components/InputBox";
 import CalenderBox from "../../components/CalenderBox";
 import FileBox from "../../components/FileBox";
 
-
 const MouForm = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
-    console.log("Form Data:", data);
-    // Handle form submission (e.g., POST to backend)
+    console.log("MoU Form Data:", data);
+    reset();
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 p-6 bg-white shadow-md rounded-lg max-w-2xl mx-auto">
-      <h2 className="text-2xl font-semibold mb-4">MoU Form</h2>
+    <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md p-10">
+      <h2 className="text-2xl font-semibold text-gray-800 mb-6">
+        Memorandum of Understanding (MoU) Submission Form
+      </h2>
 
-      <InputBox label="Agency Name" register={register} name="agencyName" required />
-      
-      <CalenderBox label="Date" register={register} name="date" required />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <InputBox
+            label="Agency Name"
+            name="agencyName"
+            register={register}
+            required
+          />
 
-      <InputBox label="Duration" register={register} name="duration" placeholder="e.g., 2 years" required />
+          <CalenderBox
+            label="Date"
+            name="date"
+            register={register}
+            required
+            type="date"
+          />
 
-      <InputBox label="Description" register={register} name="description" textarea required />
+          <InputBox
+            label="Duration"
+            name="duration"
+            register={register}
+            placeholder="e.g., 2 years"
+            required
+          />
 
-      <InputBox label="Funding" register={register} name="funding" required />
+          <InputBox
+            label="Funding"
+            name="funding"
+            register={register}
+            required
+          />
 
-      <FileBox label="MoU PDF" register={register} name="mouPdf" accept=".pdf" />
+          <InputBox
+            label="Description"
+            name="description"
+            register={register}
+            textarea
+            required
+            className="md:col-span-2"
+          />
 
-      <input type="submit" value="Submit" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md cursor-pointer" />
-    </form>
+          <FileBox
+            label="MoU PDF"
+            name="mouPdf"
+            register={register}
+            accept=".pdf"
+            className="md:col-span-2"
+          />
+          
+          <button
+            type="submit"
+            className="col-span-2 mt-6 px-6 py-3 bg-blue-600 text-white font-semibold text-base rounded-md shadow hover:bg-blue-700 transition"
+          >
+            Submit
+          </button>
+        </div>
+
+      </form>
+    </div>
   );
 };
 

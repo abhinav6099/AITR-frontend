@@ -67,6 +67,12 @@ import Mous from "./Forms/Department/Mous";
 // import AddHigherStudies from "./AddDataForms/AddHigherStudies";
 // import AddProfessionalMembership from "./AddDataForms/AddProfessionalMembership";
 
+//Admin Department
+import MOU from './Forms/Department/Mous'
+import ConsultancyProject from "./Forms/Department/ConsultancyProject";
+import RDInititatives from "./Forms/Department/RD_Inititatives";
+import EventGrantReceived from "./Forms/Department/EventGrantReceived";
+import EventOrganized from "./Forms/InstituteForms/EventOrganized";
 
 
 function App() {
@@ -76,6 +82,7 @@ function App() {
         <NavbarHeader />
         <Navbar />
         <Routes>
+
           <Route path="/" element={<HomePage />} />
           <Route path="/faculty" element={<Faculty />} />
           <Route path="/student" element={<Student />} />
@@ -125,12 +132,20 @@ function App() {
 
 
         // institute routing
-          <Route path="/instituteTabel" element={<Institute />} />
-          <Route path="add-institute-counsultancy" element={<Counsultancy />} />
-          <Route path="add-institute-eventgrant" element={<EventGrant />} />
-          <Route path="add-institute-documents" element={<InstituteDocumentForm />} />
-          <Route path="add-institue-mous" element={<MouForm />} />
-          <Route path="add-institute-r&dforms" element={<RnDForms />} />
+          <Route path="/instituteTabel" element={<Institute />} />          
+          <Route path="/admin/insititute/addinstitue-mous" element={<MouForm />} />
+          <Route path="/admin/insititute/addinstitute-counsultancy" element={<Counsultancy />} />
+          <Route path="/admin/insititute/addinstitute-eventgrant" element={<EventGrant />} />
+          <Route path="/admin/insititute/addinstitute-documents" element={<InstituteDocumentForm />} />
+          <Route path="/admin/insititute/addinstitute-r&dforms" element={<RnDForms />} />
+          <Route path="/admin/insititute/addinstitute-eventorganized" element={<EventOrganized/>}/>
+
+
+          {/* Admin Department */}
+        <Route path='/admin/department/addmou'element={<MOU/>}/>
+        <Route path="/admin/department/addconsultancy-project"element={<ConsultancyProject/>}/>
+        <Route path="/admin/department/addrd-inititatives"element={<RDInititatives/>}/>        
+        <Route path="/admin/department/addevent-grant-received"element={<EventGrantReceived/>}/>
         </Routes>
       </BrowserRouter>
     </>

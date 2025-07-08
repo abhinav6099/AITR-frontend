@@ -3,55 +3,64 @@ import { useForm } from "react-hook-form";
 import FileBox from "../../components/FileBox";
 
 const InstituteDocumentForm = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
     console.log("Uploaded Files:", data);
-    // send to backend API using FormData
+    reset();
+    // You can send FormData to your backend here
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="p-6 bg-white shadow-lg rounded-lg max-w-xl mx-auto space-y-4">
-      <h2 className="text-xl font-semibold mb-4">Institute Document Upload</h2>
+    <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md p-10">
+      <h2 className="text-2xl font-semibold text-gray-800 mb-6">
+        Institute Document Upload Form
+      </h2>
 
-      <FileBox
-        label="AICTE Affiliation PDF"
-        name="aicteAffiliationPdf"
-        register={register}
-        accept=".pdf"
-        required
-      />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-      <FileBox
-        label="RGPV PDF"
-        name="rgpvPdf"
-        register={register}
-        accept=".pdf"
-        required
-      />
+          <FileBox
+            label="AICTE Affiliation PDF"
+            name="aicteAffiliationPdf"
+            register={register}
+            accept=".pdf"
+            required
+          />
 
-      <FileBox
-        label="Society PDF"
-        name="societyPdf"
-        register={register}
-        accept=".pdf"
-        required
-      />
+          <FileBox
+            label="RGPV PDF"
+            name="rgpvPdf"
+            register={register}
+            accept=".pdf"
+            required
+          />
 
-      <FileBox
-        label="By Laws PDF"
-        name="byLawsPdf"
-        register={register}
-        accept=".pdf"
-        required
-      />
+          <FileBox
+            label="Society PDF"
+            name="societyPdf"
+            register={register}
+            accept=".pdf"
+            required
+          />
 
-      <input
-        type="submit"
-        value="Submit"
-        className="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700"
-      />
-    </form>
+          <FileBox
+            label="By Laws PDF"
+            name="byLawsPdf"
+            register={register}
+            accept=".pdf"
+            required
+          />
+
+          <button
+            type="submit"
+            className="col-span-2 mt-6 px-6 py-3 bg-blue-600 text-white font-semibold text-base rounded-md shadow hover:bg-blue-700 transition"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 
