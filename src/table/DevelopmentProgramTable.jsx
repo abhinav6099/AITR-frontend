@@ -3,16 +3,19 @@ import DataTable from 'react-data-table-component';
 
 // Columns
 const columns = [
-  { name: 'ID', selector: row => row.Id, sortable: true, width: '70px' },
-  { name: 'Faculty Name', selector: row => row.Faculty_Name, sortable: true },
-  { name: 'Program Name', selector: row => row.Program_Name, wrap: true },
-  { name: 'Organized By', selector: row => row.Organized_By },
-  { name: 'Start Date', selector: row => row.Start_Date },
-  { name: 'End Date', selector: row => row.End_Date },
-  { name: 'Program Type', selector: row => row.Program_Type },
-  { name: 'Mode', selector: row => row.Mode },
-  { name: 'Location', selector: row => row.Location },
-  { name: 'Duration Days', selector: row => row.Duration_Days, right: true },
+  { name: 'ID', selector: row => row.facultyId, sortable: true, width: '70px' },
+  { name: 'Faculty Name', selector: row => row.facultyName, sortable: true },
+  { name: 'department', selector: row => row.department, wrap: true },
+  { name: 'FDP title', selector: row => row.fdpTitle },
+  { name: 'Organising Institute', selector: row => row.organizingInstitute },
+
+  { name: 'Start Date', selector: row => row.startDate },
+  { name: 'End Date', selector: row => row.endDate },
+  { name: 'Program Type', selector: row => row.programType },
+  { name: 'Mode', selector: row => row.mode },
+  { name: 'Location', selector: row => row.location },
+  { name: 'No of days', selector: row => row.numberOfDays },
+  
   {
     name: 'Certificate',
     cell: row => (
@@ -99,11 +102,11 @@ const data = [
   },
 ];
 
-const DevelopmentProgramTable = () => {
+const DevelopmentProgramTable = ({data}) => {
+  console.log(data)
   return (
     <div className="p-4">
       <DataTable
-        title="Faculty Programs Attended"
         columns={columns}
         data={data}
         pagination

@@ -19,8 +19,8 @@ const AwardForm = ({register, handleSubmit, reset , onSubmit}) => {
         <InputBox label="recipient_Name" name={"recipientName"} register={register} required />
         <InputBox label="department" name={"department"} register={register} required />
         <InputBox label="award_Name" name={"awardName"} register={register} required />
-        <InputBox label="issuing_Organization" name={"issuingOrganization"} register={register} required />
-        <CalenderBox label="date" name={"date"} register={register} required type="date" />
+        <InputBox label="issuing Organization" name="issuingOrganization" register={register} required />
+        <CalenderBox label="date" name={"date"} register={register} required />
         <InputBox label="category" name={"category"} register={register} required />
         <InputBox label="event_Name" name={"eventName"} register={register} required />
         <InputBox label="description" name={"description"} register={register} required />
@@ -31,9 +31,8 @@ const AwardForm = ({register, handleSubmit, reset , onSubmit}) => {
           name={"level"}
           register={register}
           required
-          options={["INSTITUTE", "STATE", "NATIONAL", "INTERNATIONAL"]}
+          options={["Institute", "State", "National", "International"]}
         />
-        <FileBox label="supporting_Document" name={"supportingDocumentUrl"} register={register} />
       <button type="submit" className="px-6 py-3 bg-blue-600 text-white font-semibold text-base rounded-md shadow hover:bg-blue-700 transition">
         Submit
       </button>

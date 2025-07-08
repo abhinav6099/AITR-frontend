@@ -8,13 +8,7 @@ import FileBox from "../../components/FileBox";
 const programTypes = ["FDP", "Workshop", "Seminar", "Training"];
 const modes = ["Online", "Offline", "Hybrid"];
 
-const DevlopmentProgram = () => {
-  const { register, handleSubmit, reset } = useForm();
-
-  const onSubmit = (data) => {
-    console.log("Faculty Program Submitted:", data);
-    reset();
-  };
+const DevlopmentProgram = ({ register, handleSubmit, reset, onSubmit }) => {
 
   return (
     <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md p-10">
@@ -23,12 +17,12 @@ const DevlopmentProgram = () => {
       </h2>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <InputBox label="ID" name={"facultyId"} register={register} />
           <InputBox label="faculty_Name" name={"facultyName"} register={register} required />
           <InputBox label="department" name={"department"} register={register} required />
-          <InputBox label="fdp_Title" name={"fdpTitle"} register={register} required />
-          <InputBox label="program_Name" name={""} register={register} required />
+          <InputBox label="Faculty_devlopment_program_Title" name={"fdpTitle"} register={register} required />
+          <InputBox label="program_Name" name={"programName"} register={register} required />
           <InputBox label="organizing_Institute" name={"organizingInstitute"} register={register} required />
           <CalenderBox label="start_Date" name={"startDate"} register={register} />
           <CalenderBox label="end_Date" name={"endDate"} register={register} />

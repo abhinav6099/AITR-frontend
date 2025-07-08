@@ -9,13 +9,7 @@ const statusOptions = ["Filed", "Published", "Granted", "Expired"];
 const patentTypes = ["Utility", "Design", "Plant"];
 const patentCategories = ["National", "International"];
 
-const FacultyPatentForm = () => {
-  const { register, handleSubmit, reset } = useForm();
-
-  const onSubmit = (data) => {
-    console.log("Patent Submission:", data);
-    reset();
-  };
+const FacultyPatentForm = ({ register, handleSubmit, reset, onSubmit } ) => {
 
   return (
     <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md p-10">
@@ -29,7 +23,7 @@ const FacultyPatentForm = () => {
       <InputBox label="Title" register={register} name="title" required />
       <InputBox label="Applicant" register={register} name="applicant" required />
       <InputBox label="Application Number" register={register} name="applicationNumber" required />
-      <CalendarBox label="Application Date" register={register} name="applicationDate" />
+      <CalenderBox label="Application Date" register={register} name="applicationDate" />
       <SelectBox label="Status" options={statusOptions} register={register} name="status" />
       <InputBox label="Co-Inventors" register={register} name="coInventors" />
       <InputBox label="Country" register={register} name="country" />

@@ -17,6 +17,7 @@ const AddAwards = () => {
     if(loading == true ){
       const data = await axios.get("http://localhost:3000/api/v1/faculty/award-recognitions")
       console.log(data.data)
+      setData(data)
      
     }
  
@@ -39,30 +40,31 @@ const AddAwards = () => {
 
       const res = await axios.post("http://localhost:3000/file", formData)
       console.log(res.data)
+      
+      const url = "http://localhost:3000/api/v1/faculty/award-recognition"
+      const response = await axios.post( url 
+        , {
+        recipientId: data.recipientId,
+        recipientName: data.recipientName,
+        department: data.department,
+        awardName: data.awardName,
+        issuingOrganisation: data.issuingOrganisationber,
+        date: data.date,
+        catagory: data.catagory,
+        enevtName: data.enevtName,
+        description: data.description,
+        certificatePdfUrl: data.certificatePdfUrl,
+        titleOfAward: data.titleOfAward,
+        level: data.level,
+        supportingDocumentUrl: data.supportingDocumentUrl,
+        // using fileId without middleware 
+        // TODO : create middleware and send the fileId with using middleware
+        fileId : res.data.fileId
+      }
+      
+    )
+    console.log(response)
 
-    //   const url = "http://localhost:3000/api/v1/faculty/profile"
-    //   const response = await axios.post( url 
-    //     , {
-    //     recipientId: data.recipientId,
-    //     recipientName: data.recipientName,
-    //     department: data.department,
-    //     awardName: data.awardName,
-    //     issuingOrganisation: data.issuingOrganisationber,
-    //     date: data.date,
-    //     catagory: data.catagory,
-    //     enevtName: data.enevtName,
-    //     description: data.description,
-    //     certificatePdfUrl: data.certificatePdfUrl,
-    //     titleOfAward: data.titleOfAward,
-    //     level: data.level,
-    //     supportingDocumentUrl: data.supportingDocumentUrl,
-    //     // using fileId without middleware 
-    //     // TODO : create middleware and send the fileId with using middleware
-    //     fileId : res.data.fileId
-    //   }
-    // )
-
-    // console.log(response)
       
     }catch(err){
       console.log("Error:", err )
