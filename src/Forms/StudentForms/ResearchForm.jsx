@@ -1,8 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import InputBox from "../../components/InputBox";
+import FileBox from "../../components/FileBox";
 
-const ResearchForm  = () => {
+const ResearchForm = () => {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
@@ -18,11 +19,18 @@ const ResearchForm  = () => {
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <InputBox label="student_name" register={register} required />
-          <InputBox label="title" register={register} required />
-          <InputBox label="publication_date" register={register} required />
-          <InputBox label="journal_name" register={register} required />
-          <InputBox label="co_authors" register={register} required />
+          <InputBox label="Student Name" name="studentName" register={register} required />
+          <InputBox label="Enrollment Number" name="enrollmentNumber" register={register} required />
+          <InputBox label="Branch" name="branch" register={register} required />
+          <InputBox label="Batch" name="batch" register={register} required />
+          <InputBox label="DOI / ISBN" name="doiIsbn" register={register} />
+          <InputBox label="Title of Paper" name="paperTitle" register={register} required />
+          <InputBox label="Publication Date" name="publicationDate" register={register} required />
+          <InputBox label="Journal / Conference Name" name="journalName" register={register} required />
+          <InputBox label="Co-authors" name="coAuthors" register={register} />
+          <InputBox label="Indexing (Scopus, SCI, etc.)" name="indexing" register={register} />
+          <FileBox label="Paper PDF" name="paperPdf" register={register} />
+          <InputBox label="Faculty Guide" name="facultyGuide" register={register} />
         </div>
 
         <div className="mt-8">
@@ -38,4 +46,4 @@ const ResearchForm  = () => {
   );
 };
 
-export default ResearchForm ;
+export default ResearchForm;

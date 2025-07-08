@@ -59,16 +59,16 @@ const AdminTabs = () => {
           <Link to="/admin/addstudents">Profile</Link>
           <Link to="/admin/addstudentcertificates">Certification</Link>
           <Link to="/admin/addhackathons">Technical/Non-Technical</Link>
-          <Link to="/admin/addinternships">Placement</Link>
-          <Link to="/admin/addplacements">Internship</Link>
+          <Link to="/admin/addplacements">Placement</Link>
+          <Link to="/admin/addinternships">Internship</Link>
           <Link to="/admin/addstudentresearchs">Research Paper</Link>
           <Link to="/admin/addsports">Sports</Link>
-          <Link to="/admin/addsports">Extra Curricular</Link>
-          <Link to="/admin/addsports">Project Work/ Capstone Projects</Link>
-          <Link to="/admin/addsports">Startups/ Entrepreneurial Ventures</Link>
-          <Link to="/admin/addsports">Hackathons / Innovation Challeges</Link>
-          <Link to="/admin/addsports">Higher Studies</Link>
-          <Link to="/admin/addsports">Professional Membership</Link>
+          <Link to="/admin/extracurricular">Extra Curricular</Link>
+          <Link to="/admin/capstone-projects">Project Work/ Capstone Projects</Link>
+          <Link to="/admin/startups">Startups/ Entrepreneurial Ventures</Link>
+          <Link to="/admin/hackathon-challenges">Hackathons / Innovation Challeges</Link>
+          <Link to="/admin/higher-studies">Higher Studies</Link>
+          <Link to="/admin/professional-membership">Professional Membership</Link>
         </Accordion>
       )}
 
