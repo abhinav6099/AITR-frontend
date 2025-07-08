@@ -12,6 +12,7 @@ function AddFaculty() {
   const {register, handleSubmit, reset} = useForm()
   const [data, setData] = useState([])
   const [loading , setLoading ] = useState(true)
+  const [submit, setSubmit ] = useState(false)
 
 
   const facultyData = [
@@ -90,11 +91,13 @@ function AddFaculty() {
         facultyId: facultyData.facultyId,
         name: facultyData.name,
         email: facultyData.email,
+        qualification: facultyData.qualification,
         department: facultyData.department,
         mobileNumber: facultyData.mobileNumber,
         category: facultyData.category,
         teachingExperience: facultyData.teachingExperience,
         designation: facultyData.designation,
+
 
         // using fileId without middleware 
         // TODO : create middleware and send the fileId with using middleware
@@ -123,6 +126,11 @@ function AddFaculty() {
     cell: (row ,index) => index + 1 
   },
   {
+    name: 'faculty ID',
+    selector: row => row.facultyId,
+    sortable: true,
+  },
+  {
     name: 'Name',
     selector: row => row.name,
     sortable: true,
@@ -132,6 +140,11 @@ function AddFaculty() {
     selector: row => row.email,
     sortable: true,
   },
+    {
+    name: 'qualification',
+    selector: row => row.qualification,
+    sortable: true,
+  },
   {
     name: 'Department',
     selector: row => row.department,
@@ -139,7 +152,7 @@ function AddFaculty() {
   },
   {
     name: 'Mobile No',
-    selector: row => row.mobile_no,
+    selector: row => row.mobileNumber,
     sortable: true,
   },
   {
@@ -161,7 +174,7 @@ function AddFaculty() {
   return (
     <div>
         <FacultyForm onSubmit={onSubmit}  register={register} handleSubmit={handleSubmit} reset={reset} />
-        <DataTable columns={columns} data={facultyData} />
+        <DataTable columns={columns} data={data} />
     </div>
   )
 }

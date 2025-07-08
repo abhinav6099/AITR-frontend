@@ -20,11 +20,11 @@ const AwardForm = ({register, handleSubmit, reset , onSubmit}) => {
         <InputBox label="department" name={"department"} register={register} required />
         <InputBox label="award_Name" name={"awardName"} register={register} required />
         <InputBox label="issuing_Organization" name={"issuingOrganization"} register={register} required />
-        <InputBox label="date" name={"date"} register={register} required type="date" />
+        <CalenderBox label="date" name={"date"} register={register} required type="date" />
         <InputBox label="category" name={"category"} register={register} required />
         <InputBox label="event_Name" name={"eventName"} register={register} required />
         <InputBox label="description" name={"description"} register={register} required />
-        <FileBox label="certificate_Pdf" name={"certificatePdfUrl"} register={register} />
+        <FileBox label="certificate_Pdf" name={"file"} register={register} />
         <InputBox label="title_Of_Award" name={"titleOfAward"} register={register} required />
         <SelectBox
           label="level"

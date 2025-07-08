@@ -91,6 +91,34 @@ const columns = [
     selector: row => row.designation,
     sortable: true,
   },
+  {
+    name: 'Actions',
+    cell: row => (
+      <div className="flex gap-2">
+        <button
+          onClick={() => alert(`Viewing program ${row.Id}`)}
+          className="bg-blue-500 hover:bg-blue-600 text-white text-xs px-3 py-1 rounded"
+        >
+          View
+        </button>
+        <button
+          onClick={() => alert(`Editing program ${row.Id}`)}
+          className="bg-yellow-500 hover:bg-yellow-600 text-white text-xs px-3 py-1 rounded"
+        >
+          Edit
+        </button>
+        <button
+          onClick={() => alert(`Deleting program ${row.Id}`)}
+          className="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded"
+        >
+          Delete
+        </button>
+      </div>
+    ),
+    ignoreRowClick: true,
+    allowOverflow: true,
+    button: true,
+  },
 ];
 
 

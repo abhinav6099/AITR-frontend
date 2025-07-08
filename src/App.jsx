@@ -55,6 +55,7 @@ import Faculty from './pages/Faculty'
 import Student from './pages/Student'
 import Institute from './pages/Institute'
 import Department from './pages/Department'
+import Mous from "./Forms/Department/Mous";
 
 
 
@@ -96,7 +97,7 @@ function App() {
 
           // studnets routing 
           <Route path="addfacultyresearch" element={<AddFacultyResearchData />} />
-          <Route path="addstudents" element={<AddStudentData />} />
+          <Route path="addstudents" e  lement={<AddStudentData />} />
           <Route path="addstudentcertificates" element={<AddStudentCertificateData />} />
           <Route path="addhackathons" element={<AddHackathonsData />} />
           <Route path="addinternships" element={<AddInternshipData />} />

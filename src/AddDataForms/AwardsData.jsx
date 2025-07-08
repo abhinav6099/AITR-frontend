@@ -10,6 +10,7 @@ const AddAwards = () => {
   const {register, handleSubmit, reset} = useForm()
   const [data, setData] = useState([])
   const [loading , setLoading ] = useState(true)
+  const [file, setFile] = useState(null)
 
 
   const fetchData = async () => {
@@ -27,40 +28,46 @@ const AddAwards = () => {
     console.log(data)
   },[loading])
 
-  const onSubmit = async (facultyData) => {
+  const onSubmit = async (data) => {
  
+    console.log(data)
+    console.log(data.file[0])
+    setFile(data.file[0])
     try{
-      // const formData = new FormData();
-      // formData.append("file" , file);
+      const formData = new FormData();
+      formData.append("file" , file);
 
-      // const res = await axios.post("http://localhost:3000/file", formData)
-      // console.log(res.data)
+      const res = await axios.post("http://localhost:3000/file", formData)
+      console.log(res.data)
 
-      console.log(facultyData)
-      const url = "http://localhost:3000/api/v1/faculty/profile"
-      const response = await axios.post( url 
-        , {
-        facultyId: facultyData.facultyId,
-        name: facultyData.name,
-        email: facultyData.email,
-        department: facultyData.department,
-        mobileNumber: facultyData.mobileNumber,
-        category: facultyData.category,
-        teachingExperience: facultyData.teachingExperience,
-        designation: facultyData.designation,
+    //   const url = "http://localhost:3000/api/v1/faculty/profile"
+    //   const response = await axios.post( url 
+    //     , {
+    //     recipientId: data.recipientId,
+    //     recipientName: data.recipientName,
+    //     department: data.department,
+    //     awardName: data.awardName,
+    //     issuingOrganisation: data.issuingOrganisationber,
+    //     date: data.date,
+    //     catagory: data.catagory,
+    //     enevtName: data.enevtName,
+    //     description: data.description,
+    //     certificatePdfUrl: data.certificatePdfUrl,
+    //     titleOfAward: data.titleOfAward,
+    //     level: data.level,
+    //     supportingDocumentUrl: data.supportingDocumentUrl,
+    //     // using fileId without middleware 
+    //     // TODO : create middleware and send the fileId with using middleware
+    //     fileId : res.data.fileId
+    //   }
+    // )
 
-        // using fileId without middleware 
-        // TODO : create middleware and send the fileId with using middleware
-        // fileId : res.data.fileId
-      }
-    )
-
-      console.log(response)
+    // console.log(response)
       
-      }catch(err){
-        console.log("Error:", err )
-      }
-      console.log(facultyData)
+    }catch(err){
+      console.log("Error:", err )
+    }
+    console.log(data)
 
     setLoading((p) => !p)
   }
