@@ -15,9 +15,9 @@ function AddPatentData() {
 
   const fetchData = async () => {
     if(loading == true ){
-      const data = await axios.get("http://localhost:3000/api/v1/faculty/patents-granted")
+      const data = await axios.get("http://localhost:3000/api/v1/faculty/patents-published")
       console.log(data.data.patents)
-      setData(data.data.patents)
+      setData(data.data.programs)
      
     }
  
@@ -29,11 +29,11 @@ function AddPatentData() {
     console.log(data)
   },[loading])
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (patentData) => {
  
-    console.log(data)
-    console.log(data.file[0])
-    setFile(data.file[0])
+    console.log(patentData)
+    console.log(patentData.file[0])
+    setFile(patentData.file[0])
     try{
       const formData = new FormData();
       formData.append("file" , file);
@@ -41,24 +41,24 @@ function AddPatentData() {
       const res = await axios.post("http://localhost:3000/file", formData)
       console.log(res.data)
       
-      const url = "http://localhost:3000/api/v1/faculty/patent-granted"
+      const url = "http://localhost:3000/api/v1/faculty/patent-published"
       const response = await axios.post( url 
         , {
-        facultyId: data.facultyId,
-        facultyName: data.facultyName,
-        department: data.department,
-        fdpTitle: data.fdpTitle,
-        organizingInstitute: data.organizingInstituteber,
-        startDate: data.startDate,
-        endDate: data.endDate,
-        programType: data.programType,
-        mode: data.mode,
-        location:data.location,
-        numberOfDays: data.numberOfDays,
-        catagory: data.catagory,
-        enevtName: data.enevtName,
-        description: data.description,
-        outcomeHighlights: data.outcomeHighlights,
+        facultyId: patentData.facultyId,
+        facultyName: patentData.facultyName,
+        department: patentData.department,
+        fdpTitle: patentData.fdpTitle,
+        organizingInstitute: patentData.organizingInstituteber,
+        startDate: patentData.startDate,
+        endDate: patentData.endDate,
+        programType: patentData.programType,
+        mode: patentData.mode,
+        location:patentData.location,
+        numberOfDays: patentData.numberOfDays,
+        catagory: patentData.catagory,
+        enevtName: patentData.enevtName,
+        description: patentData.description,
+        outcomeHighlights: patentData.outcomeHighlights,
 
         // using fileId without middleware 
         // TODO : create middleware and send the fileId with using middleware
