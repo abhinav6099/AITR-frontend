@@ -2,8 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import InputBox from "../../components/InputBox";
 import CalenderBox from "../../components/CalenderBox";
-import Options from "../../components/Options";
 import Button from "../../components/Button";
+import SelectBox from "../../components/SelectBox";
 
 const MembershipForm = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -42,7 +42,7 @@ const MembershipForm = () => {
         required
       />
 
-      <Options
+      <SelectBox
         label="Membership Status"
         name="membershipStatus"
         register={register}
@@ -50,8 +50,13 @@ const MembershipForm = () => {
         required
       />
 
-      <div className="md:col-span-2">
-        <Button label="Submit Membership Info" type="submit" />
+      <div>
+        <button
+            type="submit"
+            className="px-6 py-3 bg-blue-600 text-white font-semibold text-base rounded-md shadow hover:bg-blue-700 transition"
+          >
+            Submit
+          </button>
       </div>
     </form>
   );

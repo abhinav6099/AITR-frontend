@@ -8,7 +8,9 @@ import FileBox from "../../components/FileBox";
 const programTypes = ["FDP", "Workshop", "Seminar", "Training"];
 const modes = ["Online", "Offline", "Hybrid"];
 
-const DevlopmentProgram = ({ register, handleSubmit, reset, onSubmit }) => {
+
+
+const DevlopmentProgram = ({ onSubmit, register, handleSubmit, reset }) => {
 
   return (
     <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md p-10">
@@ -32,7 +34,6 @@ const DevlopmentProgram = ({ register, handleSubmit, reset, onSubmit }) => {
           <InputBox label="duration_Days" name={"numberOfDays"} register={register} />
           <FileBox label="certificatePdf" name={"certificatePdfUrl"} register={register} />
           <InputBox label="outcome" name={"outcomeHighlights"} register={register} />
-
         </div>
 
         <div className="mt-8">

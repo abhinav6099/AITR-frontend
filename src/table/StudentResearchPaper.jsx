@@ -2,12 +2,18 @@ import React from 'react';
 import DataTable from 'react-data-table-component';
 
 const columns = [
-  { name: 'ID', selector: row => row.Id, sortable: true, width: '70px' },
-  { name: 'Student Name', selector: row => row.Student_Name, sortable: true },
-  { name: 'Title', selector: row => row.Title, wrap: true },
-  { name: 'Publication Date', selector: row => row.Publication_Date },
-  { name: 'Journal Name', selector: row => row.Journal_Name },
-  { name: 'Co-Authors', selector: row => row.Co_Authors, wrap: true },
+  { name: 'Student Name', selector: row => row.studentName, sortable: true },
+  { name: 'Enrollment Number', selector: row => row.enrollmentNumber, wrap: true },
+  { name: 'Branch', selector: row => row.branch },
+  { name: 'Batch', selector: row => row.batch },
+  { name: 'doiOrIsbn', selector: row => row.doiOrIsbn, wrap: true },
+  { name: 'title Of Paper', selector: row => row.titleOfPaper },
+  { name: 'Publication Date', selector: row => row.publicationDate },
+  { name: 'journal Or Conference Name', selector: row => row.journalOrConferenceName },
+  { name: 'cCo Authors', selector: row => row.coAuthors },
+  { name: 'indexing', selector: row => row.indexing },
+  { name: 'PDF', selector: row => row.fileId },
+  { name: 'Faculty Guide', selector: row => row.facultyGuide },
   {
     name: 'Actions',
     cell: row => (
@@ -21,34 +27,8 @@ const columns = [
   },
 ];
 
-const data = [
-  {
-    Id: 1,
-    Student_Name: 'Ankita Sharma',
-    Title: 'Deep Learning Applications in Agriculture',
-    Publication_Date: '2023-09-15',
-    Journal_Name: 'International Journal of AI Research',
-    Co_Authors: 'Dr. Vikas Gupta, Neha Verma',
-  },
-  {
-    Id: 2,
-    Student_Name: 'Rohit Mehra',
-    Title: 'A Review on Blockchain in Education',
-    Publication_Date: '2024-01-10',
-    Journal_Name: 'Journal of Distributed Systems',
-    Co_Authors: 'Dr. Anjali Rao',
-  },
-  {
-    Id: 3,
-    Student_Name: 'Kavya Rathi',
-    Title: 'Low-Power IoT Architectures for Smart Cities',
-    Publication_Date: '2023-12-22',
-    Journal_Name: 'IEEE IoT Journal',
-    Co_Authors: 'Dr. Abhay Singh, Ravi Yadav',
-  },
-];
 
-const StudentResearchPaper = () => {
+const StudentResearchPaper = ({data}) => {
   return (
     <div className="p-4 overflow-x-auto">
       <DataTable

@@ -3,25 +3,24 @@ import { useForm } from "react-hook-form";
 import InputBox from "../../components/InputBox";
 import SelectBox from "../../components/SelectBox";
 import FileBox from "../../components/FileBox";
+import DataTable from "react-data-table-component";
 
-const ResearchPaper = () => {
-  const { register, handleSubmit, reset } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Research Paper Submitted:", data);
-    reset();
-  };
+const ResearchPaper = ({onSubmit, handleSubmit, reset, register}) => {
+
+  
+
 
   return (
     <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md p-10">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-        Research Paper Submission
+        Research Paper Publication
       </h2>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <InputBox label="ID" name={"facultyId"} register={register} required />
-          <InputBox label="faculty_Name" name={"facultyName"}  register={register} required />
+          <InputBox label="faculty_Name" name={"facultyName"} register={register} required />
           <InputBox label="title_Of_Paper" name={"titleOfPaper"} register={register} required />
           <InputBox label="publication_Date" name={"publicationDate"} register={register} required />
           <InputBox label="journal_Name" name={"journalOrConferenceName"} register={register} required />
@@ -32,10 +31,12 @@ const ResearchPaper = () => {
             register={register}
             required
             options={["SCOPUS", "SCI", "ETC"]} />
-          <FileBox label="paper_Pdf" name={"paperPdfUrl"} register={register} required />
+          <FileBox label="paper_Pdf" name={"file"} register={register} required />
           <InputBox label="issn_Number" name={"issnNumber"} register={register} required />
           <InputBox label="doi" name={"doiLink"} register={register} required />
           <InputBox label="authors" name={"authors"} register={register} required />
+          <InputBox label="Issun or Isbn" name={"issnOrIsbn"} register={register} required />
+
           <InputBox label="department" name={"department"} register={register} required />
         </div>
 
@@ -48,8 +49,100 @@ const ResearchPaper = () => {
           </button>
         </div>
       </form>
+      <div>
+        <DataTable columns={publicationColumns} data={data} />
+      </div>
     </div>
+
   );
 };
 
 export default ResearchPaper;
+
+export const publicationColumns = [
+  {
+    name: 'ID',
+    selector: row => row.facultyId,
+    sortable: true,
+    center: true
+  },
+  {
+    name: 'Faculty Name',
+    selector: row => row.facultyName,
+    sortable: true
+  },
+  {
+    name: 'Title of Paper',
+    selector: row => row.titleOfPaper,
+    sortable: true,
+    wrap: true
+  },
+  {
+    name: 'Publication Date',
+    selector: row => row.publicationDate,
+    format: row => new Date(row.publicationDate).toLocaleDateString()
+  },
+  {
+    name: 'Journal/Conference Name',
+    selector: row => row.journalOrConferenceName,
+    wrap: true
+  },
+  {
+    name: 'Co-Author',
+    selector: row => row.coAuthors,
+    wrap: true
+  },
+  {
+    name: 'Indexing',
+    selector: row => row.indexing,
+    wrap: true
+  },
+  {
+    name: 'Paper PDF',
+    selector: row => row.paperPdf,
+    cell: row => (
+      <a
+        href={row.paperPdf}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline"
+      >
+        View PDF
+      </a>
+    )
+  },
+  {
+    name: 'ISSN Number',
+    selector: row => row.issnNumber
+  },
+  {
+    name: 'DOI Link',
+    selector: row => row.doiLink,
+    cell: row => (
+      <a
+        href={row.doiLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline"
+      >
+        DOI
+      </a>
+    )
+  },
+  {
+    name: 'Authors',
+    selector: row => row.authors,
+    cell: row =>
+      Array.isArray(row.authors) ? row.authors.join(', ') : row.authors
+  },
+  {
+    name: 'ISSN/ISBN',
+    selector: row => row.issnOrIsbn
+  },
+  {
+    name: 'Department',
+    selector: row => row.department
+  }
+];
+
+

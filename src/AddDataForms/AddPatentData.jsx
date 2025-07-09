@@ -1,88 +1,71 @@
-import React from 'react'
+
 import FacultyPatentForm from '../Forms/FacultyForms/Patent'
 import PatentTable from '../table/PatentsTable'
-import { useForm } from 'react-hook-form'
-import axios from 'axios'
-import { useState, useEffect } from 'react'
+import { useForm } from 'react-hook-form';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 function AddPatentData() {
 
-  const { register, reset , handleSubmit } = useForm()
-  const [data, setData] = useState([])
-  const [loading , setLoading ] = useState(true)
-  const [file, setFile] = useState(null)
-
+  const { register, handleSubmit, reset } = useForm();
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
-    if(loading == true ){
-      const data = await axios.get("http://localhost:3000/api/v1/faculty/patents-published")
-      console.log(data.data.patents)
-      setData(data.data.programs)
-     
+    try {
+      const res = await axios.get('http://localhost:3000/api/v1/faculty/research-papers');
+      console.log(res.data.papers)
+      setData(res.data.papers); // Adjust key based on your backend response
+    } catch (error) {
+      console.error("Error fetching research papers:", error);
     }
- 
-  }
+  };
 
   useEffect(() => {
-    console.log("fetching data")
-    fetchData()
-    console.log(data)
-  },[loading])
+    fetchData();
+  }, [loading]);
 
-  const onSubmit = async (patentData) => {
- 
-    console.log(patentData)
-    console.log(patentData.file[0])
-    setFile(patentData.file[0])
-    try{
-      const formData = new FormData();
-      formData.append("file" , file);
+  const onSubmit = async (data) => {
+    try {
 
-      const res = await axios.post("http://localhost:3000/file", formData)
-      console.log(res.data)
-      
-      const url = "http://localhost:3000/api/v1/faculty/patent-published"
-      const response = await axios.post( url 
-        , {
-        facultyId: patentData.facultyId,
-        facultyName: patentData.facultyName,
-        department: patentData.department,
-        fdpTitle: patentData.fdpTitle,
-        organizingInstitute: patentData.organizingInstituteber,
-        startDate: patentData.startDate,
-        endDate: patentData.endDate,
-        programType: patentData.programType,
-        mode: patentData.mode,
-        location:patentData.location,
-        numberOfDays: patentData.numberOfDays,
-        catagory: patentData.catagory,
-        enevtName: patentData.enevtName,
-        description: patentData.description,
-        outcomeHighlights: patentData.outcomeHighlights,
+      console.log(data)
+      await axios.post('http://localhost:3000/api/v1/faculty/research-paper', formData);
+      reset(); // clear form
 
-        // using fileId without middleware 
-        // TODO : create middleware and send the fileId with using middleware
-        fileId : res.data.fileId
-      }
-      
-    )
-    console.log(response)
+      await axios.post(url , {
+          facultyId: data.facultyId,
+          facultyName:data.facultyName,
+          department:data.department,
+          title:data.title,
+          applicant:data.applicant,
+          applicationNumberdata:data.applicationNumberdata,
+          applicationDate: data.applicationDate,
+          status: data.status,
+          coInventors:data.coInventors,
+          country:data.country,
+          category:data.category,
+          fileId:data.fileId,
+          patentTitle:data.patentTitle,
+          patentType:data.patentType,
+          inventors:data.inventors,
+          publicationDate: data.publicationDate,
+          abstract: data.abstract
+      }) 
 
-      
-    }catch(err){
-      console.log("Error:", err )
+      setLoading(prev => !prev); // re-fetch data
+    } catch (error) {
+      console.error("Error submitting research paper:", error);
     }
-    console.log(data)
+  };
 
-    setLoading((p) => !p)
-  }
+  
 
   return (
     <div>
-        <FacultyPatentForm register={register} reset={reset} handleSubmit={handleSubmit} onSubmit={onSubmit}  />
+        <FacultyPatentForm handleSubmit={handleSubmit} register={register} reset={reset} onSubmit={onSubmit} />
         <PatentTable data={data} />
     </div>
-  )
+  );
 }
 
-export default AddPatentData
+export default AddPatentData;

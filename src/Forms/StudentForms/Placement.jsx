@@ -5,22 +5,12 @@ import InputBox from "../../components/InputBox";
 import FileBox from "../../components/FileBox";
 import CalenderBox from "../../components/CalenderBox";
 
-const studentNames = ["John Doe", "Jane Smith", "Ajay Sahani"];
-const companies = ["Google", "TCS", "Infosys", "Amazon"];
-const jobRoles = ["Software Engineer", "Data Analyst", "Frontend Developer"];
 const branches = ["CSE", "ECE", "Mechanical", "Civil"];
 const placementTypes = ["On Campus", "Off Campus"];
-const packages = ["4 LPA", "6 LPA", "10 LPA"];
 const companyLocations = ["Bangalore", "Hyderabad", "Pune", "Delhi"];
-const interviewModes = ["Online", "Offline", "Hybrid"];
 
-const StudentPlacementForm = () => {
-  const { register, handleSubmit, reset } = useForm();
+const StudentPlacementForm = ({ register, handleSubmit, reset, onSubmit } ) => {
 
-  const onSubmit = (data) => {
-    console.log("Placement Form Submitted:", data);
-    reset();
-  };
 
   return (
     <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md p-10">
@@ -30,16 +20,18 @@ const StudentPlacementForm = () => {
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <InputBox label="student_name" options={studentNames} register={register} />
-          <SelectBox label="company_name" options={companies} register={register} />
-          <SelectBox label="job_role" options={jobRoles} register={register} />
-          <SelectBox label="branch" options={branches} register={register} />
-          <SelectBox label="placement_type" options={placementTypes} register={register} />
-          <SelectBox label="package" options={packages} register={register} />
-          <SelectBox label="company_location" options={companyLocations} register={register} />
-          <SelectBox label="interview_mode" options={interviewModes} register={register} />
-          <CalenderBox label="joining_date" register={register} />
-          <FileBox label="offer_letter_pdf" register={register} />
+          <InputBox label="ID" name="placementId" register={register} required />
+          <InputBox label="Student Name" name="studentName" register={register} required />
+          <InputBox label="Company Name" name="companyName" register={register} required />
+          <SelectBox label="Company Location" name="companyLocation" options={companyLocations} register={register} />
+          <InputBox label="Role Offered" name="roleOffered" register={register} required />
+          <SelectBox label="Branch" name="branch" options={branches} register={register} required />
+          <InputBox label="Batch" name="batch" register={register} />
+          <InputBox label="Year" name="year" register={register} />
+          <SelectBox label="Placement Type" name="placementType" options={placementTypes} register={register} />
+          <InputBox label="Package" name="package" register={register} />
+          <CalenderBox label="Joining Date" name="joiningDate" register={register} />
+          <FileBox label="Offer Letter PDF" name="offerLetterPdf" register={register} />
         </div>
 
         <div className="mt-8">

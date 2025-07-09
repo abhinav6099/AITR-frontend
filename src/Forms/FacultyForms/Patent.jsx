@@ -1,5 +1,4 @@
 import React from "react";
-import { useForm } from "react-hook-form";
 import FileBox from "../../components/FileBox";
 import InputBox from "../../components/InputBox";
 import SelectBox from "../../components/SelectBox";
@@ -34,13 +33,13 @@ const FacultyPatentForm = ({ register, handleSubmit, reset, onSubmit } ) => {
         <InputBox label="Inventors" register={register} name="inventors" required />
         <CalenderBox label="Publication Date" register={register} name="publicationDate" />
         <InputBox label="Abstract" register={register} name="abstract" multiline />
-    </div>
-        <button
+      </div>
+      <button
           type="submit"
           className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
         >
           Submit
-        </button>
+      </button>
     </form>
     </div>
   );

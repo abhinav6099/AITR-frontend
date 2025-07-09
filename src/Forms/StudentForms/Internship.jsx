@@ -5,13 +5,15 @@ import SelectBox from "../../components/SelectBox";
 import CalenderBox from "../../components/CalenderBox";
 import InputBox from "../../components/InputBox";
 
-const StudentInternshipForm = () => {
-  const { register, handleSubmit, reset } = useForm();
+const internshipModes = ["Online", "Offline", "Hybrid"];
+const stipends = ["Unpaid", "₹5,000", "₹10,000", "₹20,000"];
+const branches = ["CSE", "IT", "ECE", "Mechanical"];
+const technologies = ["React", "Node.js", "MongoDB", "Python", "Java"];
+const companyLocations = ["Delhi", "Bangalore", "Remote"];
+const internshipStatuses = ["Completed", "Ongoing", "Dropped"];
 
-  const onSubmit = (data) => {
-    console.log("Internship Data Submitted:", data);
-    reset();
-  };
+const StudentInternshipForm = ({ register, handleSubmit, reset, onSubmit }) => {
+  
 
   return (
     <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md p-10">
@@ -21,32 +23,24 @@ const StudentInternshipForm = () => {
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Select Fields */}
-          <InputBox label="studentName"  register={register} />
-          <InputBox label="enrollment_Number" register={register} />
-          <SelectBox label="company_Name" options={["TCS", "Infosys", "Wipro"]} register={register} />
-          <SelectBox label="role" options={["Frontend Developer", "Backend Developer", "Data Analyst"]} register={register} />
-          <SelectBox label="internship_Type" options={["Online", "Offline", "Hybrid"]} register={register} />
-          <SelectBox label="stipend" options={["Unpaid", "₹5,000", "₹10,000"]} register={register} />
-          <SelectBox label="duration" options={["1 month", "3 months", "6 months"]} register={register} />
-          <SelectBox label="department" options={["CSE", "IT", "ECE"]} register={register} />
-          <SelectBox label="mentorName" options={["Dr. Sharma", "Mr. Gupta"]} register={register} />
-          <SelectBox label="mentorEmail" options={["mentor1@domain.com", "mentor2@domain.com"]} register={register} />
-          <SelectBox label="technologies_Used" options={["React", "Node.js", "MongoDB", "Python"]} register={register} />
-          <SelectBox label="project_Name" options={["Student Portal", "E-commerce App"]} register={register} />
-          <SelectBox label="project_Description" options={["Web development project", "AI-powered chatbot"]} register={register} />
-          <SelectBox label="skills_Gained" options={["Teamwork", "Problem Solving", "Leadership"]} register={register} />
-          <SelectBox label="company_Location" options={["Delhi", "Bangalore", "Remote"]} register={register} />
-          <SelectBox label="internship_Status" options={["Completed", "Ongoing", "Dropped"]} register={register} />
-
-          {/* Calendar Fields */}
-          <CalenderBox label="start_Date" register={register} />
-          <CalenderBox label="end_Date" register={register} />
-
-          {/* File Uploads */}
-          <InputBox label="offerLetter_Link" register={register} />
-          <InputBox label="experience_LetterLink" register={register} />
-          <FileBox label="certificatePdf" register={register} />
+          <InputBox label="ID" name="internshipId" register={register} required />
+          <InputBox label="Student Name" name="studentName" register={register} required />
+          <InputBox label="Enrollment Number" name="enrollmentNumber" register={register} required />
+          <SelectBox label="Branch" name="branch" options={branches} register={register} />
+          <InputBox label="Batch" name="batch" register={register} />
+          <InputBox label="Year" name="year" register={register} />
+          <InputBox label="Company Name" name="companyName" register={register} required />
+          <InputBox label="Internship Role" name="internshipRole" register={register} />
+          <SelectBox label="Mode of Internship" name="internshipMode" options={internshipModes} register={register} />
+          <SelectBox label="Stipend" name="stipend" options={stipends} register={register} />
+          <CalenderBox label="Start Date" name="startDate" register={register} />
+          <CalenderBox label="End Date" name="endDate" register={register} />
+          <SelectBox label="Technology Used" name="technologyUsed" options={technologies} register={register} />
+          <InputBox label="Project Name" name="projectName" register={register} />
+          <InputBox label="Project Description" name="projectDescription" register={register} />
+          <SelectBox label="Company Location" name="companyLocation" options={companyLocations} register={register} />
+          <InputBox label="Area of Work" name="areaOfWork" register={register} />
+          <FileBox label="Certificate / Report Upload" name="certificatePdf" register={register} />
         </div>
 
         <div className="mt-8">

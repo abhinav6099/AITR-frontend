@@ -84,7 +84,7 @@ function AddDevelopmentProgramData() {
       <DevlopmentProgram register={register} handleSubmit={handleSubmit} onSubmit={onSubmit} />
       <DevelopmentProgramTable data={data} />
     </div>
-  )
+  );
 }
 
-export default AddDevelopmentProgramData
+export default AddDevelopmentProgramData;

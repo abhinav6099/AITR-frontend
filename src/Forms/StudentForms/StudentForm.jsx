@@ -1,30 +1,44 @@
 import React from "react";
-import { useForm } from "react-hook-form";
 import InputBox from "../../components/InputBox";
-import FileBox from "../../components/FileBox";
+import SelectBox from "../../components/SelectBox";
+import CalenderBox from "../../components/CalenderBox";
 
-const StudentForm = () => {
-  const { register, handleSubmit, reset } = useForm();
+const genderOptions = ["Male", "Female", "Other"];
+const categoryOptions = ["General", "OBC", "SC", "ST", "Other"];
+const statusOptions = ["Pursuing", "Graduated"];
+const courseOptions = ["B.Tech", "M.Tech", "B.Sc", "M.Sc", "MBA"]; // Add more as needed
 
-  const onSubmit = (data) => {
-    console.log("Submitted Data:", data);
-    reset();
-  };
-
+const StudentForm = ({ onSubmit, register, handleSubmit, reset }) => {
   return (
     <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md p-10">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-        Student Achievement Form
+        Student Profile Form
       </h2>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <InputBox label="hackathon" register={register} required />
-          <InputBox label="placement" register={register} required />
-          <InputBox label="internship" register={register} required />
-          <InputBox label="researchpaper" register={register} required />
-          <InputBox label="sports" register={register} required />
-          <FileBox label="Upload Certificate" register={register} />
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <InputBox label="ID" name="studentId" register={register} required />
+          <InputBox label="Name" name="name" register={register} required />
+          <InputBox label="Enrollment Number" name="enrollmentNumber" register={register} required />
+          <InputBox label="Branch" name="branch" register={register} required />
+          <InputBox label="Batch" name="batch" register={register} />
+          <InputBox label="Email" name="email" register={register} required />
+          <InputBox label="Year" name="year" register={register} required />
+          <SelectBox label="Course" name="course" options={courseOptions} register={register} required />
+          <InputBox label="CGPA" name="cgpa" register={register} />
+          <CalenderBox label="Date of Birth" name="dateOfBirth" register={register} />
+          <SelectBox label="Gender" name="gender" options={genderOptions} register={register} />
+          <SelectBox label="Category" name="category" options={categoryOptions} register={register} />
+          <InputBox label="Year of Admission" name="yearOfAdmission" register={register} />
+          <InputBox label="Year of Graduation" name="yearOfGraduationStatus" register={register} />
+          <SelectBox label="Status" name="status" options={statusOptions} register={register} />
+          <InputBox label="GitHub Link" name="githubLink" register={register} />
+          <InputBox label="LinkedIn Profile Link" name="linkedinLink" register={register} />
+          <InputBox label="Parent/Guardian Contact No" name="guardianContactNumber" register={register} />
+          <InputBox label="Parent/Guardian Name" name="guardianName" register={register} />
+          <InputBox label="Address" name="address" register={register} />
         </div>
 
         <div className="mt-8">
