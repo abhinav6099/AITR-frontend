@@ -12,26 +12,32 @@ function AddPatentData() {
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
-    try {
-      const res = await axios.get('http://localhost:3000/api/v1/faculty/research-papers');
-      console.log(res.data.papers)
-      setData(res.data.papers); // Adjust key based on your backend response
-    } catch (error) {
-      console.error("Error fetching research papers:", error);
+     if (loading == true) {
+      const data = await axios.get("http://localhost:3000/api/v1/faculty/patents-published")
+      console.log(data.data.patents)
+      setData(data.data.patents)
+      setLoading(false)
     }
-  };
+
+  }
 
   useEffect(() => {
-    fetchData();
-  }, [loading]);
-
+    console.log("fetching data")
+    fetchData()
+    console.log(data)
+  }, [loading])
   const onSubmit = async (data) => {
+    console.log(data)
+    console.log(data.file[0])
+    setFile(data.file[0])
     try {
-
+      const formData = new FormData();
+      formData.append("file", file)
       console.log(data)
-      await axios.post('http://localhost:3000/api/v1/faculty/research-paper', formData);
+      await axios.post('http://localhost:3000/file', formData);
       reset(); // clear form
 
+      const url = "http://localhost:3000/api/v1/faculty/patent-published"
       await axios.post(url , {
           facultyId: data.facultyId,
           facultyName:data.facultyName,
@@ -51,12 +57,13 @@ function AddPatentData() {
           publicationDate: data.publicationDate,
           abstract: data.abstract
       }) 
-
-      setLoading(prev => !prev); // re-fetch data
-    } catch (error) {
-      console.error("Error submitting research paper:", error);
+    } catch (err) {
+      console.log("Error:", err)
     }
-  };
+    console.log(data)
+
+    setLoading((p) => !p)
+  }
 
   
 

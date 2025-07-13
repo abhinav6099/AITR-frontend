@@ -23,16 +23,16 @@ const DevlopmentProgram = ({ onSubmit, register, handleSubmit, reset }) => {
           <InputBox label="ID" name={"facultyId"} register={register} />
           <InputBox label="faculty_Name" name={"facultyName"} register={register} required />
           <InputBox label="department" name={"department"} register={register} required />
-          <InputBox label="Faculty_devlopment_program_Title" name={"fdpTitle"} register={register} required />
+          <InputBox label="Faculty_devlopment_program_Title" name="fdpTitle" register={register} required />
           <InputBox label="program_Name" name={"programName"} register={register} required />
-          <InputBox label="organizing_Institute" name={"organizingInstitute"} register={register} required />
+          <InputBox label="organizing_Institute" name="organizingInstitute" register={register} required />
           <CalenderBox label="start_Date" name={"startDate"} register={register} />
           <CalenderBox label="end_Date" name={"endDate"} register={register} />
           <SelectBox label="program_Type" name={"programType"} options={programTypes} register={register} />
           <SelectBox label="mode" name={"mode"} options={modes} register={register} />
           <InputBox label="location" name={"location"} register={register} />
           <InputBox label="duration_Days" name={"numberOfDays"} register={register} />
-          <FileBox label="certificatePdf" name={"certificatePdfUrl"} register={register} />
+          <FileBox label="certificatePdf" name={"file"} register={register} />
           <InputBox label="outcome" name={"outcomeHighlights"} register={register} />
         </div>
 

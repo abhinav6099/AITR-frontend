@@ -5,7 +5,7 @@ import DataTable from 'react-data-table-component';
 const columns = [
   {
     name: 'ID',
-    selector: row => row.id,
+    selector: row => row.recipientId,
     sortable: true
   },
   {
@@ -52,7 +52,7 @@ const columns = [
     name: 'Certificate PDF',
     cell: row => (
       <a
-        href={row.certificatePdf}
+        href={`http://localhost:3000/file/${row.fileId}`}
         target="_blank"
         rel="noopener noreferrer"
         className="text-blue-600 underline"
@@ -71,71 +71,23 @@ const columns = [
     selector: row => row.level,
     sortable: true
   },
-  {
-    name: 'Supporting Document',
-    cell: row => (
-      <a
-        href={row.supportingDocument}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-blue-600 underline"
-      >
-        View
-      </a>
-    )
-  }
+  // {
+  //   name: 'Supporting Document',
+  //   cell: row => (
+  //     <a
+  //       href={row.supportingDocument}
+  //       target="_blank"
+  //       rel="noopener noreferrer"
+  //       className="text-blue-600 underline"
+  //     >
+  //       View
+  //     </a>
+  //   )
+  // }
 ];
 
 
 // Sample Data
-const sampleData = [
-  {
-    id: "AWD001",
-    recipientName: "Dr. Asha Mehta",
-    department: "Electronics",
-    awardName: "Young Innovator Award",
-    issuingOrganization: "IEI",
-    date: "2023-08-12",
-    category: "Research",
-    eventName: "Tech Excellence Summit",
-    description: "Awarded for outstanding contributions in VLSI Design.",
-    certificatePdf: "/certificates/asha-innovator.pdf",
-    titleOfAward: "Young Innovator",
-    level: "National",
-    supportingDocument: "/docs/asha-supporting.pdf"
-  },
-  {
-    id: "AWD002",
-    recipientName: "Prof. Rakesh Sharma",
-    department: "Mechanical",
-    awardName: "Best Mentor",
-    issuingOrganization: "AICTE",
-    date: "2022-12-01",
-    category: "Teaching",
-    eventName: "National Faculty Awards",
-    description: "Mentored multiple winning student teams in national hackathons.",
-    certificatePdf: "/certificates/rakesh-mentor.pdf",
-    titleOfAward: "Best Mentor Award",
-    level: "National",
-    supportingDocument: "/docs/rakesh-support.pdf"
-  },
-  {
-    id: "AWD003",
-    recipientName: "Ms. Priya Kaur",
-    department: "Computer Science",
-    awardName: "Excellence in Teaching",
-    issuingOrganization: "University Board",
-    date: "2024-02-20",
-    category: "Academic",
-    eventName: "Annual Academic Conclave",
-    description: "Recognized for consistent academic results and curriculum innovation.",
-    certificatePdf: "/certificates/priya-excellence.pdf",
-    titleOfAward: "Excellence in Teaching",
-    level: "Institute",
-    supportingDocument: "/docs/priya-evidence.pdf"
-  }
-];
-
 
 
 
@@ -146,7 +98,7 @@ const AwardTable = ({data}) => {
       <DataTable
         title="Faculty Awards"
         columns={columns}
-        data={sampleData}
+        data={data}
         pagination
         highlightOnHover
         striped

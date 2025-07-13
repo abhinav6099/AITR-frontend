@@ -17,7 +17,7 @@ function AddFacultyResearchData() {
       const data = await axios.get("http://localhost:3000/api/v1/faculty/research-papers")
       console.log(data.data.papers)
       setData(data.data.papers)
-
+      setLoading(false)
     }
 
   }
@@ -66,10 +66,7 @@ function AddFacultyResearchData() {
   return (
     <div>
       <ResearchPaper
-        onSubmit={onSubmit}
-        register={register}
-        handleSubmit={handleSubmit}
-        reset={reset}
+        
       />
       <ResearchPaperTable data={data} />
     </div>

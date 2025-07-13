@@ -87,7 +87,7 @@ function AddExtraCurricular() {
 export default AddExtraCurricular;
 
 
-export const studentEventColumns = [
+export const studentExtraCurricularColumns = [
   {
     name: "ID",
     selector: row => row.eventParticipationId,

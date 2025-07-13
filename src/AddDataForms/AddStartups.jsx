@@ -6,7 +6,7 @@ import axios from 'axios';
 import DataTable from 'react-data-table-component';
 
 function AddStartups() {
-    const { register, handleSubmit, reset } = useForm()
+  const { register, handleSubmit, reset } = useForm()
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const [submit, setSubmit] = useState(false)
@@ -72,7 +72,7 @@ function AddStartups() {
         handleSubmit={handleSubmit}
         reset={reset}
       />
-    <DataTable data={data} columns={startupColumns}/>
+      <DataTable data={data} columns={startupColumns} />
     </div>
   );
 }

@@ -72,10 +72,14 @@ import ConsultancyProject from "./Forms/Department/ConsultancyProject";
 import RDInititatives from "./Forms/Department/RD_Inititatives";
 import EventGrantReceived from "./Forms/Department/EventGrantReceived";
 import EventOrganized from "./Forms/InstituteForms/EventOrganized";
+import StudentTable from "./table/StudentTable";
+import ExcelUploader from "./components/ExelUploader";
 
 
 function App() {
+  // todo: add some class name for to fix some notification bar
   return (
+
     <>
       <BrowserRouter>
         <NavbarHeader />
@@ -136,18 +140,15 @@ function App() {
             <Route path="/admin/addinstitute-documents" element={<InstituteDocumentForm />} />
             <Route path="/admin/addinstitute-r&dforms" element={<RnDForms />} />
             <Route path="/admin/addinstitute-eventorganized" element={<EventOrganized />} />
-          {/* Admin Department */}
-          <Route path='/admin/addmou' element={<MOU />} />
-          <Route path="/admin/addconsultancy-project" element={<ConsultancyProject />} />
-          <Route path="/admin/addrd-inititatives" element={<RDInititatives />} />
-          <Route path="/admin/addevent-grant-received" element={<EventGrantReceived />} />
+            {/* Admin Department */}
+            <Route path='/admin/addmou' element={<MOU />} />
+            <Route path="/admin/addconsultancy-project" element={<ConsultancyProject />} />
+            <Route path="/admin/addrd-inititatives" element={<RDInititatives />} />
+            <Route path="/admin/addevent-grant-received" element={<EventGrantReceived />} />
           </Route>
           <Route path='*' element={<NotFound404 />} />
-
-
-
-
         </Routes>
+
       </BrowserRouter>
     </>
 

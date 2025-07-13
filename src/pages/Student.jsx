@@ -1,24 +1,771 @@
-
-import React from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import SearchBar from '../components/SearchBar';
-import InputBox from '../components/InputBox';
-import StudentTabs from '../components/StudentTabs';
+import DataTable from 'react-data-table-component';
+
 
 const Student = () => {
-  const { register, handleSubmit } = useForm();
+  const [data, setData] = useState([]);
+  const [column, setColumn] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [tab, setTab] = useState('');
 
-  const onSubmit = (data) => {
-    console.log("Submitted data:", data);
+  const tabs = [
+    { label: 'Profile' },
+    { label: 'Certification' },
+    { label: 'Technical/ Non-technical Competitions' },
+    { label: 'Placement' },
+    { label: 'Internship' },
+    { label: 'Reasearch Paper' },
+    { label: 'Sports' },
+    { label: 'Extra Curricular' },
+    { label: 'Project Work / Capstone Projects' },
+    { label: 'Startups/ Entrepreneurial Ventures' },
+    { label: 'Hackathons / Innvoation Challenges' },
+    { label: 'Higher Studies' },
+    { label: 'Professional Memberships' },
+  ];
+
+  const fetchDataByTab = async (selectedTab) => {
+    setLoading(true);
+    try {
+      let response;
+      switch (selectedTab) {
+        case 'Profile':
+          response = await axios.get("http://localhost:3000/api/v1/students/profiles");
+          setData(response.data.profiles);
+          setColumn(studentProfileColumns);
+          break;
+
+        case 'Certification':
+          response = await axios.get("http://localhost:3000/api/v1/students/certificates");
+          setData(response.data.certificates);
+          setColumn(certificateColumns);
+          break;
+
+        case 'Technical/ Non-technical Competitions':
+          response = await axios.get("http://localhost:3000/api/v1/students/skills");
+          console.log(response.data)
+          setData(response.data.technicalData);
+          setColumn(studentProfileColumns);
+          break;
+
+        case 'Placement':
+          response = await axios.get("http://localhost:3000/api/v1/students/placements");
+          console.log(response.data)
+          setData(response.data.placements);
+          setColumn(studentPlacementColumns);
+          break;
+
+        case 'Internship':
+          response = await axios.get("http://localhost:3000/api/v1/students/profiles");
+          console.log(response.data)
+          setData(response.data.profiles);
+          setColumn(studentInternshipColumn);
+          break;
+
+        case 'Reasearch Paper':
+          response = await axios.get("http://localhost:3000/api/v1/students/research-papers");
+          console.log(response.data)
+          setData(response.data.profiles);
+          setColumn(researchPaperColumns);
+          // we dont have reaserach paper column here
+          break;
+
+        case 'Sports':
+          response = await axios.get("http://localhost:3000/api/v1/students/sports");
+          console.log(response.data)
+          setData(response.data.sportsData);
+          setColumn(studentSportsEventColumns);
+          break;
+
+        case 'Extra Curricular':
+          response = await axios.get("http://localhost:3000/api/v1/students/extracurriculars");
+          console.log(response.data)
+          setData(response.data.extraCurriculars);
+          setColumn(studentExtraCurricularColumns);
+          break;
+
+        case 'Project Work / Capstone Projects':
+          response = await axios.get("http://localhost:3000/api/v1/students/projects");
+          console.log(response.data)
+          setData(response.data.projectWorks);
+          setColumn(CapstoneprojectColumns);
+          break;
+
+        case 'Startups/ Entrepreneurial Ventures':
+          response = await axios.get("http://localhost:3000/api/v1/students/startups");
+          console.log(response.data)
+          setData(response.data.startupsData);
+          setColumn(startupColumns);
+          break;
+
+        case 'Hackathons / Innvoation Challenges':
+          response = await axios.get("http://localhost:3000/api/v1/students/hackathons");
+          console.log(response.data)
+          setData(response.data.hackathons);
+          setColumn(studentHackthonColumns);
+          break;
+
+        case 'Higher Studies':
+        response = await axios.get("http://localhost:3000/api/v1/students/higher-studies");
+        console.log(response.data)
+        setData(response.data.higherStudies);
+        setColumn(studentHigherStudies);
+        break;
+
+
+        case 'Professional Memberships':
+          response = await axios.get("http://localhost:3000/api/v1/students/memberships");
+          console.log(response.data)
+          setData(response.data.membershipCertificates);
+          setColumn(membershipColumns);
+          break;
+
+        default:
+          setData([]);
+          setColumn([]);
+          break;
+      }
+    } catch (error) {
+      console.error(`Error fetching ${selectedTab} data:`, error);
+    }
+    setLoading(false);
   };
+
+  useEffect(() => {
+    if (tab) {
+      fetchDataByTab(tab);
+    }
+  }, [tab]);
 
   return (
     <div>
       <SearchBar />
-      <StudentTabs/>
+      <br />
+      <div className="flex flex-wrap justify-center gap-3 bg-blue-50 border border-blue-200 rounded-xl p-4 shadow">
+        {tabs.map(({ label }) => (
+          <button key={label} onClick={() => setTab(label)}>
+            <div className={`px-4 py-2 rounded-full transition-colors duration-200 ${tab === label
+              ? "bg-blue-600 text-white"
+              : "bg-white text-black hover:bg-blue-300"
+              }`}>
+              {label}
+            </div>
+          </button>
+        ))}
       </div>
-   
+
+      {/* Display loading or table */}
+      <div className="mt-6">
+        {loading ? (
+          <div className="text-center py-8 text-blue-600 font-semibold">Loading...</div>
+        ) : (
+          data && column && (
+            <DataTable columns={column} data={data} pagination />
+          )
+        )}
+      </div>
+    </div>
   );
 };
 
 export default Student;
+
+
+
+
+// columns
+
+export const studentProfileColumns = [
+  { name: 'ID', selector: row => row.studentId, sortable: true, width: '70px' },
+  { name: 'Student Name', selector: row => row.name, sortable: true },
+  { name: 'Enrollment No.', selector: row => row.enrollmentNumber },
+  { name: 'Branch', selector: row => row.branch },
+  { name: 'batch', selector: row => row.batch, wrap: true },
+  { name: 'email', selector: row => row.email },
+  { name: 'year', selector: row => row.year },
+  { name: 'course', selector: row => row.course, wrap: true },
+  { name: 'cgpa', selector: row => row.cgpa, wrap: true },
+  { name: 'dateOfBirth', selector: row => row.dateOfBirth, wrap: true },
+  { name: 'gender', selector: row => row.gender, wrap: true },
+  { name: 'catogory', selector: row => row.catogory, wrap: true },
+  { name: 'yearOfAdmission', selector: row => row.yearOfAdmission, wrap: true },
+  { name: 'status', selector: row => row.status, wrap: true },
+  { name: 'githubLink', selector: row => (<a href={row.githubLink} target='_blank'>{row.githubLink}</a>), wrap: true },
+  { name: 'linkinProfileLink', selector: row => (<a href={row.linkinProfileLink} target='_blank'>{row.linkinProfileLink}</a> ), wrap: true },
+  { name: 'gaurdianContactNumber', selector: row => row.gaurdianContactNumber, wrap: true },
+  { name: 'gaurdianName', selector: row => row.gaurdianName, wrap: true },
+  { name: 'address', selector: row => row.address, wrap: true },
+  {
+    name: 'Certificate',
+    cell: row => (
+      <a
+        href={row.Certificate_Link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline text-sm"
+      >
+        View
+      </a>
+    ),
+  },
+  {
+    name: 'Actions',
+    cell: row => (
+      <div className="flex gap-2">
+        <button
+          onClick={() => alert(`Viewing ${row.Title}`)}
+          className="bg-blue-500 text-white text-xs px-3 py-1 rounded hover:bg-blue-600"
+        >
+          View
+        </button>
+        <button
+          onClick={() => alert(`Editing ${row.Title}`)}
+          className="bg-yellow-500 text-white text-xs px-3 py-1 rounded hover:bg-yellow-600"
+        >
+          Edit
+        </button>
+        <button
+          onClick={() => alert(`Deleting ${row.Title}`)}
+          className="bg-red-500 text-white text-xs px-3 py-1 rounded hover:bg-red-600"
+        >
+          Delete
+        </button>
+      </div>
+    ),
+    ignoreRowClick: true,
+    allowOverflow: true,
+    button: true,
+  },
+];
+
+
+export const certificateColumns = [
+  { name: 'ID', selector: row => row.certificateId, sortable: true, width: '100px' },
+  { name: 'Student Name', selector: row => row.studentName, sortable: true },
+  { name: 'Enrollment Number', selector: row => row.enrollmentNumber },
+  { name: 'Certificate Name', selector: row => row.certificateName, wrap: true },
+  { name: 'Certificate Type', selector: row => row.certificateType },
+  { name: 'Branch', selector: row => row.branch },
+  { name: 'Batch', selector: row => row.batch },
+  { name: 'Year', selector: row => row.year },
+  { name: 'Course', selector: row => row.courseName },
+  { name: 'Issuing Organization', selector: row => row.issuingOrganization, wrap: true },
+  { name: 'issue Date', selector: row => row.issueDate },
+  { name: 'Validity Period', selector: row => row.validityPeriod },
+  { name: 'Graded of Score', selector: row => row.gradeOfScore },
+  { name: 'Mode Of Learning', selector: row => row.modeOfLearning },
+  { name: 'Course Duration', selector: row => row.courseDuration },
+  { name: 'Rank or Position', selector: row => row.rankOrPosition },
+  { name: 'Certificate Description', selector: row => row.certificateDescription },
+  { name: 'relevance To Program Or Branch', selector: row => row.relevanceToProgramOrBranch },
+
+
+  {
+    name: 'Certificate Link',
+    cell: row => (
+      <a href={row.fileId} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline text-sm">
+        View
+      </a>
+    ),
+  },
+  {
+    name: 'Actions',
+    cell: row => (
+      <div className="flex gap-2">
+        <button onClick={() => alert(`Viewing certificate ${row.Id}`)} className="bg-blue-500 hover:bg-blue-600 text-white text-xs px-3 py-1 rounded">View</button>
+        <button onClick={() => alert(`Editing certificate ${row.Id}`)} className="bg-yellow-500 hover:bg-yellow-600 text-white text-xs px-3 py-1 rounded">Edit</button>
+        <button onClick={() => alert(`Deleting certificate ${row.Id}`)} className="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded">Delete</button>
+      </div>
+    ),
+    ignoreRowClick: true,
+    allowOverflow: true,
+    button: true,
+  },
+];
+
+// we dont have technical non technical columns
+
+export const studentPlacementColumns = [
+  { name: 'ID', selector: row => row.placementId, sortable: true, width: '70px' },
+  { name: 'Student Name', selector: row => row.studentName, sortable: true },
+  { name: 'Company Name', selector: row => row.companyName },
+  { name: 'Company Location', selector: row => row.companyLocation },
+
+  { name: 'Job Role', selector: row => row.roleOffered },
+  { name: 'Branch', selector: row => row.branch },
+  { name: 'Year', selector: row => row.year },
+
+  { name: 'Placement Type', selector: row => row.placementType },
+  { name: 'Package', selector: row => row.package },
+  { name: 'Joining Date', selector: row => row.joiningDate },
+  {
+    name: 'Offer Letter',
+    cell: row => (
+      <a
+        href={row.fileId}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline text-sm"
+      >
+        View
+      </a>
+    ),
+  },
+  {
+    name: 'Actions',
+    cell: row => (
+      <div className="flex gap-2">
+        <button onClick={() => alert(`Viewing ${row.Id}`)} className="bg-blue-500 text-white px-2 py-1 text-xs rounded">View</button>
+        <button onClick={() => alert(`Editing ${row.Id}`)} className="bg-yellow-500 text-white px-2 py-1 text-xs rounded">Edit</button>
+        <button onClick={() => alert(`Deleting ${row.Id}`)} className="bg-red-500 text-white px-2 py-1 text-xs rounded">Delete</button>
+      </div>
+    ),
+    ignoreRowClick: true,
+    allowOverflow: true,
+    button: true,
+  },
+];
+
+
+export const studentInternshipColumn = [
+  { name: 'ID', selector: row => row.Id, sortable: true, width: '60px' },
+  { name: 'Student Name', selector: row => row.Student_Name },
+  { name: 'Enrollment Number', selector: row => row.Enrollment_Number },
+  { name: 'Company Name', selector: row => row.Company_Name },
+  { name: 'Role', selector: row => row.Role },
+  { name: 'Internship Type', selector: row => row.Internship_Type },
+  { name: 'Stipend', selector: row => row.Stipend },
+  { name: 'Duration', selector: row => row.Duration },
+  { name: 'Department', selector: row => row.Department },
+  { name: 'Mentor Name', selector: row => row.Mentor_Name },
+  { name: 'Mentor Email', selector: row => row.Mentor_Email },
+  { name: 'Technologies Used', selector: row => row.Technologies_Used },
+  { name: 'Project Name', selector: row => row.Project_Name },
+  { name: 'Project Description', selector: row => row.Project_Description, wrap: true },
+  { name: 'Skills Gained', selector: row => row.Skills_Gained },
+  { name: 'Company Location', selector: row => row.Company_Location },
+  { name: 'Internship Status', selector: row => row.Internship_Status },
+  { name: 'Start Date', selector: row => row.Start_Date },
+  { name: 'End Date', selector: row => row.End_Date },
+  {
+    name: 'Offer Letter',
+    cell: row => (
+      <a href={row.Offer_Letter_Link} target="_blank" rel="noreferrer" className="text-blue-600 underline text-sm">
+        View
+      </a>
+    ),
+  },
+  {
+    name: 'Experience Letter',
+    cell: row => (
+      <a href={row.Experience_Letter_Link} target="_blank" rel="noreferrer" className="text-blue-600 underline text-sm">
+        View
+      </a>
+    ),
+  },
+  {
+    name: 'Certificate',
+    cell: row => (
+      <a href={row.Certificate_Link} target="_blank" rel="noreferrer" className="text-blue-600 underline text-sm">
+        View
+      </a>
+    ),
+  },
+  {
+    name: 'Actions',
+    cell: row => (
+      <div className="flex gap-2">
+        <button onClick={() => alert(`Viewing internship ${row.Id}`)} className="bg-blue-500 text-white text-xs px-2 py-1 rounded">View</button>
+        <button onClick={() => alert(`Editing internship ${row.Id}`)} className="bg-yellow-500 text-white text-xs px-2 py-1 rounded">Edit</button>
+        <button onClick={() => alert(`Deleting internship ${row.Id}`)} className="bg-red-500 text-white text-xs px-2 py-1 rounded">Delete</button>
+      </div>
+    ),
+    button: true,
+  },
+];
+
+export const publicationColumns = [
+  {
+    name: 'ID',
+    selector: row => row.facultyId,
+    sortable: true,
+    center: true
+  },
+  {
+    name: 'Faculty Name',
+    selector: row => row.facultyName,
+    sortable: true
+  },
+  {
+    name: 'Title of Paper',
+    selector: row => row.titleOfPaper,
+    sortable: true,
+    wrap: true
+  },
+  {
+    name: 'Publication Date',
+    selector: row => row.publicationDate,
+    format: row => new Date(row.publicationDate).toLocaleDateString()
+  },
+  {
+    name: 'Journal/Conference Name',
+    selector: row => row.journalOrConferenceName,
+    wrap: true
+  },
+  {
+    name: 'Co-Author',
+    selector: row => row.coAuthors,
+    wrap: true
+  },
+  {
+    name: 'Indexing',
+    selector: row => row.indexing,
+    wrap: true
+  },
+  {
+    name: 'Paper PDF',
+    selector: row => row.paperPdf,
+    cell: row => (
+      <a
+        href={row.paperPdf}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline"
+      >
+        View PDF
+      </a>
+    )
+  },
+  {
+    name: 'ISSN Number',
+    selector: row => row.issnNumber
+  },
+  {
+    name: 'DOI Link',
+    selector: row => row.doiLink,
+    cell: row => (
+      <a
+        href={row.doiLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline"
+      >
+        DOI
+      </a>
+    )
+  },
+  {
+    name: 'Authors',
+    selector: row => row.authors,
+    cell: row =>
+      Array.isArray(row.authors) ? row.authors.join(', ') : row.authors
+  },
+  {
+    name: 'ISSN/ISBN',
+    selector: row => row.issnOrIsbn
+  },
+  {
+    name: 'Department',
+    selector: row => row.department
+  }
+];
+
+export const studentSportsEventColumns = [
+  {
+    name: "ID",
+    selector: row => row.sportsEventId,
+    sortable: true
+  },
+  {
+    name: "Student Name",
+    selector: row => row.studentName,
+    sortable: true
+  },
+  {
+    name: "Enrollment Number",
+    selector: row => row.enrollmentNumber
+  },
+  {
+    name: "Branch",
+    selector: row => row.branch
+  },
+  {
+    name: "Batch",
+    selector: row => row.batch
+  },
+  {
+    name: "Year",
+    selector: row => row.year
+  },
+  {
+    name: "Sports Name",
+    selector: row => row.sportsName
+  },
+  {
+    name: "Event Date",
+    selector: row => new Date(row.eventDate).toLocaleDateString()
+  },
+  {
+    name: "Event Name",
+    selector: row => row.eventName
+  },
+  {
+    name: "Event Level",
+    selector: row => row.eventLevel
+  },
+  {
+    name: "Event Location",
+    selector: row => row.eventLocation
+  },
+  {
+    name: "Position",
+    selector: row => row.position
+  },
+  {
+    name: "Certificate PDF",
+    cell: row =>
+      row.fileId ? (
+        <a href={row.certificatePDF} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+          View Certificate
+        </a>
+      ) : (
+        "N/A"
+      )
+  },
+  {
+    name: "Coach Name",
+    selector: row => row.coachName
+  },
+  {
+    name: "Organizer",
+    selector: row => row.organizer
+  }
+];
+
+export const studentExtraCurricularColumns = [
+  {
+    name: "ID",
+    selector: row => row.eventParticipationId,
+    sortable: true,
+  },
+  {
+    name: "Student Name",
+    selector: row => row.studentName,
+    sortable: true,
+  },
+  {
+    name: "Enrollment Number",
+    selector: row => row.enrollmentNumber,
+  },
+  {
+    name: "Branch",
+    selector: row => row.branch,
+  },
+  {
+    name: "Batch",
+    selector: row => row.batch,
+  },
+  {
+    name: "Year",
+    selector: row => row.year,
+  },
+  {
+    name: "Event Name",
+    selector: row => row.eventName,
+  },
+  {
+    name: "Event Date",
+    selector: row => new Date(row.eventDate).toLocaleDateString(),
+  },
+  {
+    name: "Event Level",
+    selector: row => row.eventLevel,
+  },
+  {
+    name: "Event Location",
+    selector: row => row.eventLocation,
+  },
+  {
+    name: "Position",
+    selector: row => row.position,
+  },
+  {
+    name: "Certificate PDF",
+    cell: row =>
+      row.fileId ? (
+        <a
+          href={row.fileId}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 underline"
+        >
+          View
+        </a>
+      ) : (
+        "N/A"
+      ),
+  },
+  {
+    name: "Organizer",
+    selector: row => row.organizer,
+  },
+  {
+    name: "Coach Name",
+    selector: row => row.coachName,
+  },
+];
+
+export const CapstoneprojectColumns = [
+  {
+    name: "Project Title",
+    selector: row => row.projectTitle,
+    sortable: true,
+  },
+  {
+    name: "Team Members",
+    selector: row => row.teamMembers?.join(", "),
+    wrap: true,
+  },
+  {
+    name: "Guide Name",
+    selector: row => row.guideName,
+  },
+  {
+    name: "Semester",
+    selector: row => row.semester,
+  },
+  {
+    name: "Industry Mentor",
+    selector: row => row.industryMentor || "N/A",
+  },
+  {
+    name: "Project Outcome",
+    selector: row => row.outcome,
+  },
+];
+
+export const startupColumns = [
+  {
+    name: "Startup Name",
+    selector: row => row.startupName,
+    sortable: true,
+  },
+  {
+    name: "Domain",
+    selector: row => row.domain,
+    sortable: true,
+  },
+  {
+    name: "Incubation Support",
+    selector: row => row.incubationSupport || "None",
+    wrap: true,
+  },
+  {
+    name: "Current Status",
+    selector: row => row.currentStatus,
+    sortable: true,
+  },
+  {
+    name: "Website/Link",
+    selector: row => row.websiteOrLink,
+    cell: row =>
+      row.websiteOrLink ? (
+        <a
+          href={row.websiteOrLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-500 underline"
+        >
+          Visit
+        </a>
+      ) : (
+        "N/A"
+      ),
+  },
+];
+
+export const studentHackthonColumns = [
+  { name: 'Hackathon Name', selector: row => row.hackathonName },
+  { name: 'Organiser', selector: row => row.organizer },
+  { name: 'Team Details', selector: row => row.teamDetails, wrap: true },
+  { name: 'Result', selector: row => row.result },
+  { name: 'Event Date', selector: row => row.eventDate },
+  { name: 'Team Name', selector: row => row.teamName },
+  { name: 'Team Size', selector: row => row.teamSize},
+  { name: 'Mentor Name', selector: row => row.mentorName },
+  { name: 'Venue', selector: row => row.venue },
+  { name: 'Problem Statement', selector: row => row.problemStatement, wrap: true },
+  { name: 'Technology Used', selector: row => row.technologyUsed },
+  { name: 'Prize Money', selector: row => row.prizeMoney },
+  { name: 'Position Secured', selector: row => row.positionSecured },
+  {
+    name: 'Actions',
+    cell: row => (
+      <div className="flex gap-2">
+        <button onClick={() => alert(`Viewing event ${row.Id}`)} className="bg-blue-500 text-white px-2 py-1 text-xs rounded">View</button>
+        <button onClick={() => alert(`Editing event ${row.Id}`)} className="bg-yellow-500 text-white px-2 py-1 text-xs rounded">Edit</button>
+        <button onClick={() => alert(`Deleting event ${row.Id}`)} className="bg-red-500 text-white px-2 py-1 text-xs rounded">Delete</button>
+      </div>
+    ),
+    ignoreRowClick: true,
+    allowOverflow: true,
+    button: true,
+  },
+];
+
+export const studentHigherStudies = [
+  { name: 'Course Name', selector: row => row.courseName },
+  { name: 'Scholarship', selector: row => row.scholarship || 'N/A' },
+  { name: 'Institute', selector: row => row.instituteName },
+  { name: 'City', selector: row => row.city },
+  { name: 'Country', selector: row => row.country },
+  { name: 'Duration (months)', selector: row => row.duration },
+  { name: 'Admission Year', selector: row => row.admissionYear },
+  { name: 'Admission Date', selector: row => row.admissionDate },
+  {
+    name: 'Actions',
+    cell: row => (
+      <div className="flex gap-2">
+        <button onClick={() => alert(`Viewing ${row.id}`)} className="bg-blue-500 text-white px-2 py-1 text-xs rounded">View</button>
+        <button onClick={() => alert(`Editing ${row.id}`)} className="bg-yellow-500 text-white px-2 py-1 text-xs rounded">Edit</button>
+        <button onClick={() => alert(`Deleting ${row.id}`)} className="bg-red-500 text-white px-2 py-1 text-xs rounded">Delete</button>
+      </div>
+    ),
+    ignoreRowClick: true,
+    allowOverflow: true,
+    button: true,
+  },
+];
+
+export const membershipColumns = [
+  {
+    name: "Organization Name",
+    selector: row => row.organizationName,
+    sortable: true,
+  },
+  {
+    name: "Membership ID",
+    selector: row => row.membershipId,
+    sortable: true,
+  },
+  {
+    name: "Date of Joining",
+    selector: row => new Date(row.dateOfJoining).toLocaleDateString(),
+    sortable: true,
+  },
+  {
+    name: "Membership Status",
+    selector: row => row.membershipStatus,
+    sortable: true,
+  }
+];
+
+
+
+
+
+
+
+

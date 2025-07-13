@@ -7,6 +7,7 @@ const columns = [
   { name: 'Faculty Name', selector: row => row.facultyName, sortable: true },
   { name: 'department', selector: row => row.department, wrap: true },
   { name: 'FDP title', selector: row => row.fdpTitle },
+  { name: 'Program Name', selector: row => row.programName },
   { name: 'Organising Institute', selector: row => row.organizingInstitute },
 
   { name: 'Start Date', selector: row => row.startDate },
@@ -20,7 +21,7 @@ const columns = [
     name: 'Certificate',
     cell: row => (
       <a
-        href={row.Certificate_Link}
+        href={`http://localhost:3000/file/${row.fileId}`}
         target="_blank"
         rel="noopener noreferrer"
         className="text-blue-600 underline text-sm"

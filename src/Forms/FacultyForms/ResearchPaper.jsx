@@ -6,9 +6,7 @@ import FileBox from "../../components/FileBox";
 import DataTable from "react-data-table-component";
 
 
-const ResearchPaper = ({onSubmit, handleSubmit, reset, register}) => {
-
-  
+const ResearchPaper = ({handleSubmit, onSubmit}) => {
 
 
   return (
@@ -50,7 +48,7 @@ const ResearchPaper = ({onSubmit, handleSubmit, reset, register}) => {
         </div>
       </form>
       <div>
-        <DataTable columns={publicationColumns} data={data} />
+
       </div>
     </div>
 

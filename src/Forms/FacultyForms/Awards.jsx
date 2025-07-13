@@ -17,7 +17,7 @@ const AwardForm = ({register, handleSubmit, reset , onSubmit}) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6" >
         <InputBox label="id" name={"recipientId"} register={register} required />
         <InputBox label="recipient_Name" name={"recipientName"} register={register} required />
-        <InputBox label="department" name={"department"} register={register} required />
+        <SelectBox label="department" name={"department"} options={["Mechanical", "CS", "Civil"]} register={register} required />
         <InputBox label="award_Name" name={"awardName"} register={register} required />
         <InputBox label="issuing Organization" name="issuingOrganization" register={register} required />
         <CalenderBox label="date" name={"date"} register={register} required />
@@ -26,6 +26,7 @@ const AwardForm = ({register, handleSubmit, reset , onSubmit}) => {
         <InputBox label="description" name={"description"} register={register} required />
         <FileBox label="certificate_Pdf" name={"file"} register={register} />
         <InputBox label="title_Of_Award" name={"titleOfAward"} register={register} required />
+        
         <SelectBox
           label="level"
           name={"level"}
