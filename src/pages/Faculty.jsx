@@ -11,6 +11,7 @@ import DataTable from 'react-data-table-component';
 
 
 const Faculty = () => {
+  const [filterText, setFiltertext] = useState('');
   const [data, setData] = useState([]);
   const [column, setColumn] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -30,7 +31,7 @@ const Faculty = () => {
     { label: 'Invited Talks / Resource Person' },
     { label: 'Books / Chapters Authored' },
   ];
-
+  
   const fetchDataByTab = async (selectedTab) => {
     setLoading(true);
     try {
@@ -138,11 +139,27 @@ const Faculty = () => {
     if (tab) {
       fetchDataByTab(tab);
     }
+
+    console.log(filterText)
   }, [tab]);
+
+  
+  const FilteringComponent = () => {
+
+    const filteredItems = data.filter(item => item.name && item.name.toLowerCase().includes(filterText.toLowerCase()) || item.department && item.department.toLowerCase().includes(filterText.toLowerCase()));
+    // can add more filters to this manually or think about more options
+    // can go with search woth department faculty Name, ID etc.
+    return (
+      <>
+      <DataTable data={filteredItems} columns={column} />
+      </>
+    )
+  }
+
 
   return (
     <div>
-      <SearchBar />
+      <SearchBar placeholder={"Search ..."} onChange={ (e) => setFiltertext(e.target.value)} value={filterText}  />
       <br />
       <div className="flex flex-wrap justify-center gap-3 bg-blue-50 border border-blue-200 rounded-xl p-4 shadow">
         {tabs.map(({ label }) => (
@@ -163,7 +180,7 @@ const Faculty = () => {
           <div className="text-center py-8 text-blue-600 font-semibold">Loading...</div>
         ) : (
           data && column && (
-            <DataTable columns={column} data={data} pagination />
+            <FilteringComponent />
           )
         )}
       </div>
@@ -863,3 +880,5 @@ export const booksChaptersColumns = [
     wrap: true
   }
 ];
+
+
