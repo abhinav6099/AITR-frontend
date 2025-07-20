@@ -349,8 +349,6 @@ export const facultyResearchPaperColumn = [
   }
 ];
 
-
-
 export const facultyAwardsColumns = [
   {
     name: 'ID',
