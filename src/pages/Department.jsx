@@ -13,111 +13,45 @@ const Department = () => {
   const [tab, setTab] = useState('');
 
   const tabs = [
-    { label: 'Consulancy Project' },
-    { label: 'Research paper publication' },
-    { label: 'Faculty Awards and Recognitions' },
-    { label: 'Faculty Devlopment Program(FDPs Attended)' },
-    { label: 'Patent Published' },
-    { label: 'Patents Granted' },
-    { label: 'Membership in Professional Bodies' },
-    { label: 'Academic Qualifications Discipline' },
-    { label: 'PhD Supervision / Guidances' },
-    { label: 'Research Projects Guided' },
-    { label: 'Invited Talks / Resource Person' },
-    { label: 'Books / Chapters Authored' },
+    { label: 'MoUs' },
+    { label: 'Consultancy Project' },
+    { label: 'R&D Initiatives' },
+    { label: 'Event Grant Received' },
   ];
-  
+
   const fetchDataByTab = async (selectedTab) => {
     setLoading(true);
     try {
       let response;
       switch (selectedTab) {
-        case 'Consulancy Project':
+
+        case 'MoUs':
+          response = await axios.get("http://localhost:3000/api/v1/department/mous");
+          console.log(response.data)
+          setData(response.data.mous);
+          setColumn(MoUsColumn);
+          break;
+
+        case 'Consultancy Project':
           response = await axios.get("http://localhost:3000/api/v1/department/consultancies");
           console.log(response.data)
           setData(response.data.projects);
           setColumn(CounsultancyProjectColumn);
           break;
 
-        case 'Research paper publication':
-          response = await axios.get("http://localhost:3000/api/v1/faculty/research-papers");
+        case 'R&D Initiatives':
+          response = await axios.get("http://localhost:3000/api/v1/department/rnds");
           console.log(response.data)
-          setData(response.data.papers);
-          setColumn(facultyResearchPaperColumn);
+          setData(response.data.rdInitiatives);
+          setColumn(RDColumn);
           break;
 
-        case 'Faculty Awards and Recognitions':
-          response = await axios.get("http://localhost:3000/api/v1/faculty/award-recognitions");
+        case 'Event Grant Received':
+          response = await axios.get("http://localhost:3000/api/v1/department/event-grants-received");
           console.log(response.data)
-          setData(response.data.data);
-          setColumn(facultyAwardsColumns);
+          setData(response.data.eventGrants);
+          setColumn(EventGrantReceivedColumns);
           break;
-
-        case 'Faculty Devlopment Program(FDPs Attended)':
-          response = await axios.get("http://localhost:3000/api/v1/faculty/development-programmes");
-          console.log(response.data)
-          setData(response.data.programs);
-          setColumn(facultyDevlopmentColumn);
-          break;
-
-        case 'Patent Published':
-          response = await axios.get("http://localhost:3000/api/v1/faculty/patents-published");
-          console.log(response.data)
-          setData(response.data.patents);
-          setColumn(patentPublished);
-          break;
-
-        case 'Patents Granted':
-          response = await axios.get("http://localhost:3000/api/v1/faculty/patents-granted");
-          console.log(response.data)
-          setData(response.data.patents);
-          setColumn(patentGrantedColumns);
-          // we dont have reaserach paper column here
-          break;
-
-        case 'Membership in Professional Bodies':
-          response = await axios.get("http://localhost:3000/api/v1/faculty/faculty-membership");
-          console.log(response.data)
-          setData(response.data.facultyMembershipData);
-          setColumn(membershipColumn);
-          break;
-
-        case 'Academic Qualifications Discipline':
-          response = await axios.get("http://localhost:3000/api/v1/faculty/academic-qualifications");
-          console.log(response.data)
-          setData(response.data.qualifications);
-          setColumn(academicQualificationColumns);
-          break;
-
-        case 'PhD Supervision / Guidances':
-          response = await axios.get("http://localhost:3000/api/v1/faculty/phd-superviseds");
-          console.log(response.data)
-          setData(response.data.supervisions);
-          setColumn(phdSupervisionColumns);
-          break;
-
-        case 'Research Projects Guided':
-          response = await axios.get("http://localhost:3000/api/v1/faculty/research-projects-guided");
-          console.log(response.data)
-          setData(response.data.researchProjects);
-          setColumn(invitedTalksColumn);
-
-          // invited columns not defined
-          break;
-
-        case 'Invited Talks / Resource Person':
-          response = await axios.get("http://localhost:3000/api/v1/faculty/invited-talks");
-          console.log(response.data)
-          setData(response.data.talks);
-          setColumn(invitedTalksColumn);
-          break;
-
-        case 'Books / Chapters Authored':
-        response = await axios.get("http://localhost:3000/api/v1/faculty/books-authored");
-        console.log(response.data)
-        setData(response.data.books);
-        setColumn(booksChaptersColumns);
-        break;
 
         default:
           setData([]);
@@ -138,7 +72,7 @@ const Department = () => {
     console.log(filterText)
   }, [tab]);
 
-  
+
   const FilteringComponent = () => {
 
     const filteredItems = data.filter(item => item.name && item.name.toLowerCase().includes(filterText.toLowerCase()) || item.department && item.department.toLowerCase().includes(filterText.toLowerCase()));
@@ -146,7 +80,7 @@ const Department = () => {
     // can go with search woth department faculty Name, ID etc.
     return (
       <>
-      <DataTable data={filteredItems} columns={column} />
+        <DataTable data={filteredItems} columns={column} />
       </>
     )
   }
@@ -154,7 +88,7 @@ const Department = () => {
 
   return (
     <div>
-      <SearchBar placeholder={"Search ..."} onChange={ (e) => setFiltertext(e.target.value)} value={filterText}  />
+      <SearchBar placeholder={"Search ..."} onChange={(e) => setFiltertext(e.target.value)} value={filterText} />
       <br />
       <div className="flex flex-wrap justify-center gap-3 bg-blue-50 border border-blue-200 rounded-xl p-4 shadow">
         {tabs.map(({ label }) => (
@@ -187,7 +121,7 @@ export default Department;
 
 
 export const CounsultancyProjectColumn = [
-  { name: 'Department Name', selector: row => row.departmenatName, sortable: true },
+  { name: 'Department Name', selector: row => row.departmentName, sortable: true },
   { name: 'Agency Name', selector: row => row.agencyName, sortable: true },
   { name: 'Date', selector: row => row.date, sortable: true },
   { name: 'Duration', selector: row => row.duration, sortable: true },
@@ -199,4 +133,115 @@ export const CounsultancyProjectColumn = [
   { name: 'Faculty Lead', selector: row => row.facultyLead, sortable: true },
   { name: 'Amount Sanctioned', selector: row => row.amountSanctioned, sortable: true },
   { name: 'Supporting Documents', selector: row => row.supportingDocs, cell: row => <a href={row.supportingDocs} target="_blank" rel="noreferrer">Download</a> },
+];
+
+export const RDColumn = [
+  {
+    name: "Department Name",
+    selector: row => row.departmentName,
+    sortable: true,
+  },
+  {
+    name: "Agency Name",
+    selector: row => row.agencyName,
+    sortable: true,
+  },
+  {
+    name: "Date",
+    selector: row => row.date,
+    sortable: true,
+  },
+  {
+    name: "Duration",
+    selector: row => row.duration,
+    sortable: true,
+  },
+  {
+    name: "Description",
+    selector: row => row.description,
+    wrap: true,
+  },
+  {
+    name: "Funding",
+    selector: row => row.funding,
+  },
+  {
+    name: "PDF",
+    cell: row => (
+      <a href={row.pdf} target="_blank" rel="noopener noreferrer">
+        View PDF
+      </a>
+    ),
+  },
+  {
+    name: "Project Title",
+    selector: row => row.projectTitle,
+    wrap: true,
+  },
+  {
+    name: "Funding Agency",
+    selector: row => row.fundingAgency,
+  },
+  {
+    name: "Principal Investigator (PI)",
+    selector: row => row.principalInvestigator,
+  },
+  {
+    name: "Co-Investigator",
+    selector: row => row.coInvestigator,
+  },
+  {
+    name: "Budget",
+    selector: row => row.budget,
+  },
+  {
+    name: "Output/Patents/Publications",
+    selector: row => row.output,
+    wrap: true,
+  },
+
+]
+export const MoUsColumn = [
+  { name: "Department Name", selector: row => row.departmentName, sortable: true },
+  { name: "Agency Name", selector: row => row.agencyName, sortable: true },
+  { name: "Date", selector: row => row.date, sortable: true },
+  { name: "Duration", selector: row => row.duration },
+  { name: "Description", selector: row => row.description, wrap: true },
+  { name: "Funding", selector: row => row.funding },
+  {
+    name: "MOU PDF",
+    cell: row => (
+      <a href={row.mouPdfUrl} target="_blank" rel="noopener noreferrer">
+        View PDF
+      </a>
+    ),
+  },
+  { name: "Title of MoU", selector: row => row.titleOfMoU },
+  { name: "Industry/Organization Name", selector: row => row.organizationName },
+  { name: "Date of Signing", selector: row => row.dateOfSigning },
+  { name: "Validity Period", selector: row => row.validityPeriod },
+  { name: "Purpose/Objectives", selector: row => row.purposeObjectives, wrap: true },
+  { name: "Fund/Support Received", selector: row => row.fundSupportReceived },
+]
+
+export const EventGrantReceivedColumns=[
+  { name: "Event Title", selector: row => row.eventTitle, sortable: true },
+  { name: "Department Name", selector: row => row.departmentName, sortable: true },
+  { name: "Granting Agency", selector: row => row.grantingAgency },
+  { name: "Date of Approval", selector: row => row.dateOfApproval },
+  { name: "Duration", selector: row => row.duration },
+  { name: "Description", selector: row => row.description, wrap: true },
+  { name: "Funding", selector: row => row.funding },
+  {
+    name: "PDF",
+    cell: row => (
+      <a href={row.pdf} target="_blank" rel="noopener noreferrer">
+        View PDF
+      </a>
+    ),
+  },
+  { name: "Grand Amount", selector: row => row.grantAmount },
+  { name: "Faculty Coordinator", selector: row => row.facultyCoordinator },
+  { name: "Purpose", selector: row => row.purpose, wrap: true },
+  { name: "Utilization Summary", selector: row => row.utilizationSummary, wrap: true },
 ];
