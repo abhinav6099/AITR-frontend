@@ -16,11 +16,11 @@ function HomePage() {
         uncommonly but solicitude inhabiting projection off. Connection
         stimulated estimating excellence an to impression.
       </p></div>
-      <div className="flex mt-24  gap-16  justify-center items-center">        
-        <Card children={<BiSolidInstitution />} title={"Institute"} link="/institute"/>
-        <Card  children={<FcDepartment />} title={"Department"} link="/department"/>
-        <Card children={<FcBusiness />} title={"Faculty"} link="/faculty"/>
+      <div className="flex mt-24  gap-16  justify-center items-center">                
         <Card children={<PiStudentDuotone />} title={"Student"} link="/student"/>
+        <Card children={<FcBusiness />} title={"Faculty"} link="/faculty"/>
+        <Card  children={<FcDepartment />} title={"Department"} link="/department"/>
+        <Card children={<BiSolidInstitution />} title={"Institute"} link="/institute"/>
       </div>
     </div>
   );
