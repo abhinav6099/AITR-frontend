@@ -119,7 +119,8 @@ const Faculty = () => {
 
         case 'Books / Chapters Authored':
         response = await axios.get("http://localhost:3000/api/v1/faculty/books-authored");
-        console.log(response.data)
+        console.log("Data Length:", response.data.length);
+console.log("Full Data:", response.data);
         setData(response.data.books);
         setColumn(booksChaptersColumns);
         break;
@@ -438,7 +439,7 @@ export const facultyDevlopmentColumn = [
   { name: 'Faculty Name', selector: row => row.facultyName, sortable: true },
   { name: 'department', selector: row => row.department, wrap: true },
   { name: 'FDP title', selector: row => row.fdpTitle },
-  { name: 'Program Name', selector: row => row.programName },
+  // { name: 'Program Name', selector: row => row.programName },
   { name: 'Organising Institute', selector: row => row.organizingInstitute },
 
   { name: 'Start Date', selector: row => row.startDate },
@@ -518,8 +519,8 @@ export const patentPublished = [
     ),
     
   },
-  { name: 'Patent Title', selector: row => row.patnetTitle },
-  { name: 'Patent Type', selector: row => row.patentType },
+  { name: 'Patent Title', selector: row => row.patentTitle },
+  // { name: 'Patent Type', selector: row => row.patentType },
   { name: 'Inventors', selector: row => row.inventors },
   { name: 'Publication Date', selector: row => row.publicationDate },
   { name: 'Abstract', selector: row => row.abstract },
@@ -854,7 +855,7 @@ export const invitedTalksColumn = [
 export const booksChaptersColumns = [
   {
     name: 'Title of Book/Chapter',
-    selector: row => row.title,
+    selector: row => row.title, // ✅ correct key
     wrap: true,
     sortable: true
   },
@@ -874,8 +875,18 @@ export const booksChaptersColumns = [
   },
   {
     name: 'Co-authors (if any)',
-    selector: row => row.coAuthors?.join(', ') || 'N/A',
+    selector: row =>
+      Array.isArray(row.coAuthors)
+        ? row.coAuthors.join(', ')
+        : typeof row.coAuthors === 'string'
+        ? row.coAuthors.replace(/[\[\]']+/g, '') // clean weird stringified array
+        : 'N/A',
     wrap: true
+  },
+  {
+    name: 'Faculty Name',
+    selector: row => row.facultyName,
+    sortable: true
   }
 ];
 
