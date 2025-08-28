@@ -3,7 +3,6 @@ import axios from 'axios';
 import SearchBar from '../components/SearchBar';
 import DataTable from 'react-data-table-component';
 
-
 const Student = () => {
   const [data, setData] = useState([]);
   const [column, setColumn] = useState([]);
@@ -33,12 +32,14 @@ const Student = () => {
       switch (selectedTab) {
         case 'Profile':
           response = await axios.get("http://localhost:3000/api/v1/students/profiles");
+          console.log(response.data)
           setData(response.data.profiles);
           setColumn(studentProfileColumns);
           break;
 
         case 'Certification':
           response = await axios.get("http://localhost:3000/api/v1/students/certificates");
+          console.log(response.data);
           setData(response.data.certificates);
           setColumn(certificateColumns);
           break;
@@ -67,8 +68,8 @@ const Student = () => {
         case 'Reasearch Paper':
           response = await axios.get("http://localhost:3000/api/v1/students/research-papers");
           console.log(response.data)
-          setData(response.data.profiles);
-          setColumn(researchPaperColumns);
+          setData(response.data.researchPapers);
+          setColumn( researchPaperColumns);
           // we dont have reaserach paper column here
           break;
 
@@ -108,11 +109,11 @@ const Student = () => {
           break;
 
         case 'Higher Studies':
-        response = await axios.get("http://localhost:3000/api/v1/students/higher-studies");
-        console.log(response.data)
-        setData(response.data.higherStudies);
-        setColumn(studentHigherStudies);
-        break;
+          response = await axios.get("http://localhost:3000/api/v1/students/higher-studies");
+          console.log(response.data)
+          setData(response.data.higherStudies);
+          setColumn(studentHigherStudies);
+          break;
 
 
         case 'Professional Memberships':
@@ -143,6 +144,7 @@ const Student = () => {
     <div>
       <SearchBar />
       <br />
+
       <div className="flex flex-wrap justify-center gap-3 bg-blue-50 border border-blue-200 rounded-xl p-4 shadow">
         {tabs.map(({ label }) => (
           <button key={label} onClick={() => setTab(label)}>
@@ -189,13 +191,16 @@ export const studentProfileColumns = [
   { name: 'cgpa', selector: row => row.cgpa, wrap: true },
   { name: 'dateOfBirth', selector: row => row.dateOfBirth, wrap: true },
   { name: 'gender', selector: row => row.gender, wrap: true },
-  { name: 'catogory', selector: row => row.catogory, wrap: true },
+  { name: 'catogory', selector: row => row.category, wrap: true },
   { name: 'yearOfAdmission', selector: row => row.yearOfAdmission, wrap: true },
   { name: 'status', selector: row => row.status, wrap: true },
   { name: 'githubLink', selector: row => (<a href={row.githubLink} target='_blank'>{row.githubLink}</a>), wrap: true },
-  { name: 'linkinProfileLink', selector: row => (<a href={row.linkinProfileLink} target='_blank'>{row.linkinProfileLink}</a> ), wrap: true },
-  { name: 'gaurdianContactNumber', selector: row => row.gaurdianContactNumber, wrap: true },
-  { name: 'gaurdianName', selector: row => row.gaurdianName, wrap: true },
+  { name: 'linkinProfileLink', selector: row => (<a href={row.linkedinProfileLink} target='_blank'>{row.linkinProfileLink}</a>), wrap: true },
+  {
+    name: 'gaurdianContactNumber', selector: row => row.guardianContactNumber
+    , wrap: true
+  },
+  { name: 'gaurdianName', selector: row => row.guardianName, wrap: true },
   { name: 'address', selector: row => row.address, wrap: true },
   {
     name: 'Certificate',
@@ -245,7 +250,7 @@ export const certificateColumns = [
   { name: 'ID', selector: row => row.certificateId, sortable: true, width: '100px' },
   { name: 'Student Name', selector: row => row.studentName, sortable: true },
   { name: 'Enrollment Number', selector: row => row.enrollmentNumber },
-  { name: 'Certificate Name', selector: row => row.certificateName, wrap: true },
+  { name: 'Certificate Name', selector: row => row.courseName, wrap: true },
   { name: 'Certificate Type', selector: row => row.certificateType },
   { name: 'Branch', selector: row => row.branch },
   { name: 'Batch', selector: row => row.batch },
@@ -254,7 +259,7 @@ export const certificateColumns = [
   { name: 'Issuing Organization', selector: row => row.issuingOrganization, wrap: true },
   { name: 'issue Date', selector: row => row.issueDate },
   { name: 'Validity Period', selector: row => row.validityPeriod },
-  { name: 'Graded of Score', selector: row => row.gradeOfScore },
+  { name: 'Graded of Score', selector: row => row.gradeOrScore },
   { name: 'Mode Of Learning', selector: row => row.modeOfLearning },
   { name: 'Course Duration', selector: row => row.courseDuration },
   { name: 'Rank or Position', selector: row => row.rankOrPosition },
@@ -328,63 +333,62 @@ export const studentPlacementColumns = [
   },
 ];
 
-
 export const studentInternshipColumn = [
-  { name: 'ID', selector: row => row.Id, sortable: true, width: '60px' },
-  { name: 'Student Name', selector: row => row.Student_Name },
-  { name: 'Enrollment Number', selector: row => row.Enrollment_Number },
-  { name: 'Company Name', selector: row => row.Company_Name },
-  { name: 'Role', selector: row => row.Role },
-  { name: 'Internship Type', selector: row => row.Internship_Type },
-  { name: 'Stipend', selector: row => row.Stipend },
-  { name: 'Duration', selector: row => row.Duration },
-  { name: 'Department', selector: row => row.Department },
-  { name: 'Mentor Name', selector: row => row.Mentor_Name },
-  { name: 'Mentor Email', selector: row => row.Mentor_Email },
-  { name: 'Technologies Used', selector: row => row.Technologies_Used },
-  { name: 'Project Name', selector: row => row.Project_Name },
-  { name: 'Project Description', selector: row => row.Project_Description, wrap: true },
-  { name: 'Skills Gained', selector: row => row.Skills_Gained },
-  { name: 'Company Location', selector: row => row.Company_Location },
-  { name: 'Internship Status', selector: row => row.Internship_Status },
-  { name: 'Start Date', selector: row => row.Start_Date },
-  { name: 'End Date', selector: row => row.End_Date },
+  { name: 'ID', selector: row => row._id, sortable: true, width: '60px' },
+  { name: 'Student Name', selector: row => row.name },
+  { name: 'Enrollment Number', selector: row => row.enrollmentNumber },
+  { name: 'Course', selector: row => row.course },
+  { name: 'Branch', selector: row => row.branch },
+  { name: 'Category', selector: row => row.category },
+  { name: 'CGPA', selector: row => row.cgpa },
+  { name: 'Year', selector: row => row.year },
+  { name: 'Email', selector: row => row.email },
+  { name: 'Gender', selector: row => row.gender },
+  { name: 'Date of Birth', selector: row => row.dateOfBirth },
+  { name: 'Status', selector: row => row.status },
+  { name: 'Address', selector: row => row.address },
+  { name: 'Guardian Name', selector: row => row.guardianName },
+  { name: 'Guardian Contact', selector: row => row.guardianContactNumber },
   {
-    name: 'Offer Letter',
+    name: 'GitHub',
     cell: row => (
-      <a href={row.Offer_Letter_Link} target="_blank" rel="noreferrer" className="text-blue-600 underline text-sm">
-        View
+      <a href={row.githubLink} target="_blank" rel="noreferrer" className="text-blue-600 underline text-sm">
+        GitHub
       </a>
     ),
   },
   {
-    name: 'Experience Letter',
+    name: 'LinkedIn',
     cell: row => (
-      <a href={row.Experience_Letter_Link} target="_blank" rel="noreferrer" className="text-blue-600 underline text-sm">
-        View
+      <a href={row.linkedinProfileLink} target="_blank" rel="noreferrer" className="text-blue-600 underline text-sm">
+        LinkedIn
       </a>
     ),
-  },
-  {
-    name: 'Certificate',
-    cell: row => (
-      <a href={row.Certificate_Link} target="_blank" rel="noreferrer" className="text-blue-600 underline text-sm">
-        View
-      </a>
-    ),
-  },
-  {
-    name: 'Actions',
-    cell: row => (
-      <div className="flex gap-2">
-        <button onClick={() => alert(`Viewing internship ${row.Id}`)} className="bg-blue-500 text-white text-xs px-2 py-1 rounded">View</button>
-        <button onClick={() => alert(`Editing internship ${row.Id}`)} className="bg-yellow-500 text-white text-xs px-2 py-1 rounded">Edit</button>
-        <button onClick={() => alert(`Deleting internship ${row.Id}`)} className="bg-red-500 text-white text-xs px-2 py-1 rounded">Delete</button>
-      </div>
-    ),
-    button: true,
   },
 ];
+
+export const researchPaperColumns = [
+  { name: 'Student Name', selector: row => row.studentName, sortable: true },
+  { name: 'Enrollment Number', selector: row => row.enrollmentNumber, sortable: true },
+  { name: 'Branch', selector: row => row.branch, sortable: true },
+  { name: 'Batch', selector: row => row.batch, sortable: true },
+  { name: 'DOI/ISBN', selector: row => row.doiOrIsbn },
+  { name: 'Title of Paper', selector: row => row.titleOfPaper, wrap: true },
+  { name: 'Publication Date', selector: row => row.publicationDate },
+  { name: 'Journal/Conference Name', selector: row => row.journalOrConferenceName, wrap: true },
+  { name: 'Co-Author', selector: row => row.coAuthors  },
+  { name: 'Indexing (SCOPUS, SCI, etc)', selector: row => row.indexing },
+  {
+    name: 'Paper PDF',
+    cell: row => (
+      <a href={row.paperPdfLink} target="_blank" rel="noreferrer" className="text-blue-600 underline text-sm">
+        View
+      </a>
+    ),
+  },
+  { name: 'Faculty Guide', selector: row => row.facultyGuide },
+];
+
 
 export const publicationColumns = [
   {
@@ -642,7 +646,7 @@ export const CapstoneprojectColumns = [
   },
   {
     name: "Project Outcome",
-    selector: row => row.outcome,
+    selector: row => row.projectOutcome,
   },
 ];
 
@@ -693,7 +697,7 @@ export const studentHackthonColumns = [
   { name: 'Result', selector: row => row.result },
   { name: 'Event Date', selector: row => row.eventDate },
   { name: 'Team Name', selector: row => row.teamName },
-  { name: 'Team Size', selector: row => row.teamSize},
+  { name: 'Team Size', selector: row => row.teamSize },
   { name: 'Mentor Name', selector: row => row.mentorName },
   { name: 'Venue', selector: row => row.venue },
   { name: 'Problem Statement', selector: row => row.problemStatement, wrap: true },
@@ -721,7 +725,7 @@ export const studentHigherStudies = [
   { name: 'Institute', selector: row => row.instituteName },
   { name: 'City', selector: row => row.city },
   { name: 'Country', selector: row => row.country },
-  { name: 'Duration (months)', selector: row => row.duration },
+  { name: 'Duration (months)', selector: row => row.programDuration },
   { name: 'Admission Year', selector: row => row.admissionYear },
   { name: 'Admission Date', selector: row => row.admissionDate },
   {

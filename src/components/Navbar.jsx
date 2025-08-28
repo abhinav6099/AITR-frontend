@@ -18,41 +18,39 @@ const Navbar = () => {
         <Link to="/" onClick={() => handleNavClick("Home")}>
           <Button
             label="Home"
-            className={`bg-transparent shadow-none ${
-              isActive("/home") ? "text-blue-600 underline" : "text-black hover:text-blue-600"
-            }`}
-          />
-        </Link>
-        <Link to="/institute" onClick={() => handleNavClick("Institute")}>
-          <Button
-            label="Institute"
-            className={`bg-transparent shadow-none ${
-              isActive("/institute") ? "text-blue-600 underline" : "text-black hover:text-blue-600"
-            }`}
-          />
-        </Link>
-        <Link to="/department" onClick={() => handleNavClick("Department")}>
-          <Button
-            label="Department"
-            className={`bg-transparent shadow-none ${
-              isActive("/department") ? "text-blue-600 underline" : "text-black hover:text-blue-600"
-            }`}
-          />
-        </Link>
-        <Link to="/faculty" onClick={() => handleNavClick("Faculty")}>
-          <Button
-            label="Faculty"
-            className={`bg-transparent shadow-none ${
-              isActive("/faculty") ? "text-blue-600 underline" : "text-black hover:text-blue-600"
-            }`}
+            className={`bg-transparent shadow-none ${isActive("/home") ? "text-blue-600 underline" : "text-black hover:text-blue-600"
+              }`}
           />
         </Link>
         <Link to="/student" onClick={() => handleNavClick("Student")}>
           <Button
             label="Student"
-            className={`bg-transparent shadow-none ${
-              isActive("/student") ? "text-blue-600 underline" : "text-black hover:text-blue-600"
-            }`}
+            className={`bg-transparent shadow-none ${isActive("/student") ? "text-blue-600 underline" : "text-black hover:text-blue-600"
+              }`}
+          />
+        </Link>
+        <Link to="/faculty" onClick={() => handleNavClick("Faculty")}>
+          <Button
+            label="Faculty"
+            className={`bg-transparent shadow-none ${isActive("/faculty") ? "text-blue-600 underline" : "text-black hover:text-blue-600"
+              }`}
+          />
+        </Link>
+
+        <Link to="/department" onClick={() => handleNavClick("Department")}>
+          <Button
+            label="Department"
+            className={`bg-transparent shadow-none ${isActive("/department") ? "text-blue-600 underline" : "text-black hover:text-blue-600"
+              }`}
+          />
+        </Link>
+
+
+        <Link to="/institute" onClick={() => handleNavClick("Institute")}>
+          <Button
+            label="Institute"
+            className={`bg-transparent shadow-none ${isActive("/institute") ? "text-blue-600 underline" : "text-black hover:text-blue-600"
+              }`}
           />
         </Link>
       </div>

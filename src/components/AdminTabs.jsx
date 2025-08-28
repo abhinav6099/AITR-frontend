@@ -7,10 +7,10 @@ const AdminTabs = () => {
   const [tab, setTab] = useState("");
 
   const tabs = [
-    { label: "Faculty" },
     { label: "Student" },
-    { label: "Institute" },
+    { label: "Faculty" }, 
     { label: "Department" },
+    { label: "Institute" },
   ];
 
 
