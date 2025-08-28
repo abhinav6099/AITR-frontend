@@ -104,7 +104,7 @@ const Faculty = () => {
         case 'Research Projects Guided':
           response = await axios.get("http://localhost:3000/api/v1/faculty/research-projects-guided");
           console.log(response.data)
-          setData(response.data.researchProjects);
+          setData(response.data.talks);
           setColumn(invitedTalksColumn);
 
           // invited columns not defined
