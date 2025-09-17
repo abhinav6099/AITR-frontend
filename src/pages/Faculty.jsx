@@ -11,7 +11,7 @@ import DataTable from 'react-data-table-component';
 
 
 const Faculty = () => {
-  const [filterText, setFiltertext] = useState('');
+  const [filterText, setFiltertext] = useState("");
   const [data, setData] = useState([]);
   const [column, setColumn] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -31,7 +31,7 @@ const Faculty = () => {
     { label: 'Invited Talks / Resource Person' },
     { label: 'Books / Chapters Authored' },
   ];
-  
+
   const fetchDataByTab = async (selectedTab) => {
     setLoading(true);
     try {
@@ -118,12 +118,12 @@ const Faculty = () => {
           break;
 
         case 'Books / Chapters Authored':
-        response = await axios.get("http://localhost:3000/api/v1/faculty/books-authored");
-        console.log("Data Length:", response.data.length);
-console.log("Full Data:", response.data);
-        setData(response.data.books);
-        setColumn(booksChaptersColumns);
-        break;
+          response = await axios.get("http://localhost:3000/api/v1/faculty/books-authored");
+          console.log("Data Length:", response.data.length);
+          console.log("Full Data:", response.data);
+          setData(response.data.books);
+          setColumn(booksChaptersColumns);
+          break;
 
         default:
           setData([]);
@@ -136,6 +136,7 @@ console.log("Full Data:", response.data);
     setLoading(false);
   };
 
+
   useEffect(() => {
     if (tab) {
       fetchDataByTab(tab);
@@ -144,7 +145,6 @@ console.log("Full Data:", response.data);
     console.log(filterText)
   }, [tab]);
 
-  
   const FilteringComponent = () => {
 
     const filteredItems = data.filter(item => item.name && item.name.toLowerCase().includes(filterText.toLowerCase()) || item.department && item.department.toLowerCase().includes(filterText.toLowerCase()));
@@ -152,7 +152,7 @@ console.log("Full Data:", response.data);
     // can go with search woth department faculty Name, ID etc.
     return (
       <>
-      <DataTable data={filteredItems} columns={column} />
+        <DataTable data={filteredItems} columns={column} />
       </>
     )
   }
@@ -160,7 +160,7 @@ console.log("Full Data:", response.data);
 
   return (
     <div>
-      <SearchBar placeholder={"Search ..."} onChange={ (e) => setFiltertext(e.target.value)} value={filterText}  />
+      <SearchBar placeholder={"filter by Id, name , department"} onChange={(e) => setFiltertext(e.target.value)} value={filterText} />
       <br />
       <div className="flex flex-wrap justify-center gap-3 bg-blue-50 border border-blue-200 rounded-xl p-4 shadow">
         {tabs.map(({ label }) => (
@@ -179,11 +179,10 @@ console.log("Full Data:", response.data);
       <div className="mt-6">
         {loading ? (
           <div className="text-center py-8 text-blue-600 font-semibold">Loading...</div>
-        ) : (
-          data && column && (
-            <FilteringComponent />
-          )
-        )}
+        ) : <div>
+          { filterText.length == 0 ? <DataTable data={data} columns={column} /> : <FilteringComponent /> }
+        </div>
+        }
       </div>
     </div>
   );
@@ -201,7 +200,7 @@ export const facultyProfileColumn = [
     selector: row => row.id,
     sortable: true,
     width: '80px',
-    cell: (row ,index) => index + 1 
+    cell: (row, index) => index + 1
   },
   {
     name: 'Name',
@@ -448,7 +447,7 @@ export const facultyDevlopmentColumn = [
   { name: 'Mode', selector: row => row.mode },
   { name: 'Location', selector: row => row.location },
   { name: 'No of days', selector: row => row.numberOfDays },
-  
+
   {
     name: 'Certificate',
     cell: row => (
@@ -517,7 +516,7 @@ export const patentPublished = [
         View
       </a>
     ),
-    
+
   },
   { name: 'Patent Title', selector: row => row.patentTitle },
   // { name: 'Patent Type', selector: row => row.patentType },
@@ -648,44 +647,44 @@ export const professionalCertificationEarned = [
 
 
 export const membershipColumn = [
-    {
-        name: 'Faculty Name',
-        selector: row => row.facultyName,
-        sortable: true,
-    },
-    {
-        name: 'Organization Name',
-        selector: row => row.organizationName,
-        sortable: true,
-        wrap: true,
-    },
-    {
-        name: 'Membership Type',
-        selector: row => row.membershipType,
-        sortable: true,
-    },
-    {
-        name: 'Membership ID',
-        selector: row => row.membershipId,
-        sortable: true,
-    },
-    {
-        name: 'Date of Joining',
-        selector: row => row.dateOfJoining,
-        format: row => new Date(row.dateOfJoining).toLocaleDateString(),
-        sortable: true,
-    },
-    {
-        name: 'Current Status',
-        selector: row => row.currentStatus,
-        cell: row => (
-            <span className={`px-2 py-1 rounded-full text-white text-xs ${row.currentStatus === 'Active' ? 'bg-green-600' : 'bg-gray-400'
-                }`}>
-                {row.currentStatus}
-            </span>
-        ),
-        sortable: true,
-    }
+  {
+    name: 'Faculty Name',
+    selector: row => row.facultyName,
+    sortable: true,
+  },
+  {
+    name: 'Organization Name',
+    selector: row => row.organizationName,
+    sortable: true,
+    wrap: true,
+  },
+  {
+    name: 'Membership Type',
+    selector: row => row.membershipType,
+    sortable: true,
+  },
+  {
+    name: 'Membership ID',
+    selector: row => row.membershipId,
+    sortable: true,
+  },
+  {
+    name: 'Date of Joining',
+    selector: row => row.dateOfJoining,
+    format: row => new Date(row.dateOfJoining).toLocaleDateString(),
+    sortable: true,
+  },
+  {
+    name: 'Current Status',
+    selector: row => row.currentStatus,
+    cell: row => (
+      <span className={`px-2 py-1 rounded-full text-white text-xs ${row.currentStatus === 'Active' ? 'bg-green-600' : 'bg-gray-400'
+        }`}>
+        {row.currentStatus}
+      </span>
+    ),
+    sortable: true,
+  }
 ];
 
 export const academicQualificationColumns = [
@@ -757,9 +756,8 @@ export const phdSupervisionColumns = [
     selector: row => row.status,
     sortable: true,
     cell: row => (
-      <span className={`px-2 py-1 rounded-full text-white text-xs ${
-        row.status === 'Completed' ? 'bg-green-600' : 'bg-yellow-500'
-      }`}>
+      <span className={`px-2 py-1 rounded-full text-white text-xs ${row.status === 'Completed' ? 'bg-green-600' : 'bg-yellow-500'
+        }`}>
         {row.status}
       </span>
     )
@@ -879,8 +877,8 @@ export const booksChaptersColumns = [
       Array.isArray(row.coAuthors)
         ? row.coAuthors.join(', ')
         : typeof row.coAuthors === 'string'
-        ? row.coAuthors.replace(/[\[\]']+/g, '') // clean weird stringified array
-        : 'N/A',
+          ? row.coAuthors.replace(/[\[\]']+/g, '') // clean weird stringified array
+          : 'N/A',
     wrap: true
   },
   {

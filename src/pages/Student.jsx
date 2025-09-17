@@ -8,6 +8,8 @@ const Student = () => {
   const [column, setColumn] = useState([]);
   const [loading, setLoading] = useState(false);
   const [tab, setTab] = useState('');
+  const [filterText, setFiltertext] = useState('');
+
 
   const tabs = [
     { label: 'Profile' },
@@ -69,7 +71,7 @@ const Student = () => {
           response = await axios.get("http://localhost:3000/api/v1/students/research-papers");
           console.log(response.data)
           setData(response.data.researchPapers);
-          setColumn( researchPaperColumns);
+          setColumn(researchPaperColumns);
           // we dont have reaserach paper column here
           break;
 
@@ -140,9 +142,21 @@ const Student = () => {
     }
   }, [tab]);
 
+  const FilteringComponent = () => {
+
+    const filteredItems = data.filter(item => item.studentName && item.studentName.toLowerCase().includes(filterText.toLowerCase()) || item.department && item.department.toLowerCase().includes(filterText.toLowerCase()));
+    // can add more filters to this manually or think about more options
+    // can go with search woth department faculty Name, ID etc.
+    return (
+      <>
+        <DataTable data={filteredItems} columns={column} />
+      </>
+    )
+  }
+
   return (
     <div>
-      <SearchBar />
+      <SearchBar placeholder={"filter by Id, name , department"} onChange={(e) => setFiltertext(e.target.value)} value={filterText} />
       <br />
 
       <div className="flex flex-wrap justify-center gap-3 bg-blue-50 border border-blue-200 rounded-xl p-4 shadow">
@@ -162,11 +176,10 @@ const Student = () => {
       <div className="mt-6">
         {loading ? (
           <div className="text-center py-8 text-blue-600 font-semibold">Loading...</div>
-        ) : (
-          data && column && (
-            <DataTable columns={column} data={data} pagination />
-          )
-        )}
+        ) : <div>
+          {filterText.length == 0 ? <DataTable data={data} columns={column} /> : <FilteringComponent />}
+        </div>
+        }
       </div>
     </div>
   );
@@ -376,7 +389,7 @@ export const researchPaperColumns = [
   { name: 'Title of Paper', selector: row => row.titleOfPaper, wrap: true },
   { name: 'Publication Date', selector: row => row.publicationDate },
   { name: 'Journal/Conference Name', selector: row => row.journalOrConferenceName, wrap: true },
-  { name: 'Co-Author', selector: row => row.coAuthors  },
+  { name: 'Co-Author', selector: row => row.coAuthors },
   { name: 'Indexing (SCOPUS, SCI, etc)', selector: row => row.indexing },
   {
     name: 'Paper PDF',

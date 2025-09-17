@@ -107,11 +107,10 @@ const Department = () => {
       <div className="mt-6">
         {loading ? (
           <div className="text-center py-8 text-blue-600 font-semibold">Loading...</div>
-        ) : (
-          data && column && (
-            <DataTable columns={column} data={data} />
-          )
-        )}
+        ) : <div>
+          {filterText.length == 0 ? <DataTable data={data} columns={column} /> : <FilteringComponent />}
+        </div>
+        } 
       </div>
     </div>
   );

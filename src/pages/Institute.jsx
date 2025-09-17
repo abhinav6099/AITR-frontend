@@ -4,7 +4,6 @@ import DepartmentTabs from '../components/DepartmentTabs';
 import axios from 'axios';
 
 import DataTable from 'react-data-table-component';
-import { EventGrantReceivedColumns } from './Department';
 
 const Institute = () => {
   const [filterText, setFiltertext] = useState('');
@@ -92,7 +91,7 @@ const Institute = () => {
 
   const FilteringComponent = () => {
 
-    const filteredItems = data.filter(item => item.name && item.name.toLowerCase().includes(filterText.toLowerCase()) || item.department && item.department.toLowerCase().includes(filterText.toLowerCase()));
+    const filteredItems = data.filter(item => item.agencyName && item.agencyName.toLowerCase().includes(filterText.toLowerCase()) || item.department && item.department.toLowerCase().includes(filterText.toLowerCase()));
     // can add more filters to this manually or think about more options
     // can go with search woth department faculty Name, ID etc.
     return (
@@ -124,11 +123,10 @@ const Institute = () => {
       <div className="mt-6">
         {loading ? (
           <div className="text-center py-8 text-blue-600 font-semibold">Loading...</div>
-        ) : (
-          data && column && (
-            <DataTable columns={column} data={data} />
-          )
-        )}
+        ) : <div>
+          {filterText.length == 0 ? <DataTable data={data} columns={column} /> : <FilteringComponent />}
+        </div>
+        }
       </div>
     </div>
   );
