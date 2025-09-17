@@ -33,39 +33,40 @@ function AddSportsData() {
     console.log(data)
     console.log(data.file[0])
     setFile(data.file[0])
+    const formData = new FormData();
+    formData.append("file", file);
     try {
-      const formData = new FormData();
-      formData.append("file", file);
-
       const res = await axios.post("http://localhost:3000/file", formData)
       console.log(res.data)
+      if(res.status === 200 && res.data?.fileId){
 
-      const url = "http://localhost:3000/api/v1/students/research-paper"
-      const response = await axios.post(url
-        , {
-          sportsEventId: data.sportsEventId,
-          studentName: data.studentName,
-          enrollmentNumber: data.enrollmentNumber,
-          batch: data.batch,
-          branch: data.branch,
-          year: data.year,
-          sportsName: data.sportsName,
-          eventDate: data.eventDate,
-          eventName: data.eventName,
-          eventLevel: data.eventLevel,
-          eventLocation: data.eventLocation,
-          position: data.position,
-          coachName: data.coachName,
-          organizer: data.organizer,
-
-          fileId: res.data.fileId,
-        }
-      )
-      console.log(response)
-
-
-    } catch (err) {
-      console.log("Error:", err)
+        const url = "http://localhost:3000/api/v1/students/research-paper"
+        const response = await axios.post(url
+          , {
+            sportsEventId: data.sportsEventId,
+            studentName: data.studentName,
+            enrollmentNumber: data.enrollmentNumber,
+            batch: data.batch,
+            branch: data.branch,
+            year: data.year,
+            sportsName: data.sportsName,
+            eventDate: data.eventDate,
+            eventName: data.eventName,
+            eventLevel: data.eventLevel,
+            eventLocation: data.eventLocation,
+            position: data.position,
+            coachName: data.coachName,
+            organizer: data.organizer,
+            
+            fileId: res.data.fileId,
+          }
+        )
+        console.log(response.data)
+      }else {
+        console.error("File upload failed, skipping Profile creation.");
+      }
+    } catch (error) {
+      console.error("Error occurred:", error.message);
     }
     console.log(data)
 

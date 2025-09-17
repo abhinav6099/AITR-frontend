@@ -14,6 +14,7 @@ function AddTechnicalNonTechnicalCompetition() {
 
   const fetchData = async () => {
     if (loading == true) {
+      // todo : set the url
       const data = await axios.get("http://localhost:3000/api/v1/students/startups")
       console.log(data.data)
       setData(data.data.startupsData)
@@ -32,30 +33,51 @@ function AddTechnicalNonTechnicalCompetition() {
     console.log(data)
     console.log(data.file[0])
     setFile(data.file[0])
+    const formData = new FormData();
+    formData.append("file", file);
     try {
-      const formData = new FormData();
-      formData.append("file", file);
-
       const res = await axios.post("http://localhost:3000/file", formData)
       console.log(res.data)
-
-      const url = "http://localhost:3000/api/v1/students/extracurricular"
-      const response = await axios.post(url
-        , {
-          startupName: data.startupName,
-          domain: data.domain,
-          incubationSupport: data.incubationSupport,
-          currentStatus: data.currentStatus,
-          wesiteLink: data.wesiteLink,
-
-          fileId: res.data.fileId,
-        }
-      )
-      console.log(response)
-
-
-    } catch (err) {
-      console.log("Error:", err)
+      if (res.status === 200 && res.data?.fileId) {
+        // todo: correct the url
+        const url = "http://localhost:3000/api/v1/students/extracurricular"
+        const response = await axios.post(url
+          , {
+            id: data.id,
+            studentName: data.studentName,
+            enrollmentNumber: data.enrollmentNumber,
+            currentStatus: data.currentStatus,
+            wesiteLink: data.wesiteLink,
+            branch: data.branch,
+            batch: data.batch,
+            year: data.year,
+            competiontionName: data.competiontionName,
+            date: data.date,
+            teamName: data.teamName,
+            teamSize: data.teamSize,
+            mentorName: data.mentorName,
+            level: data.level,
+            organizer: data.organizer,
+            vanue: data.vanue,
+            problemStatement: data.problemStatement,
+            datahnologyUsed: data.datahnologyUsed,
+            prizeMoney: data.prizeMoney,
+            sponsoringAgency: data.sponsoringAgency,
+            positionSecured: data.positionSecured,
+            projectGithubLink: data.projectGithubLink,
+            projectDescription: data.projectDescription,
+            certificatePdf: data.certificatePdf,
+            eventMode: data.eventMode,
+            achievement: data.achievement,
+            fileId: res.data.fileId,
+          }
+        )
+        console.log(response.data)
+      } else {
+        console.error("File upload failed, skipping Profile creation.");
+      }
+    } catch (error) {
+      console.error("Error occurred:", error.message);
     }
     console.log(data)
 
@@ -97,7 +119,7 @@ export const TechnicalNonTechnicalCompetitionColumn = [
   },
   {
     name: "Branch",
-    selector: row => row.brach,
+    selector: row => row.branch,
     sortable: true,
   },
   {

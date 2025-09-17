@@ -32,21 +32,23 @@ function AddInternshipData() {
     console.log(data)
     console.log(data.file[0])
     setFile(data.file[0])
+    const formData = new FormData();
+    formData.append("file", file);
     try {
-      const formData = new FormData();
-      formData.append("file", file);
 
       const res = await axios.post("http://localhost:3000/file", formData)
       console.log(res.data)
+      //  todo: chage placement with internship 
+      if(res.status === 200 && res.data?.fileId){
 
-      const url = "http://localhost:3000/api/v1/students/placement"
-      const response = await axios.post(url
-        , {
-          internshipId: data.internshipId,
-          studentName: data.studentName,
-          enrollmentNumber: data.enrollmentNumber,
-          branch: data.branch,
-          batch: data.batch,
+        const url = "http://localhost:3000/api/v1/students/placement"
+        const response = await axios.post(url
+          , {
+            internshipId: data.internshipId,
+            studentName: data.studentName,
+            enrollmentNumber: data.enrollmentNumber,
+            branch: data.branch,
+            batch: data.batch,
           year: data.year,
           venue: data.venue,
           companyName: data.companyName,
@@ -64,11 +66,12 @@ function AddInternshipData() {
           fileId: res.data.fileId,
         }
       )
-      console.log(response)
-
-
-    } catch (err) {
-      console.log("Error:", err)
+      console.log(response.data)
+    }else {
+        console.error("File upload failed, skipping Profile creation.");
+      }
+    } catch (error) {
+      console.error("Error occurred:", error.message);
     }
     console.log(data)
 

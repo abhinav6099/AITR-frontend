@@ -31,39 +31,40 @@ function AddStudentCertificateData() {
     console.log(data)
     console.log(data.file[0])
     setFile(data.file[0])
+    const formData = new FormData();
+    formData.append("file", file);
     try {
-      const formData = new FormData();
-      formData.append("file", file);
-
       const res = await axios.post("http://localhost:3000/file", formData)
       console.log(res.data)
+      if(res.status === 200 && res.data?.fileId){
 
-      const url = "http://localhost:3000/api/v1/students/profile"
-      const response = await axios.post(url
-        , {
-          certificateId: data.certificateId,
-          studentName: data.studentName,
-          enrollmentNumber: data.enrollmentNumber,
-          branch: data.branch,
-          batch: data.batch,
-          year: data.year,
-          courseName: data.courseName,
-          issueDate: data.issueDate,
-          validityPeriod: data.validityPeriod,
-          gradeOrScore: data.gradeOrScore,
-          modeOfLearning: data.modeOfLearning,
-          courseDuration: data.courseDuration,
-          rankOrPosition: data.rankOrPosition,
-          certificateDescription: data.certificateDescription,
-          relevanceToProgramOrBranch: data.relevanceToProgramOrBranch,
-          fileId: data.fileId,
-        }
-      )
-      console.log(response)
-
-
-    } catch (err) {
-      console.log("Error:", err)
+        const url = "http://localhost:3000/api/v1/students/profile"
+        const response = await axios.post(url
+          , {
+            certificateId: data.certificateId,
+            studentName: data.studentName,
+            enrollmentNumber: data.enrollmentNumber,
+            branch: data.branch,
+            batch: data.batch,
+            year: data.year,
+            courseName: data.courseName,
+            issueDate: data.issueDate,
+            validityPeriod: data.validityPeriod,
+            gradeOrScore: data.gradeOrScore,
+            modeOfLearning: data.modeOfLearning,
+            courseDuration: data.courseDuration,
+            rankOrPosition: data.rankOrPosition,
+            certificateDescription: data.certificateDescription,
+            relevanceToProgramOrBranch: data.relevanceToProgramOrBranch,
+            fileId: data.fileId,
+          }
+        );
+        console.log(response.data);
+      }else {
+        console.error("File upload failed, skipping Profile creation.");
+      }
+    } catch (error) {
+      console.error("Error occurred:", error.message);
     }
     console.log(data)
 

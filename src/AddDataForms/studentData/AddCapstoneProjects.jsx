@@ -24,15 +24,35 @@ function AddCapstoneProjects() {
   }, [loading]);
 
   const onSubmit = async (formData) => {
+    console.log(data)
+    console.log(data.file[0])
+    setFile(data.file[0])
+    const formData = new FormData();
+    formData.append("file", file);
     try {
-      await axios.post('http://localhost:3000/api/v1/student/capstone', formData);
 
-
-      // todo : POST requst for sending data from frontend
-      reset();
-      setLoading(prev => !prev);
-    } catch (err) {
-      console.error("Error submitting capstone project:", err);
+      const res = await axios.post("http://localhost:3000/file", formData)
+      console.log(res.data)
+      if(res.status === 200 && res.data?.fileId){
+        // todo: set the url
+        const url = "http://localhost:3000/api/v1/students/extracurricular"
+        const response = await axios.post(url
+        , {
+          projectTitle: data.projectTitle,
+          teamMembers: data.teamMembers,
+          guideName: data.guideName,
+          semester: data.semester,
+          industryMentor: data.industryMentor,
+          outcome: data.outcome,
+          fileId: res.data.fileId,
+        }
+      )
+      console.log(response.data)
+    }else {
+        console.error("File upload failed, skipping Profile creation.");
+      }
+    } catch (error) {
+      console.error("Error occurred:", error.message);
     }
   };
 
@@ -79,4 +99,6 @@ export const CapstoneprojectColumns = [
     selector: row => row.outcome,
   },
 ];
+
+// todo: add file downloading schema
 
