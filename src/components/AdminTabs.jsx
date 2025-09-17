@@ -47,12 +47,11 @@ const AdminTabs = () => {
             <Link to="faculty-adddevlopmentprograms">Development Programs</Link>
             <Link to="faculty-addpatents">Patent Published</Link>
             <Link to="faculty-patentsgranted">Patent Granted</Link>
-            <Link to="faculty-professioanlCertificate">Professional Certificate</Link>
+            <Link to="faculty-professional-certificate">Professional Certificate</Link>
             <Link to="faculty-academic-qualification-discipline">Academic Qualification</Link>
             <Link to="faculty-phD-supervision">PhD Supervision</Link>
             <Link to="faculty-membership-professional-bodies">Professional Bodies</Link>
             <Link to="faculty-research-projects-guided">Research Projects</Link>
-            <Link to="faculty-research-paper-publication">Research Paper</Link>
             <Link to="faculty-invited-talks">Invited Talks</Link>
             <Link to="faculty-books-chapterd-authored">Books/Chapters</Link>
           </Accordion>

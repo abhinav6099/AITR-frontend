@@ -43,6 +43,7 @@ function AddStudentData() {
       const url = "http://localhost:3000/api/v1/students/profile"
       const response = await axios.post(url
         , {
+          certificate: formData,
           studentId: data.studentId,
           name: data.name,
           enrollmentNumber: data.enrollmentNumber,

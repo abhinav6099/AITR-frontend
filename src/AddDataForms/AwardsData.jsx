@@ -34,16 +34,16 @@ const AddAwards = () => {
     console.log(data)
     console.log(data.file[0])
     setFile(data.file[0])
+    const formData = new FormData();
+    formData.append("file", file);
+
     try {
-      const formData = new FormData();
-      formData.append("file", file);
+      
+      const res = await axios.post("http://localhost:3000/file", formData);
 
-      const res = await axios.post("http://localhost:3000/file", formData)
-      console.log(res.data)
-
-      const url = "http://localhost:3000/api/v1/faculty/award-recognition"
-      const response = await axios.post(url
-        , {
+      if (res.status === 200 && res.data?.fileId) {
+        const url = "http://localhost:3000/api/v1/faculty/award-recognition";
+        const response = await axios.post(url, {
           recipientId: data.recipientId,
           recipientName: data.recipientName,
           department: data.department,
@@ -57,18 +57,17 @@ const AddAwards = () => {
           titleOfAward: data.titleOfAward,
           level: data.level,
           supportingDocumentUrl: data.supportingDocumentUrl,
-          // using fileId without middleware 
-          // TODO : create middleware and send the fileId with using middleware
-          fileId: res.data.fileId
-        }
+          fileId: res.data.fileId, // use fileId from upload response
+        });
 
-      )
-      console.log(response)
-
-
-    } catch (err) {
-      console.log("Error:", err)
+        console.log("Award saved:", response.data);
+      } else {
+        console.error("File upload failed, skipping award creation.");
+      }
+    } catch (error) {
+      console.error("Error occurred:", error.message);
     }
+
     console.log(data)
 
     setLoading((p) => !p)

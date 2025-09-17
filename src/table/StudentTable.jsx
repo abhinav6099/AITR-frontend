@@ -25,8 +25,8 @@ const columns = [
     name: 'Certificate',
     cell: row => (
       <a
-        href={row.Certificate_Link}
-        target="_blank"
+        href={"68ca56fd7fef5af59e9563a3"}
+        target="_blanck"
         rel="noopener noreferrer"
         className="text-blue-600 underline text-sm"
       >

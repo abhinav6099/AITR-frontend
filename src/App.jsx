@@ -14,7 +14,7 @@ import MembershipProfessionalBodies from "./Forms/FacultyForms/MembershipProfess
 import ResearchProjectsGuidedForm from "./Forms/FacultyForms/ResearchProjectsGuided";
 import InvitedTalksForm from "./Forms/FacultyForms/InvitedTalks";
 import BooksChapteresAuthored from "./Forms/FacultyForms/BooksChapteresAuthored";
-import ResearchPaperPublication from "./Forms/FacultyForms/ResearchPaper";
+import ResearchPaper from "./Forms/FacultyForms/ResearchPaper";
 
 //institute forms
 
@@ -37,6 +37,7 @@ import NavbarHeader from './components/NavbarHeader'
 
 
 import Accordian from './components/Accordian'
+import AddTechnicalNonTechnicalCompetition from "./AddDataForms/AddTechnicalNonTechnicalCompetition";
 import AddConferenceData from './AddDataForms/AddConferenceData'
 import AddDevelopmentProgramData from './AddDataForms/AddDevelopmentProgramData'
 import AddPatentData from './AddDataForms/AddPatentData'
@@ -102,17 +103,18 @@ function App() {
             <Route path="faculty-adddevlopmentprograms" element={<AddDevelopmentProgramData />} />
             <Route path="faculty-addpatents" element={<AddPatentData />} />
             <Route path="faculty-patentsgranted" element={<PatentGrantedForm />} />
-            <Route path="faculty-professioanlCertificate" element={<ProfessionalCertificationsEarned />} />
+            <Route path="faculty-professional-certificate" element={<ProfessionalCertificationsEarned />} />
             <Route path="faculty-phD-supervision" element={<PhDSupervision />} />
 
           // problem with this form
             <Route path="faculty-research-projects-guided" element={<ResearchProjectsGuidedForm />} />
+          
 
             <Route path="faculty-books-chapterd-authored" element={<BooksChapteresAuthored />} />
             <Route path="faculty-invited-talks" element={<InvitedTalksForm />} />
             <Route path="faculty-academic-qualification-discipline" element={<AcademicQualificationForm />} />
             <Route path="faculty-membership-professional-bodies" element={<MembershipProfessionalBodies />} />
-            <Route path="faculty-research-paper-publication" element={<ResearchPaperPublication />} />
+            <Route path="faculty-research-paper-publication" element={<ResearchPaper />} />
             {/* institute routing */}
 
           // studnets routing
@@ -126,7 +128,7 @@ function App() {
             <Route path="/admin/addsports" element={<AddSportsData />} />
             <Route path="/admin/extracurricular" element={<ExtraCurricular />} />
             <Route path="/admin/capstone-projects" element={<CapstoneProjects />} />
-            <Route path="/admin/technical-nontechnical" element={<TechnicalNonTechnicalCompetition />} />
+            <Route path="/admin/technical-nontechnical" element={<AddTechnicalNonTechnicalCompetition />} />
             <Route path="/admin/startups" element={<Startups />} />
             <Route path="/admin/hackathon-challenges" element={<HackathonsData />} />
             <Route path="/admin/higher-studies" element={<HigherStudies />} />

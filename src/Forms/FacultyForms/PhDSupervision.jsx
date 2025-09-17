@@ -71,7 +71,7 @@ function PhDSupervision() {
         <div>
             <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md p-10">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-                    Acadmic Qualification
+                    PhD Supervision / Guidance
                 </h2>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 p-4">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6" >

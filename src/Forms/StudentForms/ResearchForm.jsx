@@ -10,7 +10,7 @@ const ResearchForm = ({ register, handleSubmit, reset, onSubmit }) => {
   return (
     <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md p-10">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-        Student Reasearch paper
+        Student Research paper
       </h2>
 
       <form onSubmit={handleSubmit(onSubmit)}>

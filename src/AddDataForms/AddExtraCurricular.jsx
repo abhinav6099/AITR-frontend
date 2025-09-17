@@ -79,7 +79,7 @@ function AddExtraCurricular() {
         handleSubmit={handleSubmit}
         reset={reset}
       />
-      <DataTable columns={studentEventColumns} data={data} />
+      <DataTable columns={studentExtraCurricularColumns} data={data} />
     </div>
   );
 }

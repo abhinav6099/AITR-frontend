@@ -2,6 +2,7 @@ import React from "react";
 import InputBox from "../../components/InputBox";
 import SelectBox from "../../components/SelectBox";
 import CalenderBox from "../../components/CalenderBox";
+import FileBox from "../../components/FileBox";
 
 const genderOptions = ["Male", "Female", "Other"];
 const categoryOptions = ["General", "OBC", "SC", "ST", "Other"];
@@ -39,6 +40,7 @@ const StudentForm = ({ onSubmit, register, handleSubmit, reset }) => {
           <InputBox label="Parent/Guardian Contact No" name="guardianContactNumber" register={register} />
           <InputBox label="Parent/Guardian Name" name="guardianName" register={register} />
           <InputBox label="Address" name="address" register={register} />
+          <FileBox register={register} name="file" label="Certificate" />
         </div>
 
         <div className="mt-8">
