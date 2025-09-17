@@ -23,7 +23,7 @@ function AddCapstoneProjects() {
     fetchData();
   }, [loading]);
 
-  const onSubmit = async (formData) => {
+  const onSubmit = async (data) => {
     console.log(data)
     console.log(data.file[0])
     setFile(data.file[0])

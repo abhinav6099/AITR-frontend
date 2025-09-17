@@ -35,43 +35,45 @@ function AddDevelopmentProgramData() {
     console.log(data)
     console.log(data.file[0])
     setFile(data.file[0])
+    const formData = new FormData();
+    formData.append("file", file);
     try {
-      const formData = new FormData();
-      formData.append("file", file);
       
       const res = await axios.post("http://localhost:3000/file", formData)
       console.log(res.data)
+      if(res.data.status === 200 && res?.data.fileId){
 
-      const url = "http://localhost:3000/api/v1/faculty/development-programme"
-      const response = await axios.post(url
-        , {
-          facultyId: data.facultyId,
-          facultyName: data.facultyName,
-          department: data.department,
-          fdpTitle: data.fdpTitle,
-          organizingInstitute: data.organizingInstitute,
-          startDate: data.startDate,
-          endDate: data.endDate,
-          programType: data.programType,
-          mode: data.mode,
-          location: data.location,
-          numberOfDays: data.numberOfDays,
-          catagory: data.catagory,
-          enevtName: data.enevtName,
-          description: data.description,
-          outcomeHighlights: data.outcomeHighlights,
-
-          // using fileId without middleware 
-          // TODO : create middleware and send the fileId with using middleware
-          fileId: res.data.fileId
-        }
-
-      )
-      console.log(response)
-
-
-    } catch (err) {
-      console.log("Error:", err)
+        const url = "http://localhost:3000/api/v1/faculty/development-programme"
+        const response = await axios.post(url
+          , {
+            facultyId: data.facultyId,
+            facultyName: data.facultyName,
+            department: data.department,
+            fdpTitle: data.fdpTitle,
+            organizingInstitute: data.organizingInstitute,
+            startDate: data.startDate,
+            endDate: data.endDate,
+            programType: data.programType,
+            mode: data.mode,
+            location: data.location,
+            numberOfDays: data.numberOfDays,
+            catagory: data.catagory,
+            enevtName: data.enevtName,
+            description: data.description,
+            outcomeHighlights: data.outcomeHighlights,
+            
+            // using fileId without middleware 
+            // TODO : create middleware and send the fileId with using middleware
+            fileId: res.data.fileId
+          }
+          
+        )
+        console.log(response.data)
+      } else {
+        console.error("File upload failed, skipping award creation.");
+      }
+    } catch (error) {
+      console.error("Error occurred:", error.message);
     }
     console.log(data)
 

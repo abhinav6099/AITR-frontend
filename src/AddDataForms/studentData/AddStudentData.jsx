@@ -80,7 +80,6 @@ function AddStudentData() {
     setLoading((p) => !p)
   }
 
-
   return (
     <div>
       <StudentForm

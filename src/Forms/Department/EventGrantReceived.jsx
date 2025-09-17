@@ -5,6 +5,7 @@ import CalenderBox from '../../components/CalenderBox';
 import FileBox from '../../components/FileBox';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
+import { Rss } from 'lucide-react';
 
 const EventGrantReceived = () => {
 
@@ -32,44 +33,45 @@ const EventGrantReceived = () => {
   },[loading])
 
   const onSubmit = async (data) => {
- 
+    const formData = new FormData();
+    formData.append("file" , file);
+
     try{
-      const formData = new FormData();
-      formData.append("file" , file);
 
       const res = await axios.post("http://localhost:3000/file", formData)
       console.log(res.data)
+      if(res.data.status && res?.data.fileId){
 
-      console.log(data)
-      const url = "http://localhost:3000/api/v1/department/event-grant-received"
-      const response = await axios.post( url 
-        , {
-        typesOfEvent: data.typesOfEvent,
-        departmentName: data.departmentName,
-        grantingAgency: data.grantingAgency,
-        category: data.category,
-        numberOfParticipants: data.numberOfParticipants,
-        dateOfApproval: data.dateOfApproval,
-        duration: data.duration,
-        description: data.description,
-        funding: data.funding,
-        eventTitle: data.eventTitle,
-        grantAmount: data.grantAmount,
-        facultyCoordinator: data.facultyCoordinator,
-        purpose: data.purpose,
-        utilizationSummary: data.utilizationSummary,
-        // using fileId without middleware 
-        // TODO : create middleware and send the fileId with using middleware
-        fileId : res.data.fileId
+        console.log(data)
+        const url = "http://localhost:3000/api/v1/department/event-grant-received"
+        const response = await axios.post( url 
+          , {
+            typesOfEvent: data.typesOfEvent,
+            departmentName: data.departmentName,
+            grantingAgency: data.grantingAgency,
+            category: data.category,
+            numberOfParticipants: data.numberOfParticipants,
+            dateOfApproval: data.dateOfApproval,
+            duration: data.duration,
+            description: data.description,
+            funding: data.funding,
+            eventTitle: data.eventTitle,
+            grantAmount: data.grantAmount,
+            facultyCoordinator: data.facultyCoordinator,
+            purpose: data.purpose,
+            utilizationSummary: data.utilizationSummary,
+            // using fileId without middleware 
+            // TODO : create middleware and send the fileId with using middleware
+            fileId : res.data.fileId
+          }
+        )
+        console.log(response.data);
+      }else {
+        console.error("File upload failed, skipping award creation.");
       }
-    )
-
-      console.log(response)
-      
-      
-      }catch(err){
-        console.log("Error:", err )
-      }
+    } catch (error) {
+      console.error("Error occurred:", error.message);
+    }
       console.log(data)
 
     setLoading((p) => !p)

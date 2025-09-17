@@ -22,10 +22,6 @@ const RDInitiatives = () => {
     }
  
   }
-  
-  
-  
-
   useEffect(() => {
     console.log("fetching data")
     fetchData()
@@ -33,42 +29,41 @@ const RDInitiatives = () => {
   },[loading])
 
   const onSubmit = async (data) => {
- 
+    const formData = new FormData();
+    formData.append("file" , file);
     try{
-      const formData = new FormData();
-      formData.append("file" , file);
-
       const res = await axios.post("http://localhost:3000/file", formData)
       console.log(res.data)
-
       console.log(data)
-      const url = "http://localhost:3000/api/v1/department/rnd"
-      const response = await axios.post( url 
-        , {
-        dapetmentName: data.dapetmentName,
-        agencyName: data.agencyName,
-        date: data.date,
-        duration: data.duration,
-        description: data.description,
-        funding: data.funding,
-        projectTitle: data.titleOfMoU,
-        fundingAgency: data.fundingAgency,
-        principalInvestigator: data.principalInvestigator,
-        coInvestigator: data.coInvestigator,
-        budget: data.budget,
-        output: data.output,
-        // using fileId without middleware 
-        // TODO : create middleware and send the fileId with using middleware
-        fileId : res.data.fileId
-      }
-    )
+      if(res.data.status == 200 && res?.data.fileId){
 
-      console.log(response)
-      
-      
-      }catch(err){
-        console.log("Error:", err )
+        const url = "http://localhost:3000/api/v1/department/rnd"
+        const response = await axios.post( url 
+          , {
+            dapetmentName: data.dapetmentName,
+            agencyName: data.agencyName,
+            date: data.date,
+            duration: data.duration,
+            description: data.description,
+            funding: data.funding,
+            projectTitle: data.titleOfMoU,
+            fundingAgency: data.fundingAgency,
+            principalInvestigator: data.principalInvestigator,
+            coInvestigator: data.coInvestigator,
+            budget: data.budget,
+            output: data.output,
+            // using fileId without middleware 
+            // TODO : create middleware and send the fileId with using middleware
+            fileId : res.data.fileId
+          }
+        )
+        console.log(response.d)
+      }else {
+        console.error("File upload failed, skipping award creation.");
       }
+    } catch (error) {
+      console.error("Error occurred:", error.message);
+    }
       console.log(data)
 
     setLoading((p) => !p)

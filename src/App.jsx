@@ -4,8 +4,6 @@ import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 
-import AddFaculty from "./AddDataForms/FacultyData";
-import AddAwards from "./AddDataForms/AwardsData";
 import PatentGrantedForm from "./Forms/FacultyForms/PatentGrantedForm";
 import ProfessionalCertificationsEarned from "./Forms/FacultyForms/ProfessionalCertificationsEarned";
 import AcademicQualificationForm from "./Forms/FacultyForms/AcedmicQualificationDiscipline";
@@ -37,28 +35,37 @@ import NavbarHeader from './components/NavbarHeader'
 
 
 import Accordian from './components/Accordian'
-import AddTechnicalNonTechnicalCompetition from "./AddDataForms/AddTechnicalNonTechnicalCompetition";
-import AddConferenceData from './AddDataForms/AddConferenceData'
-import AddDevelopmentProgramData from './AddDataForms/AddDevelopmentProgramData'
-import AddPatentData from './AddDataForms/AddPatentData'
-import AddFacultyResearchData from './AddDataForms/AddFacultyResearchData'
+
+// Add in faculty tabs
+
+import AddFaculty from "./AddDataForms/facultyData/FacultyData";
+import AddConferenceData from './AddDataForms/facultyData/AddConferenceData'
+import AddDevelopmentProgramData from './AddDataForms/facultyData/AddDevelopmentProgramData'
+import AddFacultyResearchData from './AddDataForms/facultyData/AddFacultyResearchData'
+import AddPatentData from "./AddDataForms/facultyData/AddPatentData";
+import AddAwards from "./AddDataForms/facultyData/AwardsData";
+
 import NotFound404 from './pages/NotFound404'
-import AddStudentData from './AddDataForms/AddStudentData'
-import AddStudentCertificateData from './AddDataForms/AddStudentCertificateData'
-import AddHackathonsData from './AddDataForms/AddHackathonsData'
-import AddInternshipData from './AddDataForms/AddInternshipData'
-import AddPlacementData from './AddDataForms/AddPlacementData'
-import AddStudentResearchData from './AddDataForms/AddStudentResearchData'
-import AddSportsData from './AddDataForms/AddSportsData'
-import ExtraCurricular from './AddDataForms/AddExtraCurricular';
-import CapstoneProjects from './AddDataForms/AddCapstoneProjects';
-import Startups from './AddDataForms/AddStartups';
-import HackathonsData from "./AddDataForms/AddHackathonsData";
-import HigherStudies from "./AddDataForms/AddHigherStudies";
+
+// Add in student tabs
+
+import AddStudentData from "./AddDataForms/studentData/AddStudentData";
+import AddTechnicalNonTechnicalCompetition from "./AddDataForms/studentData/AddTechnicalNonTechnicalCompetition";
+import AddStudentCertificateData from './AddDataForms/studentData/AddStudentCertificateData'
+import AddHackathonsData from './AddDataForms/studentData/AddHackathonsData'
+import AddInternshipData from './AddDataForms/studentData/AddInternshipData'
+import AddPlacementData from './AddDataForms/studentData/AddPlacementData'
+import AddStudentResearchData from './AddDataForms/studentData/AddStudentResearchData'
+import AddSportsData from './AddDataForms/studentData/AddSportsData'
+import ExtraCurricular from './AddDataForms/studentData/AddExtraCurricular';
+import CapstoneProjects from './AddDataForms/studentData/AddCapstoneProjects';
+import Startups from './AddDataForms/studentData/AddStartups';
+import HackathonsData from "./AddDataForms/studentData/AddHackathonsData";
+import HigherStudies from "./AddDataForms/studentData/AddHigherStudies";
 // import AddProfessionalMembership from './AddDataForms/AddProfessionalMembership';
+import AddProfessionalMembership from "./AddDataForms/studentData/AddProfessionalMembership";
 
 import TechnicalNonTechnicalCompetition from "./Forms/StudentForms/TechnicalNonTechnicalCompetition";
-import AddProfessionalMembership from './AddDataForms/AddProfessionalMembership'
 
 import Faculty from './pages/Faculty'
 import Student from './pages/Student'

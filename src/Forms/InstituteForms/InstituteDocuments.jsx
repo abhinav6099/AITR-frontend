@@ -4,15 +4,9 @@ import FileBox from "../../components/FileBox";
 
 const InstituteDocumentForm = () => {
   const { register, handleSubmit, reset } = useForm();
+  // todo : do the mulptiform upload file
 
-  const onSubmit = (data) => {
-    console.log("Uploaded Files:", data);
-    reset();
-    // You can send FormData to your backend here
-    console.log("hi there")
-  };
 
-  
   return (
     <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md p-10">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6">

@@ -5,6 +5,7 @@ import CalenderBox from '../../components/CalenderBox';
 import FileBox from '../../components/FileBox';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
+import { Rss } from 'lucide-react';
 
 function InstituteRDForms() {
 
@@ -33,33 +34,31 @@ function InstituteRDForms() {
 
   const onSubmit = async (data) => {
 
+    const formData = new FormData();
+    formData.append("file", file);
     try {
-      const formData = new FormData();
-      formData.append("file", file);
-
-
-
       const res = await axios.post("http://localhost:3000/file", formData)
       console.log(res.data)
+      if(res.data.status == 200 && res?.data.fileId){
 
-      console.log(data)
-      const url = "http://localhost:3000/api/v1/institute/rnd"
-      const response = await axios.post(url
-        , {
-          agencyName: data.agencyName,
-          date: data.date,
-          duration: data.duration,
-          eventName: data.eventName,
-          description: data.description,
-          funding: data.funding,
-
-          // using fileId without middleware 
-          // TODO : create middleware and send the fileId with using middleware
-          fileId: res.data.fileId
-        }
-      )
-
-      console.log(response)
+        console.log(data)
+        const url = "http://localhost:3000/api/v1/institute/rnd"
+        const response = await axios.post(url
+          , {
+            agencyName: data.agencyName,
+            date: data.date,
+            duration: data.duration,
+            eventName: data.eventName,
+            description: data.description,
+            funding: data.funding,
+            
+            // using fileId without middleware 
+            // TODO : create middleware and send the fileId with using middleware
+            fileId: res.data.fileId
+          }
+        ) 
+        console.log(response)
+      }
 
     } catch (err) {
       console.log("Error:", err)
