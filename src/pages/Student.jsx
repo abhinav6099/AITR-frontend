@@ -3,6 +3,7 @@ import axios from 'axios';
 import SearchBar from '../components/SearchBar';
 import DataTable from 'react-data-table-component';
 
+
 const Student = () => {
   const [data, setData] = useState([]);
   const [column, setColumn] = useState([]);
@@ -50,7 +51,7 @@ const Student = () => {
           response = await axios.get("http://localhost:3000/api/v1/students/skills");
           console.log(response.data)
           setData(response.data.technicalData);
-          setColumn(studentProfileColumns);
+          setColumn(studentTechinalNonTechnicalColumn);
           break;
 
         case 'Placement':
@@ -257,6 +258,77 @@ export const studentProfileColumns = [
     button: true,
   },
 ];
+
+export const studentTechinalNonTechnicalColumn = [
+  { name: 'ID', selector: row => row.id, sortable: true, width: '70px' },
+  { name: 'Student Name', selector: row => row.studentName, sortable: true },
+  { name: 'Enrollment No.', selector: row => row.enrollmentNumber },
+  { name: 'Branch', selector: row => row.branch },
+  { name: 'batch', selector: row => row.batch, wrap: true },
+  { name: 'email', selector: row => row.email },
+  { name: 'year', selector: row => row.year },
+  { name: 'Competition Name', selector: row => row.competitionName, wrap: true },
+  { name: 'date', selector: row => row.date, wrap: true },
+  { name: 'Team Name', selector: row => row.teamName , wrap: true },
+  { name: 'Team size', selector: row => row.teamSize , wrap: true },
+  { name: 'Mentor name', selector: row => row.mentorName , wrap: true },
+  { name: 'Level', selector: row => row.level , wrap: true },
+  { name: 'Organiser', selector: row => row.organiser , wrap: true },
+  { name: 'venue', selector: row => row.venue , wrap: true },
+  { name: 'Problem statement', selector: row => row.problemStatement , wrap: true },
+  { name: 'Technology used', selector: row => row.technologyUsed, wrap:true},
+  { name: 'Price Money', selector: row => row.priceMoney , wrap: true },
+  { name: 'Sponsoring Agency', selector: row => row.sponsoringAgency, wrap: true },
+  { name: 'Position secured', selector: row => row.positionSecured, wrap: true },
+  { name: 'Project Git-hub link', selector: row => (<a href={row.projectGithubLink}>Link</a>), wrap: true },
+  { name: 'Project Description', selector: row => (<a href={row.projectDescription}>Link</a>), wrap: true },
+  { name: 'Event mode', selector: row => row.eventMode, wrap: true },
+  { name: 'Achievement', selector: row => row.achiecvement, wrap: true },
+
+  {
+    name: 'Certificate',
+    cell: row => (
+      <a
+        href={row.Certificate_Link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline text-sm"
+      >
+        View
+      </a>
+    ),
+  },
+  {
+    name: 'Actions',
+    cell: row => (
+      <div className="flex gap-2">
+        <button
+          onClick={() => alert(`Viewing ${row.Title}`)}
+          className="bg-blue-500 text-white text-xs px-3 py-1 rounded hover:bg-blue-600"
+        >
+          View
+        </button>
+        <button
+          onClick={() => alert(`Editing ${row.Title}`)}
+          className="bg-yellow-500 text-white text-xs px-3 py-1 rounded hover:bg-yellow-600"
+        >
+          Edit
+        </button>
+        <button
+          onClick={() => alert(`Deleting ${row.Title}`)}
+          className="bg-red-500 text-white text-xs px-3 py-1 rounded hover:bg-red-600"
+        >
+          Delete
+        </button>
+      </div>
+    ),
+    ignoreRowClick: true,
+    allowOverflow: true,
+    button: true,
+  },
+];
+
+
 
 
 export const certificateColumns = [

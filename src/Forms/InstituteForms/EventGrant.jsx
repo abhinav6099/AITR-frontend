@@ -31,41 +31,37 @@ function InstituteEventGrant() {
     console.log(data)
   }, [loading])
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data, e) => {
+    e.preventDefault();
 
     const formData = new FormData();
-    formData.append("file", file);
-    try {
-
-      const res = await axios.post("http://localhost:3000/file", formData)
-      console.log(res.data)
-      if (res.data.status == 200 && res?.data.fileId) {
-        const url = "http://localhost:3000/api/v1/institute/event-grant"
-        const response = await axios.post(url
-          , {
-            eventName: data.eventName,
-            eventType: data.eventType,
-            agencyName: data.agencyName,
-            date: data.date,
-            duration: data.duration,
-            description: data.description,
-            funding: data.funding,
-
-            // using fileId without middleware 
-            // TODO : create middleware and send the fileId with using middleware
-            fileId: res.data.fileId
-          }
-        )
-        console.log(response.data);
-      }
-    } catch (err) {
-      console.log("Error:", err)
+    const fileInput = document.querySelector("input[type='file']");
+    if (fileInput?.files[0]) {
+      formData.append("file", fileInput.files[0]);
     }
-    console.log(data)
 
-    setLoading((p) => !p)
-  }
+    try {
+      const res = await axios.post("http://localhost:3000/file", formData);
+      console.log(res.data);
 
+        const url = "http://localhost:3000/api/v1/institute/event-grant";
+        const response = await axios.post(url, {
+          eventName: data.eventName,
+          eventType: data.eventType,
+          agencyName: data.agencyName,
+          date: data.date,
+          duration: data.duration,
+          description: data.description,
+          funding: data.funding,
+          fileId: res.data.fileId,
+        });
+        console.log(response.data);
+    } catch (err) {
+      console.log("Error:", err);
+    }
+
+    setLoading((p) => !p);
+  };
   return (
     <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md p-10">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6">
@@ -76,7 +72,7 @@ function InstituteEventGrant() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
           <InputBox label="Event Name" name="eventName" register={register} required />
-          <InputBox label="Type of the Event" name="typeOfTheEvent" register={register} required />
+          <InputBox label="Type of the Event" name="eventType" register={register} required />
           <InputBox label="Agency Name" name="agencyName" register={register} required />
           <CalenderBox label="Date" name="date" register={register} required type="date" />
           <InputBox label="Duration" name="duration" register={register} required />
@@ -138,7 +134,7 @@ export const eventGrantColumns = [
     name: "PDF",
     cell: row =>
       row.fileId ? (
-        <a href={row.fileId} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+        <a href={`http://localhost:3000/file/${row.fileId}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
           View PDF
         </a>
       ) : (
