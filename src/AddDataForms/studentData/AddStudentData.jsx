@@ -33,46 +33,47 @@ function AddStudentData() {
     console.log(data)
     console.log(data.file[0])
     setFile(data.file[0])
+    const formData = new FormData();
+    formData.append("file", file);
+
     try {
-      const formData = new FormData();
-      formData.append("file", file);
 
       const res = await axios.post("http://localhost:3000/file", formData)
       console.log(res.data)
+      if(res.status === 200 && res.data?.fileId){
 
-      const url = "http://localhost:3000/api/v1/students/profile"
-      const response = await axios.post(url
-        , {
-          certificate: formData,
-          studentId: data.studentId,
-          name: data.name,
-          enrollmentNumber: data.enrollmentNumber,
-          organizingBody: data.organizingBody,
-          branch: data.branch,
-          batch: data.batch,
-          email:data.email,
-          year: data.year,
-          course: data.course,
-          cgpa: data.cgpa,
-          dateOfBirth: data.dateOfBirth,
-          gender: data.gender,
-          category: data.category,
-          yearOfAdmission: data.yearOfAdmission,
-          yearOfGraduationStatus: data.yearOfGraduationStatus,
-          status: data.status,
-          githubLink: data.githubLink,
-          linkedinProfileLink: data.linkedinProfileLink,
-          guardianContactNumber: data.guardianContactNumber,
-          guardianName: data.guardianName,
-          address: data.address
-        }
-
-      )
-      console.log(response)
-
-
-    } catch (err) {
-      console.log("Error:", err)
+        const url = "http://localhost:3000/api/v1/students/profile"
+        const response = await axios.post(url
+          , {
+            certificate: formData,
+            studentId: data.studentId,
+            name: data.name,
+            enrollmentNumber: data.enrollmentNumber,
+            organizingBody: data.organizingBody,
+            branch: data.branch,
+            batch: data.batch,
+            email:data.email,
+            year: data.year,
+            course: data.course,
+            cgpa: data.cgpa,
+            dateOfBirth: data.dateOfBirth,
+            gender: data.gender,
+            category: data.category,
+            yearOfAdmission: data.yearOfAdmission,
+            yearOfGraduationStatus: data.yearOfGraduationStatus,
+            status: data.status,
+            githubLink: data.githubLink,
+            linkedinProfileLink: data.linkedinProfileLink,
+            guardianContactNumber: data.guardianContactNumber,
+            guardianName: data.guardianName,
+            address: data.address
+          });
+          console.log("Profile saved:", response.data);
+      }else {
+        console.error("File upload failed, skipping Profile creation.");
+      }
+    } catch (error) {
+      console.error("Error occurred:", error.message);
     }
     console.log(data)
 
