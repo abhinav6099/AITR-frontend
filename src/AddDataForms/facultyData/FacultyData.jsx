@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
-import FacultyForm from '../Forms/FacultyForms/FacultyForm'
-import FacultyTable from '../table/FacultyTable'
+import FacultyForm from '../../Forms/FacultyForms/FacultyForm'
+import FacultyTable from '../../table/FacultyTable'
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
-import Button from '../components/Button';
+import Button from '../../components/Button';
 
 
 function AddFaculty() {

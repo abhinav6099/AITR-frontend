@@ -112,7 +112,6 @@ const ConsultancyProject = () => {
 export default ConsultancyProject;
 
 
-
 export const consultancyColumns = [
   {
     name: "Department Name",

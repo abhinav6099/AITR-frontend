@@ -1,6 +1,6 @@
 import React from 'react'
-import DevlopmentProgram from '../Forms/FacultyForms/DevelopmentProgram'
-import DevelopmentProgramTable from '../table/DevelopmentProgramTable'
+import DevlopmentProgram from '../../Forms/FacultyForms/DevelopmentProgram'
+import DevelopmentProgramTable from '../../table/DevelopmentProgramTable'
 import { useForm } from 'react-hook-form'
 import { useState, useEffect } from 'react'
 import axios from 'axios'

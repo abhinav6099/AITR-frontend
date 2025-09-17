@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import CapstoneProjectForm from '../Forms/StudentForms/CapstoneProjectForm';
-import StudentTable from '../table/StudentTable'; // Replace later if table differs
+import CapstoneProjectForm from '../../Forms/StudentForms/CapstoneProjectForm';
+import StudentTable from '../../table/StudentTable'; // Replace later if table differs
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import StartupForm from '../Forms/StudentForms/StartupForm';
-import StudentTable from '../table/StudentTable'; // Can rename to StartupTable if needed
+import StartupForm from '../../Forms/StudentForms/StartupForm';
+import StudentTable from '../../table/StudentTable'; // Can rename to StartupTable if needed
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';

@@ -1,6 +1,6 @@
 import React from 'react'
-import AwardForm from "../Forms/FacultyForms/Awards"
-import AwardTable from '../table/AwardsTable'
+import AwardForm from "../../Forms/FacultyForms/Awards"
+import AwardTable from '../../table/AwardsTable'
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
@@ -85,4 +85,4 @@ const AddAwards = () => {
 
 }
 
-export default AddAwards
+export default AddAwards;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
-import TechnicalNonTechnicalCompetition from '../Forms/StudentForms/TechnicalNonTechnicalCompetition';
+import TechnicalNonTechnicalCompetition from '../../Forms/StudentForms/TechnicalNonTechnicalCompetition';
 
 function AddTechnicalNonTechnicalCompetition() {
   const { register, handleSubmit, reset } = useForm();

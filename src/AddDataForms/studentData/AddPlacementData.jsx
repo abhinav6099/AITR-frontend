@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import StudentPlacementForm from '../Forms/StudentForms/Placement';
-import PlacementTable from '../table/Placement';
+import StudentPlacementForm from '../../Forms/StudentForms/Placement';
+import PlacementTable from '../../table/Placement';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 

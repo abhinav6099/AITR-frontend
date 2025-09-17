@@ -1,6 +1,6 @@
 
-import FacultyPatentForm from '../Forms/FacultyForms/Patent'
-import PatentTable from '../table/PatentsTable'
+import FacultyPatentForm from '../../Forms/FacultyForms/Patent'
+import PatentTable from '../../table/PatentsTable'
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useEffect, useState } from 'react';

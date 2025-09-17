@@ -1,11 +1,12 @@
-import StudentCertificateForm from '../Forms/StudentForms/Certificate';
-import StudentCertificatesTable from '../table/CertificateTable';
+import React, { useEffect, useState } from 'react';
+import StudentInternshipForm from '../../Forms/StudentForms/Internship';
+import InternshipTable from '../../table/InternshipTable';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
 
-function AddStudentCertificateData() {
-  const {register, handleSubmit, reset} = useForm()
+function AddInternshipData() {
+
+     const {register, handleSubmit, reset} = useForm()
   const [data, setData] = useState([])
   const [loading , setLoading ] = useState(true)
   const [submit, setSubmit ] = useState(false)
@@ -13,9 +14,9 @@ function AddStudentCertificateData() {
 
   const fetchData = async () => {
     if(loading == true ){
-      const data = await axios.get("http://localhost:3000/api/v1/students/certificates")
-      console.log(data.data.certificates)
-      setData(data.data.certificates)
+      const data = await axios.get("http://localhost:3000/api/v1/students/placements")
+      console.log(data.data)
+      setData(data.data.placements)
     }
  
   }
@@ -38,25 +39,29 @@ function AddStudentCertificateData() {
       const res = await axios.post("http://localhost:3000/file", formData)
       console.log(res.data)
 
-      const url = "http://localhost:3000/api/v1/students/profile"
+      const url = "http://localhost:3000/api/v1/students/placement"
       const response = await axios.post(url
         , {
-          certificateId: data.certificateId,
+          internshipId: data.internshipId,
           studentName: data.studentName,
           enrollmentNumber: data.enrollmentNumber,
           branch: data.branch,
           batch: data.batch,
           year: data.year,
-          courseName: data.courseName,
-          issueDate: data.issueDate,
-          validityPeriod: data.validityPeriod,
-          gradeOrScore: data.gradeOrScore,
-          modeOfLearning: data.modeOfLearning,
-          courseDuration: data.courseDuration,
-          rankOrPosition: data.rankOrPosition,
-          certificateDescription: data.certificateDescription,
-          relevanceToProgramOrBranch: data.relevanceToProgramOrBranch,
-          fileId: data.fileId,
+          venue: data.venue,
+          companyName: data.companyName,
+          insternshipRole: data.insternshipRole,
+          modeOfInternship: data.modeOfInternship,
+          stipend: data.stipend,
+          startDate: data.startDate,
+          endDate: data.endDate,
+          technologyUsed: data.technologyUsed,
+          projectName: data.projectName,
+          projectDescription: data.projectDescription,
+          companyLocation: data.companyLocation,
+          areaOfWork: data.areaOfWork,
+          
+          fileId: res.data.fileId,
         }
       )
       console.log(response)
@@ -72,15 +77,15 @@ function AddStudentCertificateData() {
 
   return (
     <div>
-      <StudentCertificateForm
+      <StudentInternshipForm
         onSubmit={onSubmit}
         register={register}
         handleSubmit={handleSubmit}
         reset={reset}
       />
-      <StudentCertificatesTable data={data} />
+      <InternshipTable data={data} />
     </div>
   );
 }
 
-export default AddStudentCertificateData;
+export default AddInternshipData;

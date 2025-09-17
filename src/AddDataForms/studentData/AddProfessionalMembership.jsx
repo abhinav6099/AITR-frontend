@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import ProfessionalMembershipForm from '../Forms/StudentForms/proffessionalMembership'
-import ProfessionalMembershipTable from '../table/ProfessionalMembershipTable'
+import ProfessionalMembershipForm from '../../Forms/StudentForms/proffessionalMembership'
+import ProfessionalMembershipTable from '../../table/ProfessionalMembershipTable'
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 

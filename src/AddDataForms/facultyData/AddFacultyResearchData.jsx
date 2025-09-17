@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import ResearchPaper from '../Forms/FacultyForms/ResearchPaper';
-import ResearchPaperTable from '../table/ResearchPaperTable';
+import ResearchPaper from '../../Forms/FacultyForms/ResearchPaper';
+import ResearchPaperTable from '../../table/ResearchPaperTable';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 

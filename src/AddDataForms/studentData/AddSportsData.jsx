@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import SportForm from '../Forms/StudentForms/SportsForm';
-import StudentTable from '../table/StudentTable'; // Rename to `SportsTable` if it's specific
+import SportForm from '../../Forms/StudentForms/SportsForm';
+import StudentTable from '../../table/StudentTable'; // Rename to `SportsTable` if it's specific
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
