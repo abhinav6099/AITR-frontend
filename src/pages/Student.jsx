@@ -145,9 +145,14 @@ const Student = () => {
 
   const FilteringComponent = () => {
 
-    const filteredItems = data.filter(item => item.studentName && item.studentName.toLowerCase().includes(filterText.toLowerCase()) || item.department && item.department.toLowerCase().includes(filterText.toLowerCase()));
+    const filteredItems = data.filter(item =>
+      // filters
+      item.studentName && item.studentName.toLowerCase().includes(filterText.toLowerCase()) ||
+      item.enrollmentNumber && item.enrollmentNumber.toLowerCase().includes(filterText.toLowerCase()) ||
+      item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
     // can add more filters to this manually or think about more options
     // can go with search woth department faculty Name, ID etc.
+    
     return (
       <>
         <DataTable data={filteredItems} columns={column} />
@@ -269,15 +274,15 @@ export const studentTechinalNonTechnicalColumn = [
   { name: 'year', selector: row => row.year },
   { name: 'Competition Name', selector: row => row.competitionName, wrap: true },
   { name: 'date', selector: row => row.date, wrap: true },
-  { name: 'Team Name', selector: row => row.teamName , wrap: true },
-  { name: 'Team size', selector: row => row.teamSize , wrap: true },
-  { name: 'Mentor name', selector: row => row.mentorName , wrap: true },
-  { name: 'Level', selector: row => row.level , wrap: true },
-  { name: 'Organiser', selector: row => row.organiser , wrap: true },
-  { name: 'venue', selector: row => row.venue , wrap: true },
-  { name: 'Problem statement', selector: row => row.problemStatement , wrap: true },
-  { name: 'Technology used', selector: row => row.technologyUsed, wrap:true},
-  { name: 'Price Money', selector: row => row.priceMoney , wrap: true },
+  { name: 'Team Name', selector: row => row.teamName, wrap: true },
+  { name: 'Team size', selector: row => row.teamSize, wrap: true },
+  { name: 'Mentor name', selector: row => row.mentorName, wrap: true },
+  { name: 'Level', selector: row => row.level, wrap: true },
+  { name: 'Organiser', selector: row => row.organiser, wrap: true },
+  { name: 'venue', selector: row => row.venue, wrap: true },
+  { name: 'Problem statement', selector: row => row.problemStatement, wrap: true },
+  { name: 'Technology used', selector: row => row.technologyUsed, wrap: true },
+  { name: 'Price Money', selector: row => row.priceMoney, wrap: true },
   { name: 'Sponsoring Agency', selector: row => row.sponsoringAgency, wrap: true },
   { name: 'Position secured', selector: row => row.positionSecured, wrap: true },
   { name: 'Project Git-hub link', selector: row => (<a href={row.projectGithubLink}>Link</a>), wrap: true },

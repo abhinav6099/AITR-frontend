@@ -17,7 +17,7 @@ const columns = [
   { name: 'yearOfAdmission', selector: row => row.yearOfAdmission, wrap: true },
   { name: 'status', selector: row => row.status, wrap: true },
   { name: 'githubLink', selector: row => (<a href={row.githubLink} target='_blank'>{row.githubLink}</a>), wrap: true },
-  { name: 'linkinProfileLink', selector: row => (<a href={row.linkinProfileLink} target='_blank'>{row.linkinProfileLink}</a> ), wrap: true },
+  { name: 'linkinProfileLink', selector: row => (<a href={row.linkinProfileLink} target='_blank'>Link</a> ) || "N/A", wrap: true },
   { name: 'gaurdianContactNumber', selector: row => row.gaurdianContactNumber, wrap: true },
   { name: 'gaurdianName', selector: row => row.gaurdianName, wrap: true },
   { name: 'address', selector: row => row.address, wrap: true },
@@ -25,7 +25,7 @@ const columns = [
     name: 'Certificate',
     cell: row => (
       <a
-        href={"http://localhost:3000/file/"}
+        href={`http://localhost:3000/file/${row.fileId}`}
         target="_blanck"
         rel="noopener noreferrer"
         className="text-blue-600 underline text-sm"
