@@ -32,7 +32,7 @@ const columns = [
   {
     name: 'Experience Letter',
     cell: row => (
-      <a href={row.Experience_Letter_Link} target="_blank" rel="noreferrer" className="text-blue-600 underline text-sm">
+      <a href={`http://localhost:3000/file/${row.fileId}`} target="_blank" rel="noreferrer" className="text-blue-600 underline text-sm">
         View
       </a>
     ),
@@ -40,20 +40,33 @@ const columns = [
   {
     name: 'Certificate',
     cell: row => (
-      <a href={row.Certificate_Link} target="_blank" rel="noreferrer" className="text-blue-600 underline text-sm">
+      <a href={`http://localhost:3000/file/${row.fileId}`} target="_blank" rel="noreferrer" className="text-blue-600 underline text-sm">
         View
       </a>
     ),
   },
-  {
+   {
     name: 'Actions',
     cell: row => (
-      <div className="flex gap-2">
-        <button onClick={() => alert(`Viewing internship ${row.Id}`)} className="bg-blue-500 text-white text-xs px-2 py-1 rounded">View</button>
-        <button onClick={() => alert(`Editing internship ${row.Id}`)} className="bg-yellow-500 text-white text-xs px-2 py-1 rounded">Edit</button>
-        <button onClick={() => alert(`Deleting internship ${row.Id}`)} className="bg-red-500 text-white text-xs px-2 py-1 rounded">Delete</button>
-      </div>
+      <div className="flex flex-col items-center justify-center gap-0.5">
+        {/* <button onClick={() => alert(`Viewing certificate ${row.Id}`)} className="bg-blue-500 hover:bg-blue-600 text-white text-xs px-4 py-1 rounded">View</button> */}
+        <button onClick={() => alert(`Editing certificate ${row._Id}`)} className="bg-yellow-500 hover:bg-yellow-600 text-white text-xs px-5 py-1 rounded">Edit</button>
+        <button
+          onClick={
+            async () => {
+              console.log(row._id)
+              alert(`Deleting certificate ${row._Id}`)
+              const baseUrl = "http://localhost:3000";
+              // todo: faculty iternship;
+              const url = "api/v1/faculty/certificate"
+              const response = await axios.delete(`${baseUrl}/${url}/${row._id}`);
+              console.log(response.data.certificate);
+            }
+          } className="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded">Delete</button>
+      </div >
     ),
+    ignoreRowClick: true,
+    allowOverflow: true,
     button: true,
   },
 ];

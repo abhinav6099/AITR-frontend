@@ -16,18 +16,17 @@ const columns = [
   { name: 'Country', selector: row => row.country },
   { name: 'Category', selector: row => row.category },
   {
-    name: 'Certificate',
+    name: 'Certificate PDF',
     cell: row => (
       <a
-        href={row.Certificate_Link}
+        href={`http://localhost:3000/file/${row.fileId}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-blue-600 underline text-sm"
+        className="text-blue-600 underline"
       >
         View
       </a>
-    ),
-    
+    )
   },
   { name: 'Patent Title', selector: row => row.patnetTitle },
   { name: 'Patent Type', selector: row => row.patentType },
@@ -36,29 +35,24 @@ const columns = [
   { name: 'Abstract', selector: row => row.abstract },
 
 
-  {
+   {
     name: 'Actions',
     cell: row => (
-      <div className="flex">
+      <div className="flex flex-col items-center justify-center gap-0.5">
+        {/* <button onClick={() => alert(`Viewing certificate ${row.Id}`)} className="bg-blue-500 hover:bg-blue-600 text-white text-xs px-4 py-1 rounded">View</button> */}
+        <button onClick={() => alert(`Editing certificate ${row._Id}`)} className="bg-yellow-500 hover:bg-yellow-600 text-white text-xs px-5 py-1 rounded">Edit</button>
         <button
-          onClick={() => alert(`Viewing patent ${row.Id}`)}
-          className="bg-blue-500  hover:bg-blue-600 text-white text-xs px-5 py-4 rounded"
-        >
-          View
-        </button>
-        <button
-          onClick={() => alert(`Editing patent ${row.Id}`)}
-          className="bg-yellow-500 hover:bg-yellow-600 text-white text-xs px-5 py-4 rounded"
-        >
-          Edit
-        </button>
-        <button
-          onClick={() => alert(`Deleting patent ${row.Id}`)}
-          className="bg-red-500 hover:bg-red-600 text-white text-xs px-5 py-4 rounded"
-        >
-          Delete
-        </button>
-      </div>
+          onClick={
+            async () => {
+              console.log(row._id)
+              alert(`Deleting certificate ${row._id}`)
+              const baseUrl = "http://localhost:3000";
+              const url = "api/v1/faculty/patent"
+              const response = await axios.delete(`${baseUrl}/${url}/${row._id}`);
+              console.log(response.data.certificate);
+            }
+          } className="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded">Delete</button>
+      </div >
     ),
     ignoreRowClick: true,
     allowOverflow: true,

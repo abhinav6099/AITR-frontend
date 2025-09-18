@@ -16,43 +16,37 @@ const columns = [
   { name: 'Mode', selector: row => row.mode },
   { name: 'Location', selector: row => row.location },
   { name: 'No of days', selector: row => row.numberOfDays },
-  
   {
-    name: 'Certificate',
+    name: 'Certificate PDF',
     cell: row => (
       <a
         href={`http://localhost:3000/file/${row.fileId}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-blue-600 underline text-sm"
+        className="text-blue-600 underline"
       >
         View
       </a>
-    ),
+    )
   },
   {
     name: 'Actions',
     cell: row => (
-      <div className="flex gap-2">
+      <div className="flex flex-col items-center justify-center gap-0.5">
+        {/* <button onClick={() => alert(`Viewing certificate ${row.Id}`)} className="bg-blue-500 hover:bg-blue-600 text-white text-xs px-4 py-1 rounded">View</button> */}
+        <button onClick={() => alert(`Editing certificate ${row._Id}`)} className="bg-yellow-500 hover:bg-yellow-600 text-white text-xs px-5 py-1 rounded">Edit</button>
         <button
-          onClick={() => alert(`Viewing program ${row.Id}`)}
-          className="bg-blue-500 hover:bg-blue-600 text-white text-xs px-3 py-1 rounded"
-        >
-          View
-        </button>
-        <button
-          onClick={() => alert(`Editing program ${row.Id}`)}
-          className="bg-yellow-500 hover:bg-yellow-600 text-white text-xs px-3 py-1 rounded"
-        >
-          Edit
-        </button>
-        <button
-          onClick={() => alert(`Deleting program ${row.Id}`)}
-          className="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded"
-        >
-          Delete
-        </button>
-      </div>
+          onClick={
+            async () => {
+              console.log(row._id)
+              alert(`Deleting certificate ${row._Id}`)
+              const baseUrl = "http://localhost:3000";
+              const url = "api/v1/faculty/devlopment-programme"
+              const response = await axios.delete(`${baseUrl}/${url}/${row._id}`);
+              console.log(response.data.certificate);
+            }
+          } className="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded">Delete</button>
+      </div >
     ),
     ignoreRowClick: true,
     allowOverflow: true,

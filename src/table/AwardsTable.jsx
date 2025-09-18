@@ -71,19 +71,29 @@ const columns = [
     selector: row => row.level,
     sortable: true
   },
-  // {
-  //   name: 'Supporting Document',
-  //   cell: row => (
-  //     <a
-  //       href={row.supportingDocument}
-  //       target="_blank"
-  //       rel="noopener noreferrer"
-  //       className="text-blue-600 underline"
-  //     >
-  //       View
-  //     </a>
-  //   )
-  // }
+  {
+    name: 'Actions',
+    cell: row => (
+      <div className="flex flex-col items-center justify-center gap-0.5">
+        {/* <button onClick={() => alert(`Viewing certificate ${row.Id}`)} className="bg-blue-500 hover:bg-blue-600 text-white text-xs px-4 py-1 rounded">View</button> */}
+        <button onClick={() => alert(`Editing certificate ${row._Id}`)} className="bg-yellow-500 hover:bg-yellow-600 text-white text-xs px-5 py-1 rounded">Edit</button>
+        <button
+          onClick={
+            async () => {
+              console.log(row._id)
+              alert(`Deleting certificate ${row._Id}`)
+              const baseUrl = "http://localhost:3000";
+              const url = "api/v1/students/award-recognisation"
+              const response = await axios.delete(`${baseUrl}/${url}/${row._id}`);
+              console.log(response.data.certificate);
+            }
+          } className="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded">Delete</button>
+      </div >
+    ),
+    ignoreRowClick: true,
+    allowOverflow: true,
+    button: true,
+  }
 ];
 
 
@@ -92,7 +102,7 @@ const columns = [
 
 
 // Component
-const AwardTable = ({data}) => {
+const AwardTable = ({ data }) => {
   return (
     <div className="p-4">
       <DataTable
