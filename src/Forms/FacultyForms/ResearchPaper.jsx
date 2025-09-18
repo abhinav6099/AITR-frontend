@@ -6,7 +6,7 @@ import FileBox from "../../components/FileBox";
 import DataTable from "react-data-table-component";
 
 
-const ResearchPaper = ({handleSubmit, onSubmit}) => {
+const ResearchPaper = ({handleSubmit, onSubmit , register , reset }) => {
 
 
   return (

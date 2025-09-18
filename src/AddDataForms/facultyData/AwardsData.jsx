@@ -29,18 +29,19 @@ const AddAwards = () => {
     console.log(data)
   }, [loading])
 
-  const onSubmit = async (data) => {
 
-    console.log(data)
-    console.log(data.file[0])
-    setFile(data.file[0])
+  const onSubmit = async (data, e) => {
+    e.preventDefault();
+
     const formData = new FormData();
-    formData.append("file", file);
-
+    const fileInput = document.querySelector("input[type='file']");
+    if (fileInput?.files[0]) {
+      formData.append("file", fileInput.files[0]);
+    }
     try {
-      
+      // post : file
       const res = await axios.post("http://localhost:3000/file", formData);
-
+      // post: date
       if (res.status === 200 && res.data?.fileId) {
         const url = "http://localhost:3000/api/v1/faculty/award-recognition";
         const response = await axios.post(url, {

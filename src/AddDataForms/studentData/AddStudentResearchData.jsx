@@ -27,24 +27,24 @@ function AddStudentResearchData() {
     console.log(data)
   }, [loading])
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data, e) => {
+    e.preventDefault();
 
-    console.log(data)
-    console.log(data.file[0])
-    setFile(data.file[0])
     const formData = new FormData();
-    formData.append("file", file);
+    const fileInput = document.querySelector("input[type='file']");
+    if (fileInput?.files[0]) {
+      formData.append("file", fileInput.files[0]);
+    }
     try {
       const res = await axios.post("http://localhost:3000/file", formData)
       console.log(res.data)
-      if(res.status === 200 && res.data?.fileId){
 
-        const url = "http://localhost:3000/api/v1/students/research-paper"
-        const response = await axios.post(url
-          , {
-            studentName: data.studentName,
-            enrollmentNumber: data.enrollmentNumber,
-            branch: data.branch,
+      const url = "http://localhost:3000/api/v1/students/research-paper"
+      const response = await axios.post(url
+        , {
+          studentName: data.studentName,
+          enrollmentNumber: data.enrollmentNumber,
+          branch: data.branch,
           batch: data.batch,
           doiOrIsbn: data.doiOrIsbn,
           titleOfPaper: data.titleOfPaper,
@@ -54,14 +54,11 @@ function AddStudentResearchData() {
           coAuthors: data.coAuthors,
           indexing: data.indexing,
           facultyGuide: data.facultyGuide,
-          
+
           fileId: res.data.fileId,
         }
       )
       console.log(response.data)
-    }else {
-        console.error("File upload failed, skipping Profile creation.");
-      }
     } catch (error) {
       console.error("Error occurred:", error.message);
     }

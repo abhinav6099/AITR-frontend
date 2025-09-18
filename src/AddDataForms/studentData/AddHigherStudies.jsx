@@ -6,7 +6,7 @@ import axios from 'axios';
 
 function AddHigherStudies() {
 
-    const { register, handleSubmit, reset } = useForm()
+  const { register, handleSubmit, reset } = useForm()
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const [submit, setSubmit] = useState(false)
@@ -27,15 +27,16 @@ function AddHigherStudies() {
     console.log(data)
   }, [loading])
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data, e) => {
+    e.preventDefault();
 
-    console.log(data)
-    console.log(data.file[0])
-    setFile(data.file[0])
+    const formData = new FormData();
+    const fileInput = document.querySelector("input[type='file']");
+    if (fileInput?.files[0]) {
+      formData.append("file", fileInput.files[0]);
+    }
     try {
-      const formData = new FormData();
-      formData.append("file", file);
-
+      
       const res = await axios.post("http://localhost:3000/file", formData)
       console.log(res.data)
 
@@ -72,7 +73,7 @@ function AddHigherStudies() {
         handleSubmit={handleSubmit}
         reset={reset}
       />
-      <HigherStudiesTable  data={data} />
+      <HigherStudiesTable data={data} />
     </div>
   );
 }

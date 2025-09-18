@@ -23,6 +23,7 @@ const ResearchProjectsGuided = () => {
   }, [loading]);
 
   const onSubmit = async (formData) => {
+    // todo: send the data via post request
     try {
       await axios.post('http://localhost:3000/api/v1/faculty/research-project', formData);
       reset();

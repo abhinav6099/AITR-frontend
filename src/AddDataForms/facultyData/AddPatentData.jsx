@@ -12,7 +12,7 @@ function AddPatentData() {
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
-     if (loading == true) {
+    if (loading == true) {
       const data = await axios.get("http://localhost:3000/api/v1/faculty/patents-published")
       console.log(data.data.patents)
       setData(data.data.patents)
@@ -26,40 +26,41 @@ function AddPatentData() {
     fetchData()
     console.log(data)
   }, [loading])
-  const onSubmit = async (data) => {
-    console.log(data)
-    console.log(data.file[0])
-    setFile(data.file[0])
+  const onSubmit = async (data, e) => {
+    e.preventDefault();
+
     const formData = new FormData();
-    formData.append("file", file)
-    console.log(data)
+    const fileInput = document.querySelector("input[type='file']");
+    if (fileInput?.files[0]) {
+      formData.append("file", fileInput.files[0]);
+    }
     try {
       const res = await axios.post('http://localhost:3000/file', formData);
       reset(); // clear form
-      if(res.data.status == 200 && res?.data.fileId){
+      if (res.data.status == 200 && res?.data.fileId) {
         const url = "http://localhost:3000/api/v1/faculty/patent-published"
-        const response = await axios.post(url , {
+        const response = await axios.post(url, {
           facultyId: data.facultyId,
-          facultyName:data.facultyName,
-          department:data.department,
-          title:data.title,
-          applicant:data.applicant,
-          applicationNumberdata:data.applicationNumberdata,
+          facultyName: data.facultyName,
+          department: data.department,
+          title: data.title,
+          applicant: data.applicant,
+          applicationNumberdata: data.applicationNumberdata,
           applicationDate: data.applicationDate,
           status: data.status,
-          coInventors:data.coInventors,
-          country:data.country,
-          category:data.category,
-          fileId:data.fileId,
-          patentTitle:data.patentTitle,
-          patentType:data.patentType,
-          inventors:data.inventors,
+          coInventors: data.coInventors,
+          country: data.country,
+          category: data.category,
+          fileId: data.fileId,
+          patentTitle: data.patentTitle,
+          patentType: data.patentType,
+          inventors: data.inventors,
           publicationDate: data.publicationDate,
           abstract: data.abstract
         }
-      ) 
-      console.log(response.data);
-      }else {
+        )
+        console.log(response.data);
+      } else {
         console.error("File upload failed, skipping award creation.");
       }
     } catch (error) {
@@ -70,12 +71,12 @@ function AddPatentData() {
     setLoading((p) => !p)
   }
 
-  
+
 
   return (
     <div>
-        <FacultyPatentForm handleSubmit={handleSubmit} register={register} reset={reset} onSubmit={onSubmit} />
-        <PatentTable data={data} />
+      <FacultyPatentForm handleSubmit={handleSubmit} register={register} reset={reset} onSubmit={onSubmit} />
+      <PatentTable data={data} />
     </div>
   );
 }

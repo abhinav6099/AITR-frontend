@@ -27,13 +27,14 @@ function AddPlacementData() {
     console.log(data)
   }, [loading])
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data, e) => {
+    e.preventDefault();
 
-    console.log(data)
-    console.log(data.file[0])
-    setFile(data.file[0])
     const formData = new FormData();
-    formData.append("file", file);
+    const fileInput = document.querySelector("input[type='file']");
+    if (fileInput?.files[0]) {
+      formData.append("file", fileInput.files[0]);
+    }
 
     try {
       const res = await axios.post("http://localhost:3000/file", formData)

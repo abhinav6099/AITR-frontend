@@ -28,17 +28,17 @@ function AddTechnicalNonTechnicalCompetition() {
     console.log(data)
   }, [loading])
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data, e) => {
+    e.preventDefault();
 
-    console.log(data)
-    console.log(data.file[0])
-    setFile(data.file[0])
     const formData = new FormData();
-    formData.append("file", file);
+    const fileInput = document.querySelector("input[type='file']");
+    if (fileInput?.files[0]) {
+      formData.append("file", fileInput.files[0]);
+    }
     try {
       const res = await axios.post("http://localhost:3000/file", formData)
       console.log(res.data)
-      if (res.status === 200 && res.data?.fileId) {
         // todo: correct the url
         const url = "http://localhost:3000/api/v1/students/extracurricular"
         const response = await axios.post(url
@@ -73,10 +73,8 @@ function AddTechnicalNonTechnicalCompetition() {
           }
         )
         console.log(response.data)
-      } else {
-        console.error("File upload failed, skipping Profile creation.");
       }
-    } catch (error) {
+      catch (error) {
       console.error("Error occurred:", error.message);
     }
     console.log(data)

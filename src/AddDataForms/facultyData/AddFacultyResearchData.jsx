@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 
 function AddFacultyResearchData() {
-  
+
   const { register, handleSubmit, reset } = useForm();
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
@@ -28,11 +28,14 @@ function AddFacultyResearchData() {
     console.log(data)
   }, [loading])
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data, e) => {
+    e.preventDefault();
 
-    console.log(data)
-    console.log(data.file[0])
-    setFile(data.file[0])
+    const formData = new FormData();
+    const fileInput = document.querySelector("input[type='file']");
+    if (fileInput?.files[0]) {
+      formData.append("file", fileInput.files[0]);
+    }
     try {
       const formData = new FormData();
       formData.append("file", file);
@@ -66,7 +69,7 @@ function AddFacultyResearchData() {
   return (
     <div>
       <ResearchPaper
-        
+        onSubmit={onSubmit} register={register} handleSubmit={handleSubmit} reset={reset}
       />
       <ResearchPaperTable data={data} />
     </div>

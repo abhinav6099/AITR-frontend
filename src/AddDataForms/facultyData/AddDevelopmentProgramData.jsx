@@ -41,7 +41,6 @@ function AddDevelopmentProgramData() {
       
       const res = await axios.post("http://localhost:3000/file", formData)
       console.log(res.data)
-      if(res.data.status === 200 && res?.data.fileId){
 
         const url = "http://localhost:3000/api/v1/faculty/development-programme"
         const response = await axios.post(url
@@ -69,9 +68,7 @@ function AddDevelopmentProgramData() {
           
         )
         console.log(response.data)
-      } else {
-        console.error("File upload failed, skipping award creation.");
-      }
+      
     } catch (error) {
       console.error("Error occurred:", error.message);
     }

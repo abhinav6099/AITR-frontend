@@ -28,8 +28,6 @@ function AddHackathonsData() {
 
   const onSubmit = async (data) => {
 
-    console.log(data)
-
     try {
       const url = "http://localhost:3000/api/v1/students/hackathon"
       const response = await axios.post(url

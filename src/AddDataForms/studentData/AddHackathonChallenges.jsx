@@ -11,6 +11,7 @@ function AddHackathonChallenges() {
 
   const fetchData = async () => {
     try {
+      // todo: add correct routes
       const res = await axios.get('http://localhost:3000/api/v1/student/hackathonchallenges');
       setData(res.data.hackathonChallenges); // Adjust this key based on your backend response
     } catch (err) {
