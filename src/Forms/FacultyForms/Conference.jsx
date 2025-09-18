@@ -13,7 +13,7 @@ const indexingOptions = ["SCI", "Scopus", "UGC", "None"];
 
 const FacultyConferenceForm = () => {
   const { register, handleSubmit, reset } = useForm();
-
+  // todo: complete this
   const onSubmit = (data) => {
     console.log("Conference Form Submitted:", data);
     reset();

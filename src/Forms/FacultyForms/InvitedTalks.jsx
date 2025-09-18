@@ -34,14 +34,15 @@ function InvitedTalks() {
     console.log(data)
   }, [loading])
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data, e) => {
+    e.preventDefault();
 
-    console.log(data)
-    console.log(data.file[0])
-    setFile(data.file[0])
+    const formData = new FormData();
+    const fileInput = document.querySelector("input[type='file']");
+    if (fileInput?.files[0]) {
+      formData.append("file", fileInput.files[0]);
+    }
     try {
-      const formData = new FormData();
-      formData.append("file", file);
 
       const res = await axios.post("http://localhost:3000/file", formData)
       console.log(res.data)
@@ -54,7 +55,8 @@ function InvitedTalks() {
           membershipType: data.membershipType,
           membershipId: data.membershipId,
           dateOfJoining: data.dateOfJoining,
-          currentStatus: data.currentStatus
+          currentStatus: data.currentStatus,
+          fileId: res.data.fileId
         }
 
       )
@@ -70,77 +72,77 @@ function InvitedTalks() {
   }
 
 
-    return (
-        <div>
-            <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md p-10">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-                    Invited Talks
-                </h2>
+  return (
+    <div>
+      <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md p-10">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-6">
+          Invited Talks
+        </h2>
 
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <InputBox
-                        label="faculty_Name"
-                        name="facultyName"
-                        register={register}
-                        required
-                    />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <InputBox
+              label="faculty_Name"
+              name="facultyName"
+              register={register}
+              required
+            />
 
-                    <InputBox
-                        label="title_Of_Talk"
-                        name="titleOfTalk"
-                        register={register}
-                        required
-                    />
+            <InputBox
+              label="title_Of_Talk"
+              name="titleOfTalk"
+              register={register}
+              required
+            />
 
-                    <InputBox
-                        label="event_Name"
-                        name="eventName"
-                        register={register}
-                        required
-                    />
+            <InputBox
+              label="event_Name"
+              name="eventName"
+              register={register}
+              required
+            />
 
-                    <InputBox
-                        label="organizing_Body"
-                        name="organizingBody"
-                        register={register}
-                        required
-                    />
+            <InputBox
+              label="organizing_Body"
+              name="organizingBody"
+              register={register}
+              required
+            />
 
-                    <CalenderBox
-                        label="date"
-                        name="date"
-                        register={register}
-                        required
-                    />
+            <CalenderBox
+              label="date"
+              name="date"
+              register={register}
+              required
+            />
 
-                    <SelectBox
-                        label="nature_Of_Engagement"
-                        name="natureOfEngagement"
-                        register={register}
-                        options={[
-                            "Keynote",
-                            "Panelist",
-                            "Speaker",
-                        ]}
-                        required
-                    />
+            <SelectBox
+              label="nature_Of_Engagement"
+              name="natureOfEngagement"
+              register={register}
+              options={[
+                "Keynote",
+                "Panelist",
+                "Speaker",
+              ]}
+              required
+            />
 
-                    <FileBox
-                        label="certificate_Url"
-                        name="file"
-                        register={register}
-                    />
-                    </div>
+            <FileBox
+              label="certificate_Url"
+              name="file"
+              register={register}
+            />
+          </div>
 
-                    <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
-                        Submit
-                    </button>
-                </form>
-                </div>
-                <DataTable columns={facultyTalkColumns} data={data} />
-            </div>
-            )
+          <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
+            Submit
+          </button>
+        </form>
+      </div>
+      <DataTable columns={facultyTalkColumns} data={data} />
+    </div>
+  )
 }
 
 

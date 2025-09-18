@@ -7,6 +7,7 @@ import SelectBox from "../../components/SelectBox";
 
 
 const AwardForm = ({register, handleSubmit, reset , onSubmit}) => {
+  // todo : if there is something to do
 
   return (
     <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md p-10">

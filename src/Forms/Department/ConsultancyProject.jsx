@@ -30,42 +30,42 @@ const ConsultancyProject = () => {
     console.log(data)
   }, [loading])
 
-  const onSubmit = async (data) => {
+
+  const onSubmit = async (data, e) => {
+    e.preventDefault();
 
     const formData = new FormData();
-    formData.append("file", file);
+    const fileInput = document.querySelector("input[type='file']");
+    if (fileInput?.files[0]) {
+      formData.append("file", fileInput.files[0]);
+    }
     try {
-
       const res = await axios.post("http://localhost:3000/file", formData)
       console.log(res.data)
-      if (res.data.status == 200 && res?.data.fileId) {
-
-        console.log(data)
-        const url = "http://localhost:3000/api/v1/department/consulatancy"
-        const response = await axios.post(url
-          , {
-            dapetmentName: data.dapetmentName,
-            agencyName: data.agencyName,
-            date: data.date,
-            duration: data.duration,
-            description: data.description,
-            funding: data.funding,
-            titleOfMoU: data.titleOfMoU,
-            organizationName: data.organizationName,
-            dateOfSigning: data.dateOfSigning,
-            validityPeriod: data.validityPeriod,
-            purposeObjectives: data.purposeObjectives,
-            fundSupportReceived: data.fundSupportReceived,
-            // using fileId without middleware 
-            // TODO : create middleware and send the fileId with using middleware
-            fileId: res.data.fileId
-          }
-        )
-        console.log(response.data)
-      } else {
-        console.error("File upload failed, skipping award creation.");
-      }
-    } catch (error) {
+      console.log(data)
+      const url = "http://localhost:3000/api/v1/department/consulatancy"
+      const response = await axios.post(url
+        , {
+          dapetmentName: data.dapetmentName,
+          agencyName: data.agencyName,
+          date: data.date,
+          duration: data.duration,
+          description: data.description,
+          funding: data.funding,
+          titleOfMoU: data.titleOfMoU,
+          organizationName: data.organizationName,
+          dateOfSigning: data.dateOfSigning,
+          validityPeriod: data.validityPeriod,
+          purposeObjectives: data.purposeObjectives,
+          fundSupportReceived: data.fundSupportReceived,
+          // using fileId without middleware 
+          // TODO : create middleware and send the fileId with using middleware
+          fileId: res.data.fileId
+        }
+      )
+      console.log(response.data)
+    }
+    catch (error) {
       console.error("Error occurred:", error.message);
     }
     console.log(data)

@@ -8,67 +8,67 @@ import DataTable from 'react-data-table-component';
 
 const RDInitiatives = () => {
 
-  
-  const {register, handleSubmit, reset} = useForm()
+
+  const { register, handleSubmit, reset } = useForm()
   const [data, setData] = useState([])
-  const [loading , setLoading ] = useState(true)
-  const [submit, setSubmit ] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [submit, setSubmit] = useState(false)
 
   const fetchData = async () => {
-    if(loading == true ){
+    if (loading == true) {
       const data = await axios.get("http://localhost:3000/api/v1/department/rnds")
       console.log(data.data)
       setData(data.data.rdInitiatives)
     }
- 
+
   }
   useEffect(() => {
     console.log("fetching data")
     fetchData()
     console.log(data)
-  },[loading])
+  }, [loading])
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data, e) => {
+    e.preventDefault();
+
     const formData = new FormData();
-    formData.append("file" , file);
-    try{
+    const fileInput = document.querySelector("input[type='file']");
+    if (fileInput?.files[0]) {
+      formData.append("file", fileInput.files[0]);
+    }
+    try {
       const res = await axios.post("http://localhost:3000/file", formData)
       console.log(res.data)
       console.log(data)
-      if(res.data.status == 200 && res?.data.fileId){
-
-        const url = "http://localhost:3000/api/v1/department/rnd"
-        const response = await axios.post( url 
-          , {
-            dapetmentName: data.dapetmentName,
-            agencyName: data.agencyName,
-            date: data.date,
-            duration: data.duration,
-            description: data.description,
-            funding: data.funding,
-            projectTitle: data.titleOfMoU,
-            fundingAgency: data.fundingAgency,
-            principalInvestigator: data.principalInvestigator,
-            coInvestigator: data.coInvestigator,
-            budget: data.budget,
-            output: data.output,
-            // using fileId without middleware 
-            // TODO : create middleware and send the fileId with using middleware
-            fileId : res.data.fileId
-          }
-        )
-        console.log(response.d)
-      }else {
-        console.error("File upload failed, skipping award creation.");
-      }
+      const url = "http://localhost:3000/api/v1/department/rnd"
+      const response = await axios.post(url
+        , {
+          dapetmentName: data.dapetmentName,
+          agencyName: data.agencyName,
+          date: data.date,
+          duration: data.duration,
+          description: data.description,
+          funding: data.funding,
+          projectTitle: data.titleOfMoU,
+          fundingAgency: data.fundingAgency,
+          principalInvestigator: data.principalInvestigator,
+          coInvestigator: data.coInvestigator,
+          budget: data.budget,
+          output: data.output,
+          // using fileId without middleware 
+          // TODO : create middleware and send the fileId with using middleware
+          fileId: res.data.fileId
+        }
+      )
+      console.log(response.d)
     } catch (error) {
       console.error("Error occurred:", error.message);
     }
-      console.log(data)
+    console.log(data)
 
     setLoading((p) => !p)
-  } ;
-  
+  };
+
   return (
     <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md p-10">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6">
