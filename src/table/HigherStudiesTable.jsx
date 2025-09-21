@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import DataTable from 'react-data-table-component';
 
@@ -22,11 +23,11 @@ const columns = [
           onClick={
             async () => {
               console.log(row._id)
-              alert(`Deleting certificate ${row._id}`)
+              alert(`Deleting this ${row._id}`)
               const baseUrl = "http://localhost:3000";
               const url = "api/v1/students/higher-study"
               const response = await axios.delete(`${baseUrl}/${url}/${row._id}`);
-              console.log(response.data.certificate);
+              console.log(response.data);
             }
           } className="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded">Delete</button>
       </div >
@@ -34,35 +35,6 @@ const columns = [
     ignoreRowClick: true,
     allowOverflow: true,
     button: true,
-  },
-];
-
-const dummyData = [
-  {
-    id: 1,
-    studentName: "Riya Sharma",
-    enrollmentNumber: "ENR2023CS101",
-    courseName: "MS in Computer Science",
-    scholarship: "DAAD",
-    instituteName: "Technical University of Munich",
-    city: "Munich",
-    country: "Germany",
-    duration: "24",
-    admissionYear: "2024",
-    admissionDate: "2024-09-01",
-  },
-  {
-    id: 2,
-    studentName: "Aman Verma",
-    enrollmentNumber: "ENR2023IT122",
-    courseName: "MBA in Finance",
-    scholarship: "",
-    instituteName: "London Business School",
-    city: "London",
-    country: "UK",
-    duration: "18",
-    admissionYear: "2023",
-    admissionDate: "2023-10-15",
   },
 ];
 

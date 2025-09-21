@@ -20,8 +20,8 @@ const TechnicalNonTechnicalCompetition = ({ register, handleSubmit, onSubmit, re
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <InputBox label="ID" name="studentId" register={register} required />
-          <InputBox label="Name" name="name" register={register} required />
+          <InputBox label="ID" name="competitionId" register={register} required />
+          <InputBox label="Name" name="studentName" register={register} required />
           <InputBox label="Enrollment Number" name="enrollmentNumber" register={register} required />
           <InputBox label="Branch" name="branch" register={register} required />
           <InputBox label="Batch" name="batch" register={register} />
@@ -40,7 +40,7 @@ const TechnicalNonTechnicalCompetition = ({ register, handleSubmit, onSubmit, re
           <InputBox label="Sponsoring agency" name="sponsoringAgency" register={register} />
           <InputBox label="position Acquired" name="positionAcquired" register={register} />
           <InputBox label="project github link" name="projectGithubLink" register={register} />
-          <InputBox label="Event mode" name="eventMode" register={register} />
+          <SelectBox label="Event mode" name="eventMode" options={['Online', 'Offline', 'Hybrid']} register={register} />
           <SelectBox label="Achievement" name="achievement" options={["Participation", "Winner" , "Rank"]} register={register} />
           <FileBox register={register} name="file" label="Certificate" />
         </div>

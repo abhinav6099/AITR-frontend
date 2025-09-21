@@ -17,8 +17,8 @@ const StartupForm = ({ onSubmit, register, handleSubmit, reset }) => {
           <InputBox label="Startup Name" name="startupName" register={register} required />
           <InputBox label="Domain" name="domain" register={register} required />
           <InputBox label="Incubation Support" name="incubationSupport" register={register} placeholder="If any" />
-          <SelectBox label="Current Status" name="status" options={statusOptions} register={register} />
-          <InputBox label="Website or Link" name="websiteLink" register={register} placeholder="https://example.com" />
+          <SelectBox label="Current Status" name="currentStatus" options={statusOptions} register={register} />
+          <InputBox label="Website or Link" name="websiteOrLink" register={register} placeholder="https://example.com" />
         </div>
 
         <div className="mt-8">

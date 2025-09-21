@@ -30,17 +30,9 @@ function AddStartups() {
   const onSubmit = async (data, e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    const fileInput = document.querySelector("input[type='file']");
-    if (fileInput?.files[0]) {
-      formData.append("file", fileInput.files[0]);
-    }
     try {
 
-      const res = await axios.post("http://localhost:3000/file", formData)
-      console.log(res.data)
-
-      const url = "http://localhost:3000/api/v1/students/extracurricular"
+      const url = "http://localhost:3000/api/v1/students/startup"
       const response = await axios.post(url
         , {
           startupName: data.startupName,
@@ -48,8 +40,6 @@ function AddStartups() {
           incubationSupport: data.incubationSupport,
           currentStatus: data.currentStatus,
           wesiteLink: data.wesiteLink,
-
-          fileId: res.data.fileId,
         }
       )
       console.log(response)
@@ -128,11 +118,11 @@ export const startupColumns = [
           onClick={
             async () => {
               console.log(row._id)
-              alert(`Deleting certificate ${row._Id}`)
+              alert(`Deleting this ${row._id}`)
               const baseUrl = "http://localhost:3000";
-              const url = "api/v1/students/certificate"
+              const url = "api/v1/students/startup"
               const response = await axios.delete(`${baseUrl}/${url}/${row._id}`);
-              console.log(response.data.certificate);
+              console.log(response.data);
             }
           } className="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded">Delete</button>
       </div >
