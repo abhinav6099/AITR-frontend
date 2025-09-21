@@ -48,7 +48,7 @@ function AddStudentResearchData() {
           batch: data.batch,
           doiOrIsbn: data.doiOrIsbn,
           titleOfPaper: data.titleOfPaper,
-          publicatioDate: data.publicatioDate,
+          publicationDate: data.publicationDate,
           insternshipRole: data.insternshipRole,
           journalOrConferenceName: data.journalOrConferenceName,
           coAuthors: data.coAuthors,
@@ -78,6 +78,7 @@ function AddStudentResearchData() {
       />
       <StudentResearchPaper data={data} />
     </div>
+    
   );
 }
 

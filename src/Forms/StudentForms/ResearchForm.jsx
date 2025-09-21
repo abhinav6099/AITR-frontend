@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import InputBox from "../../components/InputBox";
 import FileBox from "../../components/FileBox";
 import StudentResearchPaper from "../../table/StudentResearchPaper";
+import CalenderBox from "../../components/CalenderBox";
 
 const ResearchForm = ({ register, handleSubmit, reset, onSubmit }) => {
 
@@ -14,15 +15,15 @@ const ResearchForm = ({ register, handleSubmit, reset, onSubmit }) => {
       </h2>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <InputBox label="Student Name" name="studentName" register={register} required />
           <InputBox label="Enrollment Number" name="enrollmentNumber" register={register} required />
           <InputBox label="Branch" name="branch" register={register} required />
           <InputBox label="Batch" name="batch" register={register} required />
-          <InputBox label="DOI / ISBN" name="doiIsbn" register={register} />
-          <InputBox label="Title of Paper" name="paperTitle" register={register} required />
-          <InputBox label="Publication Date" name="publicationDate" register={register} required />
-          <InputBox label="Journal / Conference Name" name="journalName" register={register} required />
+          <InputBox label="DOI / ISBN" name="doiOrIsbn" register={register} />
+          <InputBox label="Title of Paper" name="titleOfPaper" register={register} required />
+          <CalenderBox label="Publication Date" name="publicationDate" register={register} required />
+          <InputBox label="Journal / Conference Name" name="journalOrConferenceName" register={register} required />
           <InputBox label="Co-authors" name="coAuthors" register={register} />
           <InputBox label="Indexing (Scopus, SCI, etc.)" name="indexing" register={register} />
           <FileBox label="Paper PDF" name="paperPdf" register={register} />

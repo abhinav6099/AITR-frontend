@@ -1,4 +1,5 @@
-import React from 'react';
+
+import axios from 'axios';
 import DataTable from 'react-data-table-component';
 
 const columns = [
@@ -6,13 +7,25 @@ const columns = [
   { name: 'Enrollment Number', selector: row => row.enrollmentNumber, wrap: true },
   { name: 'Branch', selector: row => row.branch },
   { name: 'Batch', selector: row => row.batch },
-  { name: 'doiOrIsbn', selector: row => row.doiOrIsbn, wrap: true },
+  { name: 'doi Or Isbn', selector: row => row.doiOrIsbn, wrap: true },
   { name: 'title Of Paper', selector: row => row.titleOfPaper },
   { name: 'Publication Date', selector: row => row.publicationDate },
   { name: 'journal Or Conference Name', selector: row => row.journalOrConferenceName },
   { name: 'cCo Authors', selector: row => row.coAuthors },
   { name: 'indexing', selector: row => row.indexing },
-  { name: 'PDF', selector: row => row.fileId },
+   {
+    name: 'Certificate PDF',
+    cell: row => (
+      <a
+        href={`http://localhost:3000/file/${row.fileId}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline"
+      >
+        View
+      </a>
+    )
+  },
   { name: 'Faculty Guide', selector: row => row.facultyGuide },
    {
     name: 'Actions',
@@ -24,7 +37,7 @@ const columns = [
           onClick={
             async () => {
               console.log(row._id)
-              alert(`Deleting certificate ${row._Id}`)
+              alert(`Deleting certificate ${row._id}`)
               const baseUrl = "http://localhost:3000";
               const url = "api/v1/students/research-paper"
               const response = await axios.delete(`${baseUrl}/${url}/${row._id}`);

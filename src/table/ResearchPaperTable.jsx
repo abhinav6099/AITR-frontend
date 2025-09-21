@@ -1,51 +1,8 @@
 import React from 'react'
 import DataTable from 'react-data-table-component';
+import axios from 'axios';
 
 function ResearchPaperTable() {
-
-
-//     const data = [
-//   {
-//     Id: 1,
-//     Faculty_Name: 'Dr. Ajay Sahani',
-//     Title: 'Artificial Intelligence in Education',
-//     Publication_Date: '2024-10-15',
-//     Journal_Name: 'International Journal of AI Research',
-//     Co_Authors: 'Riya Sharma, Vikram Patel',
-//   },
-//   {
-//     Id: 2,
-//     Faculty_Name: 'Prof. Riya Sharma',
-//     Title: 'Advancements in Quantum Computing',
-//     Publication_Date: '2023-07-22',
-//     Journal_Name: 'Quantum Technology Today',
-//     Co_Authors: 'Ajay Sahani',
-//   },
-//   {
-//     Id: 3,
-//     Faculty_Name: 'Dr. Vikram Patel',
-//     Title: 'Blockchain Applications in Academia',
-//     Publication_Date: '2022-11-10',
-//     Journal_Name: 'Journal of Computer Science',
-//     Co_Authors: 'Riya Sharma, Neha Mehta',
-//   },
-//   {
-//     Id: 4,
-//     Faculty_Name: 'Prof. Neha Mehta',
-//     Title: 'Cybersecurity Trends in 2025',
-//     Publication_Date: '2024-03-18',
-//     Journal_Name: 'CyberSec Journal',
-//     Co_Authors: 'Ajay Sahani',
-//   },
-//   {
-//     Id: 5,
-//     Faculty_Name: 'Dr. Karan Verma',
-//     Title: 'Machine Learning for Healthcare Analytics',
-//     Publication_Date: '2023-12-01',
-//     Journal_Name: 'HealthTech Journal',
-//     Co_Authors: 'Riya Sharma, Vikram Patel',
-//   },
-// ];
 
   return (
     <DataTable columns={researchPaperColumns} data={data} />
@@ -59,6 +16,12 @@ export const researchPaperColumns = [
     name: 'ID',
     selector: row => row.facultyId,
     sortable: true,
+    center: true
+  },
+  {
+    name: 'Publication Date',
+    selector: row => row.publicationDate,
+    sortable : true,
     center: true
   },
   {
@@ -152,7 +115,19 @@ export const ResearchPaperPublication = [
   { name: 'journal Or Conference Name', selector: row => row.journalOrConferenceName },
   { name: 'cCo Authors', selector: row => row.coAuthors },
   { name: 'indexing', selector: row => row.indexing },
-  { name: 'PDF', selector: row => row.fileId },
+   {
+    name: 'Certificate Pdf',
+    cell: row => (
+      <a
+        href={`http://localhost:3000/file/${row.fileId}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline"
+      >
+        View
+      </a>
+    )
+  },
   { name: 'Faculty Guide', selector: row => row.facultyGuide },
    {
     name: 'Actions',
@@ -164,7 +139,7 @@ export const ResearchPaperPublication = [
           onClick={
             async () => {
               console.log(row._id)
-              alert(`Deleting certificate ${row._Id}`)
+              alert(`Deleting certificate ${row.facultyId}`)
               const baseUrl = "http://localhost:3000";
               const url = "api/v1/faculty/research-paper"
               const response = await axios.delete(`${baseUrl}/${url}/${row._id}`);
@@ -178,3 +153,6 @@ export const ResearchPaperPublication = [
     button: true,
   },
 ];
+
+// todo : here we are deleting faculty reaseach paper
+// this research paper belongs to faculty member
