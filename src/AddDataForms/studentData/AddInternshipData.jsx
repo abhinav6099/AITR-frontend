@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import StudentInternshipForm from '../../Forms/StudentForms/Internship';
-import InternshipTable from '../../table/InternshipTable';
+import { InternshipTable } from '../../table/InternshipTable';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 

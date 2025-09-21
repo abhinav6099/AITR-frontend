@@ -148,7 +148,7 @@ const data = [
   },
 ];
 
-const InternshipTable = () => {
+export const InternshipTable = () => {
   return (
     <div className="p-4 overflow-x-auto">
       <DataTable
@@ -166,4 +166,4 @@ const InternshipTable = () => {
   );
 };
 
-export default InternshipTable;
+
