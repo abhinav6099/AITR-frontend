@@ -1,5 +1,7 @@
+import axios from 'axios';
 import React from 'react';
 import DataTable from 'react-data-table-component';
+
 
 const columns = [
   { name: 'ID', selector: row => row.Id, sortable: true, width: '60px' },
@@ -55,7 +57,7 @@ const columns = [
           onClick={
             async () => {
               console.log(row._id)
-              alert(`Deleting certificate ${row._Id}`)
+              alert(`Deleting certificate ${row.Id}`)
               const baseUrl = "http://localhost:3000";
               // todo: faculty iternship;
               const url = "api/v1/faculty/certificate"

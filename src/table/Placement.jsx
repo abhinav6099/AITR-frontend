@@ -1,5 +1,7 @@
+import axios from 'axios';
 import React from 'react';
 import DataTable from 'react-data-table-component';
+
 
 const columns = [
   { name: 'ID', selector: row => row.placementId, sortable: true, width: '70px' },
@@ -36,12 +38,12 @@ const columns = [
         <button
           onClick={
             async () => {
-              console.log(row._id)
-              alert(`Deleting certificate ${row._Id}`)
+              console.log(row.placementId)
+              alert(`Deleting plcaement ID ${row.placementId}`)
               const baseUrl = "http://localhost:3000";
               const url = "api/v1/students/placement"
               const response = await axios.delete(`${baseUrl}/${url}/${row._id}`);
-              console.log(response.data.certificate);
+              console.log(response.data)
             }
           } className="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded">Delete</button>
       </div >
