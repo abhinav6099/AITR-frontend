@@ -38,7 +38,7 @@ function AddStudentCertificateData() {
       const res = await axios.post("http://localhost:3000/file", formData)
       console.log(res.data)
 
-      const url = "http://localhost:3000/api/v1/students/profile"
+      const url = "http://localhost:3000/api/v1/students/certificate"
       const response = await axios.post(url
         , {
           certificateId: data.certificateId,
@@ -48,6 +48,7 @@ function AddStudentCertificateData() {
           batch: data.batch,
           year: data.year,
           courseName: data.courseName,
+          issuingOrganization: data.issuingOrganization,
           issueDate: data.issueDate,
           validityPeriod: data.validityPeriod,
           gradeOrScore: data.gradeOrScore,
