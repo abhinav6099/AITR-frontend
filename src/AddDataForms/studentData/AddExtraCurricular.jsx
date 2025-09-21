@@ -174,9 +174,9 @@ export const studentExtraCurricularColumns = [
               console.log(row._id)
               alert(`Deleting certificate ${row._Id}`)
               const baseUrl = "http://localhost:3000";
-              const url = "api/v1/students/certificate"
+              const url = "api/v1/students/extracurricular"
               const response = await axios.delete(`${baseUrl}/${url}/${row._id}`);
-              console.log(response.data.certificate);
+              console.log(response.data);
             }
           } className="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded">Delete</button>
       </div >

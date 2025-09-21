@@ -24,14 +24,14 @@ const SportForm = ( {register, handleSubmit, reset, onSubmit } ) => {
       </h2>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <InputBox label="ID" name="studentId" register={register} required />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <InputBox label="ID" name="sportsEventId" register={register} required />
           <InputBox label="Student Name" name="studentName" register={register} required />
           <InputBox label="Enrollment Number" name="enrollmentNumber" register={register} required />
           <InputBox label="Branch" name="branch" register={register} required />
           <InputBox label="Batch" name="batch" register={register} required />
           <InputBox label="Year" name="year" register={register} required />
-          <InputBox label="Sports Name" name="sportName" register={register} required />
+          <InputBox label="Sports Name" name="sportsName" register={register} required />
           <CalenderBox label="Event Date" name="eventDate" register={register} />
           <SelectBox label="Event Name" name="eventName" options={eventNames} register={register} />
           <SelectBox label="Event Level" name="eventLevel" options={eventLevels} register={register} />

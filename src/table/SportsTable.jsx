@@ -45,48 +45,6 @@ const columns = [
   },
 ];
 
-const data = [
-  {
-    Id: 1,
-    Student_Name: 'Riya Sharma',
-    Sport_Name: 'Volleyball',
-    Achievement: 'Gold Medal',
-    Event_Date: '2024-02-15',
-    Event_Name: 'Inter-University Championship',
-    Event_Level: 'National',
-    Event_Location: 'Delhi University',
-    Position: '1st',
-    Certificate: 'https://example.com/sports/riya-certificate.pdf',
-    Coach_Name: 'Mr. Anil Kumar',
-  },
-  {
-    Id: 2,
-    Student_Name: 'Arjun Mehta',
-    Sport_Name: '100m Sprint',
-    Achievement: 'Silver Medal',
-    Event_Date: '2023-11-10',
-    Event_Name: 'State Athletics Meet',
-    Event_Level: 'State',
-    Event_Location: 'Bhopal',
-    Position: '2nd',
-    Certificate: 'https://example.com/sports/arjun-certificate.pdf',
-    Coach_Name: 'Ms. Rekha Sinha',
-  },
-  {
-    Id: 3,
-    Student_Name: 'Sneha Verma',
-    Sport_Name: 'Badminton',
-    Achievement: 'Participation',
-    Event_Date: '2023-08-05',
-    Event_Name: 'College Sports Fest',
-    Event_Level: 'Intra-College',
-    Event_Location: 'Campus Indoor Hall',
-    Position: 'N/A',
-    Certificate: 'https://example.com/sports/sneha-certificate.pdf',
-    Coach_Name: 'Mr. Rakesh Jaiswal',
-  },
-];
-
 const SportsTable = () => {
   return (
     <div className="p-4 overflow-x-auto">

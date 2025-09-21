@@ -18,6 +18,7 @@ const ExtraCurricularForm = ({ onSubmit, register, handleSubmit, reset }) => {
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <InputBox label="Event participation ID" name="eventParticipationId" register={register} required />
           <InputBox label="student_name" name="studentName" register={register} required />
           <InputBox label="enrollment_number" name="enrollmentNumber" register={register} required />
           <InputBox label="branch" name="branch" register={register} required />

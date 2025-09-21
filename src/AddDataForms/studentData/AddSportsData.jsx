@@ -40,7 +40,7 @@ function AddSportsData() {
       const res = await axios.post("http://localhost:3000/file", formData)
       console.log(res.data)
 
-        const url = "http://localhost:3000/api/v1/students/research-paper"
+        const url = "http://localhost:3000/api/v1/students/sports"
         const response = await axios.post(url
           , {
             sportsEventId: data.sportsEventId,
@@ -165,11 +165,11 @@ export const studentSportsEventColumns = [
           onClick={
             async () => {
               console.log(row._id)
-              alert(`Deleting certificate ${row._Id}`)
+              alert(`Deleting Sports Event ID ${row.sportsEventId}`)
               const baseUrl = "http://localhost:3000";
-              const url = "api/v1/students/certificate"
+              const url = "api/v1/students/sports"
               const response = await axios.delete(`${baseUrl}/${url}/${row._id}`);
-              console.log(response.data.certificate);
+              console.log(response.data);
             }
           } className="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded">Delete</button>
       </div >
