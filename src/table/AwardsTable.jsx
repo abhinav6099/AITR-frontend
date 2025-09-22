@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import DataTable from 'react-data-table-component';
 
@@ -81,11 +82,11 @@ const columns = [
           onClick={
             async () => {
               console.log(row._id)
-              alert(`Deleting certificate ${row._Id}`)
+              alert(`Deleting this ${row._id}`)
               const baseUrl = "http://localhost:3000";
               const url = "api/v1/students/award-recognisation"
               const response = await axios.delete(`${baseUrl}/${url}/${row._id}`);
-              console.log(response.data.certificate);
+              console.log(response.data);
             }
           } className="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded">Delete</button>
       </div >
