@@ -115,19 +115,7 @@ export const ResearchPaperPublication = [
   { name: 'journal Or Conference Name', selector: row => row.journalOrConferenceName },
   { name: 'cCo Authors', selector: row => row.coAuthors },
   { name: 'indexing', selector: row => row.indexing },
-   {
-    name: 'Certificate Pdf',
-    cell: row => (
-      <a
-        href={`http://localhost:3000/file/${row.fileId}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-blue-600 underline"
-      >
-        View
-      </a>
-    )
-  },
+  { name: 'Certificate PDF', selector: row => row.fileId },
   { name: 'Faculty Guide', selector: row => row.facultyGuide },
    {
     name: 'Actions',
