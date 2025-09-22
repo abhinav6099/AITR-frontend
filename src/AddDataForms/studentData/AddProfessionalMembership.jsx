@@ -29,11 +29,7 @@ const AddProfessionalMembership = () => {
   const onSubmit = async (data) => {
 
     try {
-
-
-      // const res = await axios.post("http://localhost:3000/file", formData)
-      // console.log(res.data)
-
+      console.log("hi ")
       const url = "http://localhost:3000/api/v1/students/membership"
       const response = await axios.post(url
         , {

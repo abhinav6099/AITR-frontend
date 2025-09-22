@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import DataTable from 'react-data-table-component';
 
@@ -20,7 +21,7 @@ const columns = [
               const baseUrl = "http://localhost:3000";
               const url = "api/v1/students/membership"
               const response = await axios.delete(`${baseUrl}/${url}/${row._id}`);
-              console.log(response.data.certificate);
+              console.log(response.data);
             }
           } className="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded">Delete</button>
       </div >
