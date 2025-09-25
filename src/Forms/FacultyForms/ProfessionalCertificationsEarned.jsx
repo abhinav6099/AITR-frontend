@@ -12,7 +12,7 @@ import axios from 'axios'
 
 function ProfessionalCertificationsEarned() {
 
-  const { register, handleSubmit, reset } = useForm()
+  const { register, handleSubmit } = useForm()
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const [file, setFile] = useState(null)
@@ -35,8 +35,6 @@ function ProfessionalCertificationsEarned() {
   }, [loading])
 
   const onSubmit = async (data) => {
-    e.preventDefault();
-
     const formData = new FormData();
     const fileInput = document.querySelector("input[type='file']");
     if (fileInput?.files[0]) {
@@ -46,11 +44,12 @@ function ProfessionalCertificationsEarned() {
       const res = await axios.post("http://localhost:3000/file", formData)
       console.log(res.data)
 
-      const url = "http://localhost:3000/api/v1/faculty/professional-certificates"
+      const url = "http://localhost:3000/api/v1/faculty/professional-certificate"  //professional-certificate
       const response = await axios.post(url
         , {
           facultyName: data.facultyName,
-          issuingBody: data.issuingBodyt,
+          certificationName: data.certificationName,
+          issuingBody: data.issuingBody,
           certificationLevel: data.certificationLevel,
           validityPeriod: data.validityPeriod,
           domain: data.domain,
@@ -134,9 +133,9 @@ export const certificationColumns = [
   {
     name: 'Certificate',
     cell: row => (
-      row.certificateUrl ? (
+      row.fileId ? (
         <a
-          href={row.certificateUrl}
+          href={`http://localhost:3000/file/${row.fileId}`}
           target="_blank"
           rel="noopener noreferrer"
           className="text-blue-600 underline"

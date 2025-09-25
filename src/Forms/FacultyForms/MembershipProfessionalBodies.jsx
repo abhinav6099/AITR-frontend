@@ -33,14 +33,8 @@ function MembershipProfessionalBodies() {
         console.log(data)
     }, [loading])
 
-    const onSubmit = async (data, e) => {
-        e.preventDefault();
-
-        const formData = new FormData();
-        const fileInput = document.querySelector("input[type='file']");
-        if (fileInput?.files[0]) {
-            formData.append("file", fileInput.files[0]);
-        }
+    const onSubmit = async (data) => {
+        
         try {
 
             const res = await axios.post("http://localhost:3000/file", formData)

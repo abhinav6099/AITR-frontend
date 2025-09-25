@@ -48,7 +48,7 @@ function AcedmicQualificationDiscipline() {
       const response = await axios.post(url
         , {
           facultyName: data.facultyName,
-          highestDegree: data.highestDegreet,
+          highestDegree: data.highestDegree,
           universityOrInstitute: data.universityOrInstitute,
           specialization: data.specialization,
           yearOfCompletion: data.yearOfCompletion,
@@ -105,6 +105,12 @@ export default AcedmicQualificationDiscipline
 
 export const academicQualificationColumns = [
   {
+    name: 'Faculty Name',
+    selector: row => row.facultyName,
+    sortable: true,
+    wrap: true,
+  },
+  {
     name: 'Highest Degree',
     selector: row => row.highestDegree,
     sortable: true,
@@ -129,16 +135,39 @@ export const academicQualificationColumns = [
   {
     name: 'Certificate',
     cell: row => (
-      row.certificateUrl ? (
+      row.fileId ? (
         <a
-          href={row.certificateUrl}
+          href={`http://localhost:3000/file/${row.fileId}`}
           target="_blank"
           rel="noopener noreferrer"
           className="text-blue-600 underline"
         >
-          View
+          View PDF
         </a>
-      ) : 'N/A'
+      ) : "N/A"
+    ),
+    ignoreRowClick: true,
+    allowOverflow: true,
+    button: true,
+  },
+  {
+    name: 'Actions',
+    cell: row => (
+      <div className="flex flex-col items-center justify-center gap-0.5">
+        {/* <button onClick={() => alert(`Viewing certificate ${row.Id}`)} className="bg-blue-500 hover:bg-blue-600 text-white text-xs px-4 py-1 rounded">View</button> */}
+        <button onClick={() => alert(`Editing certificate ${row._Id}`)} className="bg-yellow-500 hover:bg-yellow-600 text-white text-xs px-5 py-1 rounded">Edit</button>
+        <button
+          onClick={
+            async () => {
+              console.log(row._id)
+              alert(`Deleting this ${row._id}`)
+              const baseUrl = "http://localhost:3000";
+              const url = "api/v1/faculty/academic-qualification"
+              const response = await axios.delete(`${baseUrl}/${url}/${row._id}`);
+              console.log(response.data);
+            }
+          } className="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded">Delete</button>
+      </div >
     ),
     ignoreRowClick: true,
     allowOverflow: true,
