@@ -36,7 +36,7 @@ function AddPatentData() {
     }
     try {
       const res = await axios.post('http://localhost:3000/file', formData);
-      reset(); // clear form
+      console.log(res);
       
         const url = "http://localhost:3000/api/v1/faculty/patent-published"
         const response = await axios.post(url, {
@@ -45,7 +45,7 @@ function AddPatentData() {
           department: data.department,
           title: data.title,
           applicant: data.applicant,
-          applicationNumberdata: data.applicationNumberdata,
+          applicationNumber: data.applicationNumber,
           applicationDate: data.applicationDate,
           status: data.status,
           coInventors: data.coInventors,

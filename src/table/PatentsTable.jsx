@@ -1,5 +1,6 @@
 import React from 'react';
 import DataTable from 'react-data-table-component';
+import axios from 'axios';
 
 // Column Definitions
 const columns = [
@@ -28,8 +29,7 @@ const columns = [
       </a>
     )
   },
-  { name: 'Patent Title', selector: row => row.patnetTitle },
-  { name: 'Patent Type', selector: row => row.patentType },
+  { name: 'Patent Title', selector: row => row.patentTitle },
   { name: 'Inventors', selector: row => row.inventors },
   { name: 'Publication Date', selector: row => row.publicationDate },
   { name: 'Abstract', selector: row => row.abstract },
@@ -47,7 +47,7 @@ const columns = [
               console.log(row._id)
               alert(`Deleting this ${row._id}`)
               const baseUrl = "http://localhost:3000";
-              const url = "api/v1/faculty/patent"
+              const url = "api/v1/faculty/patent-published"
               const response = await axios.delete(`${baseUrl}/${url}/${row._id}`);
               console.log(response.data);
             }
