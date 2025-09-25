@@ -1,6 +1,8 @@
 import axios from 'axios';
-import React from 'react';
 import DataTable from 'react-data-table-component';
+
+
+// note : this is the faculty table
 
 // Columns Definition
 const columns = [
@@ -84,7 +86,7 @@ const columns = [
               console.log(row._id)
               alert(`Deleting this ${row._id}`)
               const baseUrl = "http://localhost:3000";
-              const url = "api/v1/students/award-recognisation"
+              const url = "api/v1/faculty/award-recognition"
               const response = await axios.delete(`${baseUrl}/${url}/${row._id}`);
               console.log(response.data);
             }

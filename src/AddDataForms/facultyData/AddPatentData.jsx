@@ -37,7 +37,7 @@ function AddPatentData() {
     try {
       const res = await axios.post('http://localhost:3000/file', formData);
       reset(); // clear form
-      if (res.data.status == 200 && res?.data.fileId) {
+      
         const url = "http://localhost:3000/api/v1/faculty/patent-published"
         const response = await axios.post(url, {
           facultyId: data.facultyId,
@@ -51,7 +51,7 @@ function AddPatentData() {
           coInventors: data.coInventors,
           country: data.country,
           category: data.category,
-          fileId: data.fileId,
+          fileId: res.data.fileId,
           patentTitle: data.patentTitle,
           patentType: data.patentType,
           inventors: data.inventors,
@@ -60,9 +60,6 @@ function AddPatentData() {
         }
         )
         console.log(response.data);
-      } else {
-        console.error("File upload failed, skipping award creation.");
-      }
     } catch (error) {
       console.error("Error occurred:", error.message);
     }

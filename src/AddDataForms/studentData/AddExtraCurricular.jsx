@@ -40,50 +40,48 @@ function AddExtraCurricular() {
 
       const res = await axios.post("http://localhost:3000/file", formData)
       console.log(res.data)
-      if (res.status === 200 && res.data?.fileId) {
 
-        const url = "http://localhost:3000/api/v1/students/extracurricular"
-        const response = await axios.post(url
-          , {
-            eventParticipationId: data.eventParticipationId,
-            studentName: data.studentName,
-            enrollmentNumber: data.enrollmentNumber,
-            batch: data.batch,
-            branch: data.branch,
-            year: data.year,
-            eventDate: data.eventDate,
-            eventName: data.eventName,
-            eventLevel: data.eventLevel,
-            eventLocation: data.eventLocation,
-            position: data.position,
-            coachName: data.coachName,
-            organizer: data.organizer,
+      const url = "http://localhost:3000/api/v1/students/extracurricular"
+      const response = await axios.post(url
+        , {
+          eventParticipationId: data.eventParticipationId,
+          studentName: data.studentName,
+          enrollmentNumber: data.enrollmentNumber,
+          batch: data.batch,
+          branch: data.branch,
+          year: data.year,
+          eventDate: data.eventDate,
+          eventName: data.eventName,
+          eventLevel: data.eventLevel,
+          eventLocation: data.eventLocation,
+          position: data.position,
+          coachName: data.coachName,
+          organizer: data.organizer,
 
-            fileId: res.data.fileId,
-          }
-        )
-        console.log(response.data)
-      } 
-    }
+          fileId: res.data.fileId,
+        }
+      )
+      console.log(response.data)
+    } 
     catch (error) {
-      console.error("Error occurred:", error.message);
-    }
-    console.log(data)
-
-    setLoading((p) => !p)
+    console.error("Error occurred:", error.message);
   }
+  console.log(data)
 
-  return (
-    <div>
-      <ExtraCurricularForm
-        onSubmit={onSubmit}
-        register={register}
-        handleSubmit={handleSubmit}
-        reset={reset}
-      />
-      <DataTable columns={studentExtraCurricularColumns} data={data} />
-    </div>
-  );
+  setLoading((p) => !p)
+}
+
+return (
+  <div>
+    <ExtraCurricularForm
+      onSubmit={onSubmit}
+      register={register}
+      handleSubmit={handleSubmit}
+      reset={reset}
+    />
+    <DataTable columns={studentExtraCurricularColumns} data={data} />
+  </div>
+);
 }
 
 export default AddExtraCurricular;

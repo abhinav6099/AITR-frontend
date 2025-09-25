@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import DataTable from 'react-data-table-component';
 
@@ -41,7 +42,7 @@ const columns = [
               console.log(row._id)
               alert(`Deleting certificate ${row._Id}`)
               const baseUrl = "http://localhost:3000";
-              const url = "api/v1/faculty/devlopment-programme"
+              const url = "api/v1/faculty/development-programme"  //devlopment-programme
               const response = await axios.delete(`${baseUrl}/${url}/${row._id}`);
               console.log(response.data.certificate);
             }
@@ -54,48 +55,6 @@ const columns = [
   },
 ];
 
-// Sample Data
-const data = [
-  {
-    Id: 1,
-    Faculty_Name: 'Dr. Ajay Sahani',
-    Program_Name: 'FDP on Artificial Intelligence',
-    Organized_By: 'IIT Bombay',
-    Start_Date: '2024-05-10',
-    End_Date: '2024-05-14',
-    Program_Type: 'Faculty Development Program',
-    Mode: 'Online',
-    Location: 'Mumbai',
-    Duration_Days: 5,
-    Certificate_Link: 'https://example.com/certificates/fdp-ajay.pdf',
-  },
-  {
-    Id: 2,
-    Faculty_Name: 'Prof. Riya Sharma',
-    Program_Name: 'Workshop on Quantum Computing',
-    Organized_By: 'IIT Delhi',
-    Start_Date: '2023-11-01',
-    End_Date: '2023-11-03',
-    Program_Type: 'Workshop',
-    Mode: 'Offline',
-    Location: 'Delhi',
-    Duration_Days: 3,
-    Certificate_Link: 'https://example.com/certificates/workshop-riya.pdf',
-  },
-  {
-    Id: 3,
-    Faculty_Name: 'Dr. Vikram Patel',
-    Program_Name: 'STTP on Machine Learning',
-    Organized_By: 'NIT Trichy',
-    Start_Date: '2023-07-15',
-    End_Date: '2023-07-20',
-    Program_Type: 'Short Term Training Program',
-    Mode: 'Hybrid',
-    Location: 'Trichy',
-    Duration_Days: 6,
-    Certificate_Link: 'https://example.com/certificates/sttp-vikram.pdf',
-  },
-];
 
 const DevelopmentProgramTable = ({data}) => {
   console.log(data)
