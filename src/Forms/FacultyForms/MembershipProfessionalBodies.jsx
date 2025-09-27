@@ -14,14 +14,13 @@ function MembershipProfessionalBodies() {
     const { register, handleSubmit, reset } = useForm()
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
-    const [file, setFile] = useState(null)
 
 
     const fetchData = async () => {
         if (loading == true) {
-            const data = await axios.get("http://localhost:3000/api/v1/faculty/faculty-memberships")
-            console.log(data.data.supervisions)
-            setData(data.data.supervisions)
+            const data = await axios.get("http://localhost:3000/api/v1/faculty/faculty-membership")
+            console.log(data.data)
+            setData(data.data.facultyMembershipData)
 
         }
 
@@ -34,13 +33,9 @@ function MembershipProfessionalBodies() {
     }, [loading])
 
     const onSubmit = async (data) => {
-        
-        try {
-
-            const res = await axios.post("http://localhost:3000/file", formData)
-            console.log(res.data)
-
-            const url = "http://localhost:3000/api/v1/faculty/faculty-membership"
+            
+        try{
+            const url = "http://localhost:3000/api/v1/faculty/faculty-membership" //factulty-membership
             const response = await axios.post(url
                 , {
                     facultyName: data.facultyName,
@@ -49,18 +44,15 @@ function MembershipProfessionalBodies() {
                     membershipId: data.membershipId,
                     dateOfJoining: data.dateOfJoining,
                     currentStatus: data.currentStatus,
-                    fileId: res.data.fileId
                 }
 
             )
             console.log(response)
 
-
         } catch (err) {
             console.log("Error:", err)
         }
         console.log(data)
-
         setLoading((p) => !p)
     }
     return (
@@ -98,7 +90,7 @@ function MembershipProfessionalBodies() {
                     </div>
                 </form>
             </div>
-            <DataTable columns={membershipColumns} />
+            <DataTable columns={membershipColumns} data={data} />
         </div>
     )
 }
