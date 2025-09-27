@@ -3,6 +3,7 @@ import InputBox from "../../components/InputBox";
 import SelectBox from "../../components/SelectBox";
 import CalenderBox from "../../components/CalenderBox";
 import FileBox from "../../components/FileBox";
+import DynamicSelectBox from "../../components/DynamicSelectBox";
 
 const genderOptions = ["Male", "Female", "Other"];
 const categoryOptions = ["General", "OBC", "SC", "ST", "Other"];
