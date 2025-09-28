@@ -25,7 +25,7 @@ const StudentHackathonForm = ({ onSubmit }) => {
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <InputBox label="Hackathon Name" name="hackathonName" register={methods.register} />
-            <InputBox label="Organiser" name="organiser" register={methods.register} />
+            <InputBox label="Organiser" name="organizer" register={methods.register} />
 
             {/* 👇 Subform for team details */}
             <DynamicUserFields label="Team Details" name="teamDetails" />

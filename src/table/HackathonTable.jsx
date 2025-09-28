@@ -1,14 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DataTable from 'react-data-table-component';
+import { useMemo } from 'react';
+
+
+
+
 
 const columns = [
   { name: 'Hackathon Name', selector: row => row.hackathonName },
   { name: 'Organiser', selector: row => row.organizer },
-  { name: 'Team Details', selector: row => row.teamDetails, wrap: true },
+  {
+    name: 'Team Details', selector: row =>
+    (row.teamDetails.map(
+      (item, index) =>
+      (<div
+        key={index}>
+        <p>{item.memberName}</p>
+        <p>{item.role}</p>
+      </div>)
+    )
+    ), wrap: true
+  },
   { name: 'Result', selector: row => row.result },
   { name: 'Event Date', selector: row => row.eventDate },
   { name: 'Team Name', selector: row => row.teamName },
-  { name: 'Team Size', selector: row => row.teamSize},
+  { name: 'Team Size', selector: row => row.teamSize },
   { name: 'Mentor Name', selector: row => row.mentorName },
   { name: 'Venue', selector: row => row.venue },
   { name: 'Problem Statement', selector: row => row.problemStatement, wrap: true },
@@ -42,9 +58,57 @@ const columns = [
 
 
 
-const HackathonTable = ({data}) => {
+export const HackathonTable = ({ data }) => {
+
+
+  function convertArrayOfObjectsToCSV(array) {
+    let result;
+
+    const columnDelimiter = ',';
+    const lineDelimiter = '\n';
+    const keys = Object.keys(data[0]);
+
+    result = '';
+    result += keys.join(columnDelimiter);
+    result += lineDelimiter;
+
+    array.forEach(item => {
+      let ctr = 0;
+      keys.forEach(key => {
+        if (ctr > 0) result += columnDelimiter;
+
+        result += item[key];
+
+        ctr++;
+      });
+      result += lineDelimiter;
+    });
+
+    return result;
+  }
+
+  function downloadCSV(array) {
+    const link = document.createElement('a');
+    let csv = convertArrayOfObjectsToCSV(array);
+    if (csv == null) return;
+
+    const filename = 'export.csv';
+
+    if (!csv.match(/^data:text\/csv/i)) {
+      csv = `data:text/csv;charset=utf-8,${csv}`;
+    }
+
+    link.setAttribute('href', encodeURI(csv));
+    link.setAttribute('download', filename);
+    link.click();
+  }
+
+  const Export = ({ onExport }) => <button onClick={e => onExport(e.target.value)}>Export</button>;
+
+  const actionsMemo = React.useMemo(() => <Export onExport={() => downloadCSV(data)} />, []);
   return (
     <div className="p-4 overflow-x-auto">
+
       <DataTable
         title="Student Hackathon Participation"
         columns={columns}
@@ -55,6 +119,7 @@ const HackathonTable = ({data}) => {
         responsive
         fixedHeader
         fixedHeaderScrollHeight="600px"
+        actions={actionsMemo}
       />
     </div>
   );
