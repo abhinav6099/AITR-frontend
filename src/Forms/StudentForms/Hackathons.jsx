@@ -1,11 +1,19 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import SelectBox from "../../components/SelectBox";
 import CalenderBox from "../../components/CalenderBox";
 import FileBox from "../../components/FileBox";
 import InputBox from "../../components/InputBox";
+import DynamicUserFields from "../../components/DynamicFieldsForm";
 
-const StudentHackathonForm = ({ register, handleSubmit, reset, onSubmit }) => {
+const StudentHackathonForm = ({ onSubmit }) => {
+  const methods = useForm({
+    defaultValues: {
+      hackathonName: "",
+      organiser: "",
+      teamDetails: [{ memberName: "", role: "" }], // 👈 default subform array
+    },
+  });
 
   return (
     <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md p-10">
@@ -13,39 +21,37 @@ const StudentHackathonForm = ({ register, handleSubmit, reset, onSubmit }) => {
         Student Hackathon Participation Form
       </h2>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* CalenderBox Fields */}
-          <InputBox label="Hackathon_Name" name={"hackathonName"}  register={register} />
-          <InputBox label="Organiser" name={"organiser"} register={register} />
-          <InputBox label="Team Details" name={"teamDetails"} register={register} />
-          <InputBox label="Result" name={"name"} register={register} />
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <InputBox label="Hackathon Name" name="hackathonName" register={methods.register} />
+            <InputBox label="Organiser" name="organiser" register={methods.register} />
 
-          {/* SelectBox Fields */}
-          <CalenderBox label="Event Date" name={"eventDate"} register={register} />
-          <InputBox label="team_Details" name={"teamDetails"} register={register} />
-          <InputBox label="result" name={"result"} register={register} />
-          <CalenderBox label="event_date" name={"eventDate"} register={register} />
-          <InputBox label="team_Name" name={"teamName"} register={register} />
-          <InputBox label="team_Size" name={"teamSize"} register={register} />
-          <InputBox label="mentor name" name={"mentorName"} register={register} />
-          <InputBox label="venue" name={"venue"} register={register} />
-          <InputBox label="problem statement" name={"problemStatement"} register={register} />
-          <InputBox label="technology used" name={"technologyUsed"} register={register} />
-          <InputBox label="price Money" name={"prizeMoney"} register={register} />
-          <InputBox label="position Secured" name={"positionSecured"} register={register} />
+            {/* 👇 Subform for team details */}
+            <DynamicUserFields label="Team Details" name="teamDetails" />
 
-        </div>
+            <InputBox label="Result" name="result" register={methods.register} />
+            <CalenderBox label="Event Date" name="eventDate" register={methods.register} />
+            <InputBox label="Team Name" name="teamName" register={methods.register} />
+            <InputBox label="Team Size" name="teamSize" register={methods.register} />
+            <InputBox label="Mentor Name" name="mentorName" register={methods.register} />
+            <InputBox label="Venue" name="venue" register={methods.register} />
+            <InputBox label="Problem Statement" name="problemStatement" register={methods.register} />
+            <InputBox label="Technology Used" name="technologyUsed" register={methods.register} />
+            <InputBox label="Prize Money" name="prizeMoney" register={methods.register} />
+            <InputBox label="Position Secured" name="positionSecured" register={methods.register} />
+          </div>
 
-        <div className="mt-8">
-          <button
-            type="submit"
-            className="px-6 py-3 bg-blue-600 text-white font-semibold text-base rounded-md shadow hover:bg-blue-700 transition"
-          >
-            Submit
-          </button>
-        </div>
-      </form>
+          <div className="mt-8">
+            <button
+              type="submit"
+              className="px-6 py-3 bg-blue-600 text-white font-semibold text-base rounded-md shadow hover:bg-blue-700 transition"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </FormProvider>
     </div>
   );
 };
