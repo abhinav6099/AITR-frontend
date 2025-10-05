@@ -3,6 +3,7 @@ import StudentCertificatesTable from '../../table/CertificateTable';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import UploadForm from '../../components/UploadForm';
 
 function AddStudentCertificateData() {
   const { register, handleSubmit, reset } = useForm()
@@ -72,6 +73,7 @@ function AddStudentCertificateData() {
 
   return (
     <div>
+      <UploadForm />
       <StudentCertificateForm
         onSubmit={onSubmit}
         register={register}

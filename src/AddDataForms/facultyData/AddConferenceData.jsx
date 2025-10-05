@@ -3,6 +3,7 @@ import FacultyConferenceForm from '../../Forms/FacultyForms/Conference';
 import ConferenceTable from '../../table/ConferenceTable';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import UploadForm from '../../components/UploadForm';
 
 function AddConferenceData() {
   const { register, handleSubmit, reset } = useForm();
@@ -36,6 +37,7 @@ function AddConferenceData() {
 
   return (
     <div>
+      <UploadForm />
       <FacultyConferenceForm
         onSubmit={onSubmit}
         register={register}

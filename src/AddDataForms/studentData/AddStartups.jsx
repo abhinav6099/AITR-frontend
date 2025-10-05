@@ -4,6 +4,7 @@ import StudentTable from '../../table/StudentTable'; // Can rename to StartupTab
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
+import UploadForm from '../../components/UploadForm';
 
 function AddStartups() {
   const { register, handleSubmit, reset } = useForm()
@@ -57,6 +58,7 @@ function AddStartups() {
 
   return (
     <div>
+      <UploadForm />
       <StartupForm
         onSubmit={onSubmit}
         register={register}

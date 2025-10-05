@@ -4,6 +4,7 @@ import AwardTable from '../../table/AwardsTable'
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import UploadForm from '../../components/UploadForm';
 
 const AddAwards = () => {
 
@@ -79,6 +80,7 @@ const AddAwards = () => {
 
   return (
     <>
+    <UploadForm />
       <AwardForm onSubmit={onSubmit} register={register} handleSubmit={handleSubmit} reset={reset} />
       <AwardTable data={data} />
     </>

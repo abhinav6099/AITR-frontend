@@ -3,6 +3,7 @@ import ProfessionalMembershipForm from '../../Forms/StudentForms/proffessionalMe
 import ProfessionalMembershipTable from '../../table/ProfessionalMembershipTable'
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import UploadForm from '../../components/UploadForm';
 
 const AddProfessionalMembership = () => {
   
@@ -51,6 +52,7 @@ const AddProfessionalMembership = () => {
   }
   return (
     <div>
+      <UploadForm />
       <ProfessionalMembershipForm
         onSubmit={onSubmit}
         register={register}

@@ -23,13 +23,12 @@ const StudentHackathonForm = ({ onSubmit }) => {
 
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <InputBox label="Hackathon Name" name="hackathonName" register={methods.register} />
             <InputBox label="Organiser" name="organizer" register={methods.register} />
 
             {/* 👇 Subform for team details */}
-            <DynamicUserFields label="Team Details" name="teamDetails" />
-
+            <DynamicUserFields label="Team Details" name="teamDetails" fieldName={"Member name"} />
             <InputBox label="Result" name="result" register={methods.register} />
             <CalenderBox label="Event Date" name="eventDate" register={methods.register} />
             <InputBox label="Team Name" name="teamName" register={methods.register} />
@@ -37,7 +36,7 @@ const StudentHackathonForm = ({ onSubmit }) => {
             <InputBox label="Mentor Name" name="mentorName" register={methods.register} />
             <InputBox label="Venue" name="venue" register={methods.register} />
             <InputBox label="Problem Statement" name="problemStatement" register={methods.register} />
-            <InputBox label="Technology Used" name="technologyUsed" register={methods.register} />
+            <DynamicUserFields label="Technology Used" name="technologyUsed" fieldName={"Technology used"} addButtonLabel="Add Technology" register={methods.register} />
             <InputBox label="Prize Money" name="prizeMoney" register={methods.register} />
             <InputBox label="Position Secured" name="positionSecured" register={methods.register} />
           </div>

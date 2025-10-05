@@ -2,9 +2,10 @@ import React from 'react'
 import InputBox from '../../components/InputBox'
 import FileBox from '../../components/FileBox'
 import CalenderBox from '../../components/CalenderBox'
-import { useForm } from 'react-hook-form'
+import { useForm ,FormProvider} from 'react-hook-form'
 import DataTable from 'react-data-table-component'
 import { useEffect, useState } from 'react'
+import DynamicUserFields from "../../components/DynamicFieldsForm";
 
 import axios from 'axios'
 
@@ -14,7 +15,24 @@ function PatentGrantedForm() {
   const [data, setData] = useState([])
   const [loading , setLoading ] = useState(true)
   const [file, setFile] = useState(null)
+     const methods = useForm({
+        defaultValues: {
+          studentName: "",
+          enrollmentNumber: "",
+          branch: "",
+          batch: "",
+          doiOrIsbn: "",
+          titleOfPaper: "",
+          publicationDate: "",
+          journalOrConferenceName: "",
+          indexing: "",
+          paperPdf: null,
+          coAuthors: [{ memberName: "", role: "" }],
+          facultyGuide: [{ memberName: "", role: "" }],
+        },
+      });
 
+   
 
   const fetchData = async () => {
     if(loading == true ){
@@ -33,7 +51,7 @@ function PatentGrantedForm() {
   },[loading])
 
   const onSubmit = async (data) => {
- 
+
     console.log(data)
     console.log(data.file[0])
     setFile(data.file[0])
@@ -74,12 +92,18 @@ function PatentGrantedForm() {
     <div>
       <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md p-10">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-        Patent Guided
+        Patent Granted
       </h2>
+      <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)} >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <InputBox label="patent_Title" name="patentTitle" register={register} required />
-        <InputBox label="investors" name="inventors" register={register} required />
+         <DynamicUserFields
+                label="Investors"
+                name="Investor"
+                fieldName="Investor"
+                addButtonLabel="Add Investor"
+              />
         <InputBox label="grant_Number" name="grantNumber" register={register} required />
         <CalenderBox label="date_Of_Grant" name="dateOfGrant" register={register} required />
         <InputBox label="country_Of_Grant" name="countryOfGrant" register={register} required />
@@ -89,6 +113,7 @@ function PatentGrantedForm() {
         <button type="submit" className="bg-blue-600 text-white px-4 py-1 rounded">Submit</button>
         </div>
         </form>
+        </FormProvider>
       </div>
       <DataTable columns={patentColumn} data={data} />
     </div>

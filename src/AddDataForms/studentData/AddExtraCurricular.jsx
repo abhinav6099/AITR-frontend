@@ -4,6 +4,7 @@ import StudentTable from '../../table/StudentTable';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
+import UploadForm from '../../components/UploadForm';
 
 function AddExtraCurricular() {
 
@@ -73,6 +74,7 @@ function AddExtraCurricular() {
 
 return (
   <div>
+    <UploadForm />
     <ExtraCurricularForm
       onSubmit={onSubmit}
       register={register}

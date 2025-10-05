@@ -3,7 +3,7 @@ import ResearchForm from '../../Forms/StudentForms/ResearchForm';
 import StudentResearchPaper from '../../table/StudentResearchPaper';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-
+import UploadForm from '../../components/UploadForm';
 function AddStudentResearchData() {
 
   const { register, handleSubmit, reset } = useForm()
@@ -70,6 +70,7 @@ function AddStudentResearchData() {
 
   return (
     <div>
+      <UploadForm />
       <ResearchForm
         onSubmit={onSubmit}
         register={register}

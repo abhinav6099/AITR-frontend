@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
 import TechnicalNonTechnicalCompetition from '../../Forms/StudentForms/TechnicalNonTechnicalCompetition';
+import UploadForm from '../../components/UploadForm';
 
 function AddTechnicalNonTechnicalCompetition() {
   const { register, handleSubmit, reset } = useForm();
@@ -86,6 +87,7 @@ function AddTechnicalNonTechnicalCompetition() {
 
   return (
     <div>
+      <UploadForm />
       <TechnicalNonTechnicalCompetition
         onSubmit={onSubmit}
         register={register}

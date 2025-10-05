@@ -3,6 +3,7 @@ import ResearchProjectsGuidedForm from '../Forms/FacultyForms/ResearchProjectsGu
 import ResearchProjectsGuidedTable from '../table/ResearchProjectsGuidedTable';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import UploadForm from '../../components/UploadForm';
 
 const ResearchProjectsGuided = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -35,6 +36,7 @@ const ResearchProjectsGuided = () => {
 
   return (
     <div>
+      <UploadForm />
       <ResearchProjectsGuidedForm
         onSubmit={onSubmit}
         register={register}

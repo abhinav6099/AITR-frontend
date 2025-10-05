@@ -3,7 +3,8 @@ import FileBox from "../../components/FileBox";
 import SelectBox from "../../components/SelectBox";
 import CalenderBox from "../../components/CalenderBox";
 import InputBox from "../../components/InputBox";
-
+import { useForm, FormProvider } from "react-hook-form";
+import DynamicUserFields from "../../components/DynamicFieldsForm";
 const internshipModes = ["Online", "Offline", "Hybrid"];
 const stipends = ["Unpaid", "₹5,000", "₹10,000", "₹20,000"];
 const branches = ["CSE", "IT", "ECE", "Mechanical"];
@@ -12,14 +13,20 @@ const companyLocations = ["Delhi", "Bangalore", "Remote"];
 const internshipStatuses = ["Completed", "Ongoing", "Dropped"];
 
 const StudentInternshipForm = ({ register, handleSubmit, reset, onSubmit }) => {
-  
+    const methods = useForm({
+      defaultValues: {
+        hackathonName: "",
+        organiser: "",
+        teamDetails: [{ memberName: "", role: "" }], // 👈 default subform array
+      },
+    });
 
   return (
     <div className="w-full bg-white border border-gray-200 rounded-lg shadow-md p-10">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6">
         Student Internship Form
       </h2>
-
+   <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <InputBox label="ID" name="internshipId" register={register} required />
@@ -34,7 +41,7 @@ const StudentInternshipForm = ({ register, handleSubmit, reset, onSubmit }) => {
           <SelectBox label="Stipend" name="stipend" options={stipends} register={register} />
           <CalenderBox label="Start Date" name="startDate" register={register} />
           <CalenderBox label="End Date" name="endDate" register={register} />
-          <SelectBox label="Technology Used" name="technologyUsed" options={technologies} register={register} />
+          <DynamicUserFields label="Technology Used" name="technologyUsed" fieldName={"Technology used"} addButtonLabel="Add Technology" register={methods.register} />
           <InputBox label="Project Name" name="projectName" register={register} />
           <InputBox label="Project Description" name="projectDescription" register={register} />
           <SelectBox label="Company Location" name="companyLocation" options={companyLocations} register={register} />
@@ -51,6 +58,7 @@ const StudentInternshipForm = ({ register, handleSubmit, reset, onSubmit }) => {
           </button>
         </div>
       </form>
+      </FormProvider>
     </div>
   );
 };

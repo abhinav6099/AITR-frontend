@@ -4,6 +4,7 @@ import StudentTable from '../../table/StudentTable'; // Rename to `SportsTable` 
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
+import UploadForm from '../../components/UploadForm';
 
 function AddSportsData() {
 
@@ -72,6 +73,7 @@ function AddSportsData() {
   }
   return (
     <div>
+    <UploadForm />
       <SportForm
         onSubmit={onSubmit}
         register={register}

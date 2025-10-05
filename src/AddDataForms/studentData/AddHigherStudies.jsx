@@ -3,6 +3,8 @@ import HigherStudiesForm from '../../Forms/StudentForms/HigherStudiesForm';
 import HigherStudiesTable from '../../table/HigherStudiesTable';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import UploadForm from '../../components/UploadForm';
+
 
 function AddHigherStudies() {
 
@@ -57,6 +59,7 @@ function AddHigherStudies() {
 
   return (
     <div>
+      <UploadForm />
       <HigherStudiesForm
         onSubmit={onSubmit}
         register={register}

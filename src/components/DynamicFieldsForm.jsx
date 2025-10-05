@@ -1,7 +1,7 @@
 import React from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 
-const DynamicUserFields = ({ label, name }) => {
+const DynamicUserFields = ({ label, name, fieldName, addButtonLabel = "Add Item" }) => {
   const { control, register } = useFormContext();
   const { fields, append, remove } = useFieldArray({ control, name });
 
@@ -17,7 +17,7 @@ const DynamicUserFields = ({ label, name }) => {
           >
             <div className="flex flex-col">
               <label className="text-sm font-medium text-gray-700 mb-1">
-                Member Name
+                {fieldName}
               </label>
               <input
                 {...register(`${name}.${index}.memberName`)}
@@ -54,7 +54,7 @@ const DynamicUserFields = ({ label, name }) => {
           onClick={() => append({ memberName: "", role: "" })}
           className="px-4 py-2 bg-green-600 text-white font-medium text-sm rounded-lg shadow hover:bg-green-700 transition"
         >
-          + Add Member
+          + {addButtonLabel} {/* ✅ Dynamic button label */}
         </button>
       </div>
     </div>

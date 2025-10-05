@@ -4,6 +4,7 @@ import PatentTable from '../../table/PatentsTable'
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import UploadForm from '../../components/UploadForm';
 
 function AddPatentData() {
 
@@ -72,6 +73,7 @@ function AddPatentData() {
 
   return (
     <div>
+      <UploadForm />
       <FacultyPatentForm handleSubmit={handleSubmit} register={register} reset={reset} onSubmit={onSubmit} />
       <PatentTable data={data} />
     </div>

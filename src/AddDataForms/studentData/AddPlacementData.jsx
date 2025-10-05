@@ -3,6 +3,7 @@ import StudentPlacementForm from '../../Forms/StudentForms/Placement';
 import PlacementTable from '../../table/Placement';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import UploadForm from '../../components/UploadForm';
 
 function AddPlacementData() {
 
@@ -70,6 +71,7 @@ function AddPlacementData() {
 
   return (
     <div>
+      <UploadForm />
       <StudentPlacementForm
         onSubmit={onSubmit}
         register={register}

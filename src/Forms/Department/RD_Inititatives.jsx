@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm,FormProvider } from 'react-hook-form';
 import InputBox from '../../components/InputBox';
 import CalenderBox from '../../components/CalenderBox';
 import FileBox from '../../components/FileBox';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
-
+import DynamicUserFields from '../../components/DynamicFieldsForm';
 const RDInitiatives = () => {
 
 
@@ -13,7 +13,22 @@ const RDInitiatives = () => {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const [submit, setSubmit] = useState(false)
-
+   const methods = useForm({
+            defaultValues: {
+              studentName: "",
+              enrollmentNumber: "",
+              branch: "",
+              batch: "",
+              doiOrIsbn: "",
+              titleOfPaper: "",
+              publicationDate: "",
+              journalOrConferenceName: "",
+              indexing: "",
+              paperPdf: null,
+              coAuthors: [{ memberName: "", role: "" }],
+              facultyGuide: [{ memberName: "", role: "" }],
+            },
+          });
   const fetchData = async () => {
     if (loading == true) {
       const data = await axios.get("http://localhost:3000/api/v1/department/rnds")
@@ -74,7 +89,7 @@ const RDInitiatives = () => {
       <h2 className="text-2xl font-semibold text-gray-800 mb-6">
         R&D Initiatives Submission Form
       </h2>
-
+    <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <InputBox label="department Name" name="departmentName" register={register} required />
@@ -87,7 +102,12 @@ const RDInitiatives = () => {
           <InputBox label="project Title" name="projectTitle" register={register} required />
           <InputBox label="funding Agency" name="fundingAgency" register={register} required />
           <InputBox label="principal Investigator" name="principalInvestigator" register={register} required />
-          <InputBox label="co Investigator" name="coInvestigator" register={register} />
+          <DynamicUserFields
+                label="Co-Investigators"
+                name="Co-Investigators"
+                fieldName="Co-Investigators"
+                addButtonLabel="Add Co-Investigators"
+              />
           <InputBox label="budget" name="budget" register={register} required />
           <InputBox label="output Patents Publications" name="outputPatentsPublications" register={register} />
 
@@ -99,6 +119,7 @@ const RDInitiatives = () => {
           </button>
         </div>
       </form>
+      </FormProvider>
       <DataTable columns={rdInitiativesColumns} data={data} />
     </div>
   );

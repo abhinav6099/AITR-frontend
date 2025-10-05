@@ -3,7 +3,7 @@ import StudentForm from '../../Forms/StudentForms/StudentForm';
 import StudentTable from '../../table/StudentTable';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-
+import UploadForm from '../../components/UploadForm';
 function AddStudentData() {
 
   const { register, handleSubmit, reset } = useForm();
@@ -80,6 +80,7 @@ function AddStudentData() {
 
   return (
     <div>
+      <UploadForm />
       <StudentForm
         onSubmit={onSubmit}
         register={register}

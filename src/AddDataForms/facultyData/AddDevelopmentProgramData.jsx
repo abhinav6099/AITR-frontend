@@ -4,6 +4,7 @@ import DevelopmentProgramTable from '../../table/DevelopmentProgramTable'
 import { useForm } from 'react-hook-form'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import UploadForm from '../../components/UploadForm';
 
 function AddDevelopmentProgramData() {
 
@@ -78,6 +79,7 @@ function AddDevelopmentProgramData() {
 
   return (
     <div>
+      <UploadForm />
       <DevlopmentProgram register={register} handleSubmit={handleSubmit} onSubmit={onSubmit} />
       <DevelopmentProgramTable data={data} />
     </div>

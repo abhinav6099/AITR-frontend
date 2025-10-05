@@ -6,6 +6,8 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
 import Button from '../../components/Button';
+import UploadForm from '../../components/UploadForm';
+
 
 
 function AddFaculty() {
@@ -145,6 +147,7 @@ function AddFaculty() {
 
   return (
     <div>
+      <UploadForm />
         <FacultyForm onSubmit={onSubmit}  register={register} handleSubmit={handleSubmit} reset={reset} />
         <DataTable columns={columns} data={data} />
     </div>

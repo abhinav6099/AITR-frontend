@@ -4,6 +4,7 @@ import StudentTable from '../../table/StudentTable'; // Replace later if table d
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
+import UploadForm from '../../components/UploadForm';
 
 function AddCapstoneProjects() {
   const { register, handleSubmit, reset } = useForm();
@@ -56,6 +57,7 @@ function AddCapstoneProjects() {
 
   return (
     <div>
+       <UploadForm />
       <CapstoneProjectForm
         onSubmit={onSubmit}
         register={register}

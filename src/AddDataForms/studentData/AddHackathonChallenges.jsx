@@ -3,6 +3,7 @@ import HackathonChallengeForm from '../../Forms/StudentForms/HackathonChallengeF
 import StudentTable from '../../table/StudentTable'; // Replace with HackathonTable if needed
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import UploadForm from '../../components/UploadForm';
 
 function AddHackathonChallenges() {
   const { register, handleSubmit, reset } = useForm();
@@ -35,6 +36,7 @@ function AddHackathonChallenges() {
 
   return (
     <div>
+      <UploadForm />
       <HackathonChallengeForm
         onSubmit={onSubmit}
         register={register}
